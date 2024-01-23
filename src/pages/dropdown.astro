@@ -1,0 +1,60 @@
+<style>
+  .myButton {
+    background-color: bisque;
+    padding: 10px;
+  }
+
+  .content-items {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .show {
+    display: block;
+  }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="content">
+    <button id="myButton">click me</button>
+    <ul class="content-items" id="contentItems">
+      <li class="items">hola</li>
+      <li class="items">como estas</li>
+      <li class="items">que paso</li>
+    </ul>
+  </div>
+
+  <script>
+    var dropdown = document.getElementById("contentItems");
+    var button = document.getElementById("myButton");
+
+    // Agregar un escuchador de eventos al botón para abrir el dropdown
+    button.addEventListener("click", function() {
+      dropdown.classList.toggle("show");
+    });
+
+    // Agregar un escuchador de eventos al documento para cerrar el dropdown si se hace clic fuera de él
+    document.addEventListener("click", function(event) {
+      var target = event.target as Node;
+      if (!dropdown.contains(target) && !button.contains(target)) {
+        dropdown.classList.remove("show");
+      }
+    });
+  </script>
+</body>
+
+</html>
