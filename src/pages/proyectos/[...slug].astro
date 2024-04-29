@@ -1,0 +1,139 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+    const proyectEntries = await getCollection("proyectos");
+
+    return proyectEntries.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+
+---
+
+<Layout title={entry.data.title}>
+    <div class="max-w-screen-xl mx-auto flex flex-wrap p-4 lg:p-0">
+        <div
+            class="text-gray-400 mt-4 mb-8 lg:mb-0 lg:sticky top-20 h-full lg:basis-1/2 lg:px-10"
+        >
+            <a class="hover:text-indigo-600" href="/">
+                <p class="mb-6">&larr;</p>
+            </a>
+            <p>Proyecto:</p>
+            <h1 class="text-gray-300 text-4xl">{entry.data.title}</h1>
+            <div class="my-2">
+                <p>Cliente: {entry.data.cliente}</p>
+            </div>
+            <p>Fecha de creación: {entry.data.date}</p>
+            <div class="lg:pr-8 pt-2">
+                <p>{entry.data.descripcion}</p>
+            </div>
+            <div class="flex items-center justify-start space-x-4 mt-10">
+                <p
+                    class="ring-1 ring-blue-600 rounded-md p-1 text-sm inline-block"
+                >
+                    {entry.data.categoria}
+                </p>
+                <div class="text-gray-400">
+                    <div class="md:mt-0">
+                        <a class="flex items-center space-x-1" href="">
+                            <svg
+                                class="w-4 icon fill-gray-400"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 448 512"
+                                ><path
+                                    d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                                ></path></svg
+                            >
+                            <p>/monrold21</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {
+                entry.data.categoria === "UX | Frontend" ? (
+                    <div class="mt-4 flex space-x-2">
+                        <button
+                            id="btnDesktop"
+                            class="outline outline-1 outline-gray-400 p-2 rounded-md hover:outline-gray-300 focus:outline-0 focus:ring-1 focus:ring-[#6B5EE7]"
+                        >
+                            Desktop
+                        </button>
+                        <button
+                            id="btnMobile"
+                            class="outline outline-1 outline-gray-400 p-2 rounded-md hover:outline-gray-300  focus:outline-0 focus:ring-1 focus:ring-[#6B5EE7]"
+                        >
+                            Mobile
+                        </button>
+                    </div>
+                ) : null
+            }
+        </div>
+        <div
+            class="lg:basis-1/2 text-gray-400 flex flex-col items-center space-y-4"
+            id="content"
+        >
+            <Content />
+            {
+                entry.data.images && (
+                    <div>
+                        <img
+                            id="imageMobile"
+                            src={entry.data.images?.imageMobile?.src}
+                            alt={entry.data.images?.imageMobile?.alt}
+                        />
+                        <img
+                            id="imageDesktop"
+                            src={entry.data.images?.imageDesktop?.src}
+                            alt={entry.data.images?.imageDesktop?.alt}
+                        />
+                    </div>
+                ) 
+            }
+        </div>
+        <script>
+            window.addEventListener("DOMContentLoaded", function () {
+                const btnMobile = document.getElementById(
+                    "btnMobile",
+                ) as HTMLButtonElement;
+                const btnDesktop = document.getElementById(
+                    "btnDesktop",
+                ) as HTMLButtonElement;
+                const imageMobile = document.getElementById(
+                    "imageMobile",
+                ) as HTMLImageElement;
+                const imageDesktop = document.getElementById(
+                    "imageDesktop",
+                ) as HTMLImageElement;
+
+                // Ocultar imagen mobile inicialmente
+                imageMobile.style.display = "none";
+
+                const mobile = () => {
+                    imageMobile.style.display = "block";
+                    imageDesktop.style.display = "none";
+                };
+
+                const desktop = () => {
+                    imageMobile.style.display = "none";
+                    imageDesktop.style.display = "block";
+                };
+
+                btnMobile.addEventListener("click", mobile);
+                btnDesktop.addEventListener("click", desktop);
+            });
+        </script>
+    </div>
+</Layout>
+
+<style>
+    a:hover .icon path {
+        fill: #c13584;
+    }
+</style>

@@ -1,0 +1,167 @@
+---
+import icon from "/public/favicon.svg";
+---
+
+<!--desktop -->
+<nav id="navDesktop" class="bg-[#12101e] sticky z-50 top-0 hidden md:block">
+    <div class="flex justify-around space-x-4 py-5">
+        <div>
+            <a
+                class="flex relative items-center hover:opacity-80 hover:transition-opacity hover:delay-100"
+                href="/"
+            >
+                <img
+                    class="w-6 hover:w-7 hover:transition-all hover:delay-150 absolute inset-0 my-auto"
+                    src={icon.src}
+                    alt="Logotipo Monrold morado"
+                />
+                <p class="text-gray-100 pl-8 monrold">Monrold</p>
+            </a>
+        </div>
+        <ul class="flex space-x-12 text-gray-100">
+            <li><a class="hover:opacity-80" href="">Proyectos</a></li>
+            <li><a class="hover:opacity-80" href="">Blog</a></li>
+            <li><a class="hover:opacity-80" href="">Agendas digitales</a></li>
+        </ul>
+    </div>
+    <script>
+        let nav = document.getElementById("navDesktop");
+
+        const scroll = () => {
+            const y = window.pageYOffset || document.documentElement.scrollTop;
+
+            const px = 10;
+
+            if (nav) {
+                if (y > px) {
+                    nav.classList.add("scrollDesktop");
+                } else {
+                    nav.classList.remove("scrollDesktop");
+                }
+            }
+        };
+
+        window.addEventListener("scroll", scroll);
+    </script>
+</nav>
+<style>
+    nav {
+        font-family: "Rubik", 900;
+    }
+    .scrollDesktop {
+        background-color: rgb(19, 21, 26, 0.5);
+        backdrop-filter: blur(8px);
+        transition: all 200ms ease-in-out;
+        border-bottom: solid 1px rgb(107 114 128);
+    }
+</style>
+
+<!--mobile -->
+<nav id="navMobile" class="bg-[#12101e] sticky z-50 top-0 md:hidden">
+    <div class="flex relative justify-between mx-4 space-x-4 py-5">
+        <a
+            class="flex relative items-center hover:opacity-80 hover:transition-opacity hover:delay-100"
+            href="/"
+        >
+            <img
+                class="w-6 hover:w-7 hover:transition-all hover:delay-150 absolute inset-0 my-auto"
+                src={icon.src}
+                alt="Logotipo Monrold morado"
+            />
+            <p class="text-gray-100 pl-8">Monrold</p>
+        </a>
+        <button id="btn" class="hover:opacity-80">
+            <svg
+                class="fill-gray-100 w-4"
+                id="burger"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+                ><path
+                    d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
+                ></path></svg
+            >
+            <svg
+                class="fill-gray-100 w-4"
+                id="close"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 384 512"
+                ><path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+                ></path></svg
+            >
+        </button>
+        <script>
+            const burgerIcon = document.getElementById("burger") as HTMLElement;
+            const closeIcon = document.getElementById("close") as HTMLElement;
+            const content = document.getElementById("content") as HTMLElement;
+            const btn = document.getElementById("btn") as HTMLButtonElement;
+
+            closeIcon.style.display = "none";
+
+            const dropdown = () => {
+                if (content.classList.contains("show")) {
+                    closeIcon.style.display = "none";
+                    burgerIcon.style.display = "block";
+                    content.classList.remove("show");
+                } else {
+                    closeIcon.style.display = "block";
+                    burgerIcon.style.display = "none";
+                    content.classList.add("show");
+                }
+            };
+
+            btn.addEventListener("click", dropdown);
+        </script>
+    </div>
+    <ul id="content" class="space-y-4 text-xl text-gray-100 px-4 w-full">
+        <li class="border-gray-500 border-b py-4">
+            <a class="hover:opacity-80" href="">Proyectos</a>
+        </li>
+        <li class="border-gray-500 border-b py-4">
+            <a class="hover:opacity-80" href="">Blog</a>
+        </li>
+        <li class="pt-4 pb-6">
+            <a class="hover:opacity-80" href="">Agendas digitales</a>
+        </li>
+    </ul>
+    <script>
+        let nav = document.getElementById("navMobile");
+
+        const scroll = () => {
+            const y = window.pageYOffset || document.documentElement.scrollTop;
+
+            const px = 20;
+
+            if (nav) {
+                if (y > px) {
+                    nav.classList.add("scrollMobile");
+                } else {
+                    nav.classList.remove("scrollMobile");
+                }
+            }
+        };
+
+        window.addEventListener("scroll", scroll);
+    </script>
+</nav>
+<style>
+    .scrollMobile {
+        background-color: rgb(19, 21, 26, 0.5);
+        backdrop-filter: blur(8px);
+        transition: all 200ms ease-in-out;
+        border-bottom: solid 1px rgb(107 114 128);
+    }
+    #content {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition:
+            max-height 0.5s ease-out,
+            opacity 0.5s ease-out;
+    }
+
+    #content.show {
+        max-height: 250px; /* Ajusta este valor según sea necesario */
+        opacity: 1;
+    }
+</style>

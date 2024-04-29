@@ -1,0 +1,318 @@
+---
+import Layout from "../layouts/Layout.astro";
+import agenda from "../images/index/agenda.webp";
+import html from "../images/index/tec/html.webp";
+import css from "../images/index/tec/css.webp";
+import tailwind from "../images/index/tec/tailwind.webp";
+import js from "../images/index/tec/js.webp";
+import ts from "../images/index/tec/ts.webp";
+import react from "../images/index/tec/react.webp";
+import astro from "../images/index/tec/astro.webp";
+import figma from "../images/index/tec/figma.webp";
+import ps from "../images/index/tec/ps.webp";
+import ai from "../images/index/tec/ai.webp";
+import blurBg from "../images/index/bg-blur.webp";
+import sitioWeb from "../images/index/sitio-web.webp";
+
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("proyectos");
+
+
+
+
+---
+
+<Layout title="Soy Luis Montaño, y estoy listo para llevar tu proyecto al siguiente nivel con un sitio web moderno, escalable y de alto rendimiento.">
+	<main class="px-4 lg:px-0 gradient-bg mx-auto">
+		<div class="max-w-screen-lg mx-auto relative z-10">
+			<div class="py-20">
+				<h1
+					id="headingPrincipal"
+					class="font-semibold lg:w-3/4 mx-auto text-center text-white text-4xl lg:text-6xl"
+				>
+					Hola, soy <span id="gradient">Luis Montaño</span>, Diseñador
+					UX y Frontend developer
+				</h1>
+			</div>
+			<div class="my-10">
+				<div class="my-5 flex flex-wrap space-y-5 md:space-y-0">
+					<div class="w-full md:basis-1/2 md:pr-5">
+						<div
+							class="bg-[#171527] ring-2 ring-[#292449] w-full h-full rounded-xl relative px-6 pt-6"
+						>
+							<p class="text-3xl text-gray-200">Tu agenda web</p>
+							<p class="text-gray-400 mt-4">
+								Optimiza tu tiempo gestionando tus citas,
+								reuniones y eventos importantes de forma
+								automática
+							</p>
+							<div class="my-4 space-x-4 mb-4">
+								<button
+									class="bg-gradient-to-r from-[#6B5EE7] to-[#3F7AD9] rounded-md px-4 py-2 text-gray-100 hover:ring-1 hover:ring-[#3FAAD9]"
+								>
+									<a href="">Agenda un demo</a>
+								</button>
+								<button
+									class="text-gray-400 hover:text-gray-200"
+								>
+									<a href="">Leer más &rarr;</a>
+								</button>
+							</div>
+							<img class="opacity-90" src={agenda.src} alt="Calendario de google" />
+						</div>
+					</div>
+					<div
+						class="w-full md:basis-1/2 bg-white bg-opacity-5 ring-2 ring-gray-600 rounded-xl p-6"
+					>
+						<p class="text-gray-100 text-3xl">Un poco sobre mi</p>
+						<div class="space-y-4 text-gray-400 pt-4">
+							<p>
+								Cuento con 6 años de experiencia trabajando de
+								forma remota con personas creativas de agencias,
+								nuevas empresas y pequeñas empresas en diversos
+								proyectos.
+							</p>
+							<p>Conocimientos en:</p>
+							<div class="flex flex-wrap mt-4">
+								<div
+									class="flex items-center space-x-2 p-2 ring-1 ring-gray-400 rounded-md my-1 mx-1 text-sm"
+								>
+									<img
+										class="w-5 h-5"
+										src={html.src}
+										alt="Logotipo de HTML"
+									/>
+									<p>HTML 5</p>
+								</div>
+								<div
+									class="flex items-center space-x-2 p-2 ring-1 ring-gray-400 rounded-md my-1 mx-1 text-sm"
+								>
+									<img class="w-5 h-5" src={css.src} alt="Logotipo de CSS3" />
+									<p>CSS3</p>
+								</div>
+								<div
+									class="flex items-center space-x-2 p-2 ring-1 ring-gray-400 rounded-md my-1 mx-1 text-sm"
+								>
+									<img
+										class="w-5 h-5"
+										src={tailwind.src}
+										alt="Logotipo de tailwind"
+									/>
+									<p>Tailwind</p>
+								</div>
+								<div
+									class="flex items-center space-x-2 p-2 ring-1 ring-gray-400 rounded-md my-1 mx-1 text-sm"
+								>
+									<img class="w-5 h-5" src={js.src} alt="Logotipo de Javascript" />
+									<p>Javascript</p>
+								</div>
+								<div
+									class="flex items-center space-x-2 p-2 ring-1 ring-gray-400 rounded-md my-1 mx-1 text-sm"
+								>
+									<img class="w-5 h-5" src={ts.src} alt="Logotipo de Typescript" />
+									<p>Typescript</p>
+								</div>
+								<div
+									class="flex items-center space-x-2 p-2 ring-1 ring-gray-400 rounded-md my-1 mx-1 text-sm"
+								>
+									<img
+										class="w-5 h-5"
+										src={react.src}
+										alt="Logotipo de React"
+									/>
+									<p>React</p>
+								</div>
+								<div
+									class="flex items-center space-x-2 p-2 ring-1 ring-gray-400 rounded-md my-1 mx-1 text-sm"
+								>
+									<img
+										class="w-5 h-5"
+										src={astro.src}
+										alt="Logotipo de Astro"
+									/>
+									<p>Astro</p>
+								</div>
+								<div
+									class="flex items-center space-x-2 p-2 ring-1 ring-gray-400 rounded-md my-1 mx-1 text-sm"
+								>
+									<img
+										class="w-5 h-5"
+										src={figma.src}
+										alt="Logotipo de figma"
+									/>
+									<p>Figma</p>
+								</div>
+								<div
+									class="flex items-center space-x-2 p-2 ring-1 ring-gray-400 rounded-md my-1 mx-1 text-sm"
+								>
+									<img class="w-5 h-5" src={ps.src} alt="Logotipo de Photoshop" />
+									<p>Photoshop</p>
+								</div>
+								<div
+									class="flex items-center space-x-2 p-2 ring-1 ring-gray-400 rounded-md my-1 mx-1 text-sm"
+								>
+									<img class="w-5 h-5" src={ai.src} alt="Logotipo de Illustrator" />
+									<p>Illustrator</p>
+								</div>
+							</div>
+						</div>
+						<div class="mt-6 text-gray-400">
+							<p>Conoce más de mi día a día en mi instagram</p>
+							<div class="mt-2 md:mt-0">
+								<a class="flex space-x-1" href="https://www.instagram.com/monrold21/">
+									<svg
+										class="w-4 icon fill-gray-400"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 448 512"
+										><path
+											d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+										></path></svg
+									>
+									<p>/monrold21</p>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<div class="projects-container px-2">
+		<div class="max-w-screen-lg mx-auto">
+			<p class="text-2xl text-gray-400 lg:mb-2">
+				Mis últimos proyectos
+			</p>
+			<div class="overflow-x-scroll snap-x snap-mandatory">
+				<div>
+					<ul
+						class="flex"
+						style={{
+							width: `${allPosts.length * 300}px !important`,
+						}}
+					>
+						{
+							allPosts.slice(0, 3).map((project) => (
+								<li class="project text-gray-100 lg:px-0 snap-center hover:cursor-pointer">
+									<a
+										class="pointer rounded-md"
+										href={`/proyectos/${project.slug}`}
+									>
+										<div class="relative">
+											<img
+												class="rounded-md"
+												src={project.data.image.src}
+												alt={project.data.image.alt}
+											/>
+											<div class="absolute bottom-0 flex items-center space-x-2 px-4 py-2">
+												<div class="o outline outline-1 outline-gray-300 p-1 rounded-md">
+													<p>
+														{project.data.categoria}
+													</p>
+												</div>
+												<h3>{project.data.title}</h3>
+											</div>
+										</div>
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="max-w-screen-lg mx-auto mt-10">
+		<div class="sitio-web flex flex-col items-center justify-center">
+			<h3 class="z-10 lg:mx-20 text-2xl text-gray-400 p-4 text-center">Tu proyecto con un sitio web moderno, escalable y de alto rendimiento.</h3>
+			<div class="flex flex-col md:flex-grow items-center justify-center lg:space-x-2 space-y-2">
+			<button class="text-gray-400 z-10 md:w-auto w-full">
+				<a class="bg-gradient-to-r from-[#6B5EE7] to-[#3F7AD9] rounded-md px-4 py-2 text-gray-100 hover:ring-1 hover:ring-[#3FAAD9]" href="">Contáctame</a>
+			</button>
+			<button class="text-gray-300 z-10">
+				<a class="" href="">Agenda una reunión &rarr;</a>
+			</button>
+		</div>
+		</div>
+	</div>
+
+	<style define:vars={{ 
+	blurBg: `url("${blurBg.src}")`,
+	sitio: `url("${sitioWeb.src}")`
+	}}>
+	.sitio-web{
+		background-image: var(--sitio);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 30vh;
+		position: relative;
+	}
+	.sitio-web::before{
+		content: "";
+		top: 0;
+		left: 0;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		background-image: linear-gradient(to top, #12101e, transparent);
+	}
+	.project:hover .o{
+		outline-color: #3F7AD9;
+	}
+	.project{
+		margin: 0 20px;
+	}
+	@media screen and (min-width:400px){
+		.project{
+		margin: 0 4px;
+	}
+	}
+		.gradient-bg {
+			position: relative; /* Añade posición relativa para que el pseudoelemento ::before se posicione correctamente */
+			background-image: var(--blurBg);
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+		.gradient-bg::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(
+				to top,
+				#12101e,
+				transparent,
+				#12101e
+			); /* Corrige la sintaxis del gradiente */
+			z-index: 1; /* Asegura que el pseudoelemento esté detrás del contenido principal */
+		}
+		a:hover .icon path {
+			fill: #c13584;
+		}
+		#gradient {
+			background-image: linear-gradient(
+				to left,
+				#6b5ee7,
+				#3faad9,
+				#673fd9
+			);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+			background-size: 400%;
+			animation: gradientAnimation 4s infinite alternate-reverse;
+		}
+		@keyframes gradientAnimation {
+			from {
+				background-position: 0%;
+			}
+			to {
+				background-position: 100%;
+			}
+		}
+	</style>
+</Layout>
