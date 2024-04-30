@@ -1,7 +1,9 @@
 ---
 title: "Agenda web Wapa"
 cliente: "wapa"
-categoria: "UX | Frontend"
+categoria: {
+    ux: "UX | Frontend"
+}
 date: "2024-04-24"
 descripcion: "hola mundo esto es hh gagare"
 image: {

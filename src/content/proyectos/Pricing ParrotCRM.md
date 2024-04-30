@@ -1,7 +1,9 @@
 ---
 title: "Pricing"
 cliente: "Parrot CRM"
-categoria: "UX | Frontend"
+categoria: {
+    ux: "UX | Frontend"
+}
 date: "2024-04-24"
 descripcion: ""
 image: {

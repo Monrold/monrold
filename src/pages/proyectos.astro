@@ -1,0 +1,114 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("proyectos");
+const ux = await getCollection("proyectos", ({ data }) => {
+    return data.categoria.ux;
+});
+---
+
+<Layout title="Conoce todos mi proyectos">
+    <section class="max-w-screen-xl mx-auto">
+        <h1 class="text-gray-400 text-center text-4xl py-6">
+            Conoce todos mis proyectos
+        </h1>
+        <button
+            id="ux-developer"
+            class="p-2 outline outline-1 outline-gray-400 hover:outline-gray-300 rounded-md text-gray-400 focus:outline-0 focus:ring-1 focus:ring-sky-300"
+            >UX design</button
+        >
+        <script>
+            window.addEventListener("DOMContentLoaded", function () {
+                const all = document.getElementById("all") as HTMLLIElement;
+                const ux = document.getElementById("ux") as HTMLLIElement;
+                const btnUx = document.getElementById(
+                    "ux-developer",
+                ) as HTMLButtonElement;
+
+                ux.style.display = "none";
+
+                const filtradoUx = () => {
+                    all.style.display = "none";
+                    ux.style.display = "flex";
+                };
+
+                btnUx.addEventListener("click", filtradoUx);
+            });
+        </script>
+        <ul id="all" class="flex flex-wrap mx-auto">
+            {
+                allPosts.map((project) => (
+                    <li
+                        class="project text-gray-100 lg:px-0 snap-center hover:cursor-pointer"
+                        style={{
+                            width: `${400}px !important`,
+                        }}
+                    >
+                        <a
+                            class="pointer rounded-md"
+                            href={`/proyectos/${project.slug}`}
+                        >
+                            <div class="px-2 py-2">
+                                <img
+                                    class="rounded-md"
+                                    src={project.data.image.src}
+                                    alt={project.data.image.alt}
+                                />
+                                <div class=" bottom-0 flex items-center space-x-2 pt-4 ml-2 lg:ml-0">
+                                    <div class="o outline outline-1 outline-gray-300 p-1 rounded-md">
+                                        <p id="categoria">
+                                            {project.data.categoria.ux}
+                                            {project.data.categoria.branding}
+                                        </p>
+                                    </div>
+                                    <h3 class="title">{project.data.title}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+        <ul id="ux" class="flex flex-wrap mx-auto">
+            {
+                ux.map((project) => (
+                    <li
+                        class="project text-gray-100 lg:px-0 snap-center hover:cursor-pointer"
+                        style={{
+                            width: `${400}px !important`,
+                        }}
+                    >
+                        <a
+                            class="pointer rounded-md"
+                            href={`/proyectos/${project.slug}`}
+                        >
+                            <div class="px-2 py-2">
+                                <img
+                                    class="rounded-md"
+                                    src={project.data.image.src}
+                                    alt={project.data.image.alt}
+                                />
+                                <div class=" bottom-0 flex items-center space-x-2 pt-4 ml-2 lg:ml-0">
+                                    <div class="o outline outline-1 outline-gray-300 p-1 rounded-md">
+                                        <p id="categoria">
+                                            {project.data.categoria.ux}
+                                        </p>
+                                    </div>
+                                    <h3 class="title">{project.data.title}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </section>
+</Layout>
+
+<style>
+    .project:hover .o,
+		.project:hover .title {
+			outline-color: #3f7ad9;
+			color: rgb(156, 163, 175);
+		}
+</style>

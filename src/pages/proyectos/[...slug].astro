@@ -38,7 +38,8 @@ const { Content } = await entry.render();
                 <p
                     class="ring-1 ring-blue-600 rounded-md p-1 text-sm inline-block"
                 >
-                    {entry.data.categoria}
+                    {entry.data.categoria.ux} 
+                    {entry.data.categoria.branding}
                 </p>
                 <div class="text-gray-400">
                     <div class="md:mt-0">
@@ -57,7 +58,7 @@ const { Content } = await entry.render();
                 </div>
             </div>
             {
-                entry.data.categoria === "UX | Frontend" ? (
+                entry.data.categoria.ux ? (
                     <div class="mt-4 flex space-x-2">
                         <button
                             id="btnDesktop"

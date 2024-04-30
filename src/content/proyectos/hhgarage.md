@@ -1,7 +1,9 @@
 ---
 title: "HH GARAGE"
 cliente: "HH GARAGE"
-categoria: "Branding"
+categoria: {
+    branding: "branding"
+}
 date: "2024-04-24"
 descripcion: "
 HH Garage ha nacido de la inspiración pura y la pasión de Humberto e Hilario, quienes sienten un amor profundo por las cuatro ruedas. Tomé inspiración de las texturas generadas por los autos a lo largo del tiempo en su pintura, chasis y/o piezas, además de una tipografía generada desde cero con el objetivo de replicar un estilo retro, sumando un conejo con un pelaje inspirado en el mismo estilo. La mascota de este taller tiene un gran significado para los fundadores: ingenio, prudencia y destreza."

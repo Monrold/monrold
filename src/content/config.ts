@@ -1,12 +1,17 @@
 
 import {z, defineCollection} from "astro:content";
 
+
+
 const allProyects = defineCollection({
     type: 'content',
     schema:({
         title: z.string(),
         cliente: z.string(),
-        categoria: z.string(),
+        categoria: z.object({
+            ux: z.string().optional(),
+            brandign: z.string().optional()
+        }).optional(),
         date: z.string().date(),
         descripcion: z.string(),
         image: z.object({
