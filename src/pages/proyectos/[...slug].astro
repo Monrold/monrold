@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import Btns from '../../components/btns-filters-projects.jsx';
+import BtnsFilterPorjects from "../../components/btns-filters-projects.tsx";
 
 export async function getStaticPaths() {
     const proyectEntries = await getCollection("proyectos");
@@ -14,8 +14,6 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-
-
 ---
 
 <Layout title={entry.data.title}>
@@ -39,7 +37,7 @@ const { Content } = await entry.render();
                 <p
                     class="ring-1 ring-blue-600 rounded-md p-1 text-sm inline-block"
                 >
-                    {entry.data.categoria.ux} 
+                    {entry.data.categoria.ux}
                     {entry.data.categoria.branding}
                 </p>
                 <div class="text-gray-400">
@@ -60,23 +58,9 @@ const { Content } = await entry.render();
             </div>
             {
                 entry.data.categoria.ux ? (
-                    <div class="mt-4 flex space-x-2">
-                        <button
-                            id="btnDesktop"
-                            class="outline outline-1 outline-gray-400 p-2 rounded-md hover:outline-gray-300 focus:outline-0 focus:ring-1 focus:ring-[#6B5EE7]"
-                        >
-                            Desktop
-                        </button>
-                        <button
-                            id="btnMobile"
-                            class="outline outline-1 outline-gray-400 p-2 rounded-md hover:outline-gray-300  focus:outline-0 focus:ring-1 focus:ring-[#6B5EE7]"
-                        >
-                            Mobile
-                        </button>
-                    </div>
+                    <BtnsFilterPorjects client:visible />
                 ) : null
             }
-           
         </div>
         <div
             class="lg:basis-1/2 text-gray-400 flex flex-col items-center space-y-4"
@@ -97,50 +81,39 @@ const { Content } = await entry.render();
                             alt={entry.data.images?.imageDesktop?.alt}
                         />
                     </div>
-                ) 
+                )
             }
         </div>
         <script>
-            const imageMobile = document.getElementById('imageMobile') as HTMLImageElement;
-            const imageDesktop = document.getElementById('imageDesktop') as HTMLImageElement;
-            const btnMobile = document.getElementById('btnMobile') as HTMLButtonElement;
-            const btnDesktop = document.getElementById('btnDesktop') as HTMLButtonElement;
-          
-            // Hide mobile image initially
-            imageMobile.style.display = 'none';
-          
-            const mobile = () => {
-              imageMobile.style.display = 'block';
-              imageDesktop.style.display = 'none';
+            const lazyLoad = (entry) => {
+                const { target } = entry;
+                const imageMobile = target.querySelector("#imageMobile");
+                const imageDesktop = target.querySelector("#imageDesktop");
+                
+                imageMobile.style.display = "none";
+
+                const handleClick = (displayMobile) => () => {
+                    imageMobile.style.display = displayMobile;
+                    imageDesktop.style.display =
+                        displayMobile === "block" ? "none" : "block";
+                };
+
+                const btnMobile = target.querySelector("#btnMobile");
+                btnMobile.addEventListener("click", handleClick("block"));
+
+                const btnDesktop = target.querySelector("#btnDesktop");
+                btnDesktop.addEventListener("click", handleClick("none"));
             };
-          
-            const desktop = () => {
-              imageMobile.style.display = 'none';
-              imageDesktop.style.display = 'block';
-            };
-          
-            // Create Intersection Observer and initial event listener setup
-            const observer = new IntersectionObserver(entries => {
-              if (entries[0].isIntersecting) {
-                // Page is visible, execute logic (including event listeners)
-                btnMobile.addEventListener('click', mobile);
-                btnDesktop.addEventListener('click', desktop);
-                observer.unobserve(imageMobile); // Unobserve after initial execution
-              }
+
+            const observer = new IntersectionObserver(lazyLoad, {
+                threshold: 0.5,
             });
-          
-            // Initial check (in case the image is visible on page load)
-            const initialCheck = () => {
-              if (imageMobile.getBoundingClientRect().top < window.innerHeight) {
-                // Image is visible, execute logic (including event listeners)
-                btnMobile.addEventListener('click', mobile);
-                btnDesktop.addEventListener('click', desktop);
-              }
-            };
-          
-            initialCheck();
-            observer.observe(imageMobile); // Observe the mobile image
-          </script>
+
+            const componente = document.querySelector(".componente-con-js");
+            if (componente !== null) {
+            observer.observe(componente);
+            }
+        </script>
     </div>
 </Layout>
 
