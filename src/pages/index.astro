@@ -12,7 +12,7 @@ import figma from "../images/index/tec/figma.webp";
 import ps from "../images/index/tec/ps.webp";
 import ai from "../images/index/tec/ai.webp";
 import blurBg from "../images/index/bg-blur.webp";
-import sitioWeb from "../images/index/sitio-web.webp";
+import Btns from '../components/btns-filters-projects.jsx';
 
 import { getCollection } from "astro:content";
 const allPosts = await getCollection("proyectos");
@@ -239,8 +239,15 @@ const allPosts = await getCollection("proyectos");
 											<div class=" bottom-0 flex items-center space-x-2 py-4 ml-2 lg:ml-0">
 												<div class="o outline outline-1 outline-gray-300 p-1 rounded-md">
 													<p id="categoria">
-														{project.data.categoria.ux}
-														{project.data.categoria.branding}
+														{
+															project.data
+																.categoria.ux
+														}
+														{
+															project.data
+																.categoria
+																.branding
+														}
 													</p>
 												</div>
 												<h3 class="title">

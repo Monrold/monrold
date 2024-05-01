@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Btns from '../../components/btns-filters-projects.jsx';
 
 export async function getStaticPaths() {
     const proyectEntries = await getCollection("proyectos");
@@ -75,6 +76,7 @@ const { Content } = await entry.render();
                     </div>
                 ) : null
             }
+           
         </div>
         <div
             class="lg:basis-1/2 text-gray-400 flex flex-col items-center space-y-4"
@@ -99,37 +101,46 @@ const { Content } = await entry.render();
             }
         </div>
         <script>
-            window.addEventListener("DOMContentLoaded", function () {
-                const btnMobile = document.getElementById(
-                    "btnMobile",
-                ) as HTMLButtonElement;
-                const btnDesktop = document.getElementById(
-                    "btnDesktop",
-                ) as HTMLButtonElement;
-                const imageMobile = document.getElementById(
-                    "imageMobile",
-                ) as HTMLImageElement;
-                const imageDesktop = document.getElementById(
-                    "imageDesktop",
-                ) as HTMLImageElement;
-
-                // Ocultar imagen mobile inicialmente
-                imageMobile.style.display = "none";
-
-                const mobile = () => {
-                    imageMobile.style.display = "block";
-                    imageDesktop.style.display = "none";
-                };
-
-                const desktop = () => {
-                    imageMobile.style.display = "none";
-                    imageDesktop.style.display = "block";
-                };
-
-                btnMobile.addEventListener("click", mobile);
-                btnDesktop.addEventListener("click", desktop);
+            const imageMobile = document.getElementById('imageMobile') as HTMLImageElement;
+            const imageDesktop = document.getElementById('imageDesktop') as HTMLImageElement;
+            const btnMobile = document.getElementById('btnMobile') as HTMLButtonElement;
+            const btnDesktop = document.getElementById('btnDesktop') as HTMLButtonElement;
+          
+            // Hide mobile image initially
+            imageMobile.style.display = 'none';
+          
+            const mobile = () => {
+              imageMobile.style.display = 'block';
+              imageDesktop.style.display = 'none';
+            };
+          
+            const desktop = () => {
+              imageMobile.style.display = 'none';
+              imageDesktop.style.display = 'block';
+            };
+          
+            // Create Intersection Observer and initial event listener setup
+            const observer = new IntersectionObserver(entries => {
+              if (entries[0].isIntersecting) {
+                // Page is visible, execute logic (including event listeners)
+                btnMobile.addEventListener('click', mobile);
+                btnDesktop.addEventListener('click', desktop);
+                observer.unobserve(imageMobile); // Unobserve after initial execution
+              }
             });
-        </script>
+          
+            // Initial check (in case the image is visible on page load)
+            const initialCheck = () => {
+              if (imageMobile.getBoundingClientRect().top < window.innerHeight) {
+                // Image is visible, execute logic (including event listeners)
+                btnMobile.addEventListener('click', mobile);
+                btnDesktop.addEventListener('click', desktop);
+              }
+            };
+          
+            initialCheck();
+            observer.observe(imageMobile); // Observe the mobile image
+          </script>
     </div>
 </Layout>
 
