@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import BtnsFilterPorjects from "../../components/btns-filters-projects.tsx";
+import BtnsFilterPorjects from '../../components/btns-filters-projects.tsx';
 
 export async function getStaticPaths() {
     const proyectEntries = await getCollection("proyectos");
@@ -14,6 +14,8 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+
 ---
 
 <Layout title={entry.data.title}>
@@ -37,7 +39,7 @@ const { Content } = await entry.render();
                 <p
                     class="ring-1 ring-blue-600 rounded-md p-1 text-sm inline-block"
                 >
-                    {entry.data.categoria.ux}
+                    {entry.data.categoria.ux} 
                     {entry.data.categoria.branding}
                 </p>
                 <div class="text-gray-400">
@@ -58,9 +60,10 @@ const { Content } = await entry.render();
             </div>
             {
                 entry.data.categoria.ux ? (
-                    <BtnsFilterPorjects client:visible />
+                  <BtnsFilterPorjects client:visible/>
                 ) : null
             }
+           
         </div>
         <div
             class="lg:basis-1/2 text-gray-400 flex flex-col items-center space-y-4"
@@ -81,38 +84,40 @@ const { Content } = await entry.render();
                             alt={entry.data.images?.imageDesktop?.alt}
                         />
                     </div>
-                )
+                ) 
             }
         </div>
         <script>
-            const lazyLoad = (entry) => {
-                const { target } = entry;
-                const imageMobile = target.querySelector("#imageMobile");
-                const imageDesktop = target.querySelector("#imageDesktop");
-                
+            window.addEventListener("DOMContentLoaded", function () {
+                const btnMobile = document.getElementById(
+                    "btnMobile",
+                ) as HTMLButtonElement;
+                const btnDesktop = document.getElementById(
+                    "btnDesktop",
+                ) as HTMLButtonElement;
+                const imageMobile = document.getElementById(
+                    "imageMobile",
+                ) as HTMLImageElement;
+                const imageDesktop = document.getElementById(
+                    "imageDesktop",
+                ) as HTMLImageElement;
+
+                // Ocultar imagen mobile inicialmente
                 imageMobile.style.display = "none";
 
-                const handleClick = (displayMobile) => () => {
-                    imageMobile.style.display = displayMobile;
-                    imageDesktop.style.display =
-                        displayMobile === "block" ? "none" : "block";
+                const mobile = () => {
+                    imageMobile.style.display = "block";
+                    imageDesktop.style.display = "none";
                 };
 
-                const btnMobile = target.querySelector("#btnMobile");
-                btnMobile.addEventListener("click", handleClick("block"));
+                const desktop = () => {
+                    imageMobile.style.display = "none";
+                    imageDesktop.style.display = "block";
+                };
 
-                const btnDesktop = target.querySelector("#btnDesktop");
-                btnDesktop.addEventListener("click", handleClick("none"));
-            };
-
-            const observer = new IntersectionObserver(lazyLoad, {
-                threshold: 0.5,
+                btnMobile.addEventListener("click", mobile);
+                btnDesktop.addEventListener("click", desktop);
             });
-
-            const componente = document.querySelector(".componente-con-js");
-            if (componente !== null) {
-            observer.observe(componente);
-            }
         </script>
     </div>
 </Layout>
