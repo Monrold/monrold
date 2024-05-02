@@ -12,7 +12,7 @@ import figma from "../images/index/tec/figma.webp";
 import ps from "../images/index/tec/ps.webp";
 import ai from "../images/index/tec/ai.webp";
 import blurBg from "../images/index/bg-blur.webp";
-import Btns from '../components/btns-filters-projects.jsx';
+import Scroll from '../components/scroll-projects-home.tsx';
 
 import { getCollection } from "astro:content";
 const allPosts = await getCollection("proyectos");
@@ -216,7 +216,8 @@ const allPosts = await getCollection("proyectos");
 			</div>
 
 			<div class="overflow-x-scroll snap-x snap-mandatory">
-				<div>
+				<Scroll client:visible>
+				<div slot="projects">
 					<ul
 						class="flex"
 						style={{
@@ -261,6 +262,7 @@ const allPosts = await getCollection("proyectos");
 						}
 					</ul>
 				</div>
+			</Scroll>
 			</div>
 		</div>
 	</div>
