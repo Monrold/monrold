@@ -10,7 +10,8 @@ const allProyects = defineCollection({
         cliente: z.string(),
         categoria: z.object({
             ux: z.string().optional(),
-            branding: z.string().optional()
+            branding: z.string().optional(),
+            marketing: z.string().optional()
         }).optional(),
         date: z.string().date(),
         descripcion: z.string(),

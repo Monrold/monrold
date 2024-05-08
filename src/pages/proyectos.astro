@@ -10,6 +10,10 @@ const ux = await getCollection("proyectos", ({ data }) => {
 const branding = await getCollection("proyectos", ({ data }) => {
     return data.categoria.branding;
 });
+
+const marketing = await getCollection("proyectos", ({ data }) => {
+    return data.categoria.marketing;
+});
 ---
 
 <Layout title="Conoce todos mi proyectos">
@@ -17,7 +21,7 @@ const branding = await getCollection("proyectos", ({ data }) => {
         <h1 class="text-gray-400 text-center text-4xl py-6">
             Conoce todos mis proyectos
         </h1>
-        <LogicFilterBtns allPosts={allPosts} ux={ux} branding={branding} client:visible/>
+        <LogicFilterBtns allPosts={allPosts} ux={ux} branding={branding} marketing={marketing}  client:visible/>
     </section>
 </Layout>
 
