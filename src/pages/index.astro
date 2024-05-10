@@ -11,7 +11,7 @@ import astro from "../images/index/tec/astro.webp";
 import figma from "../images/index/tec/figma.webp";
 import ps from "../images/index/tec/ps.webp";
 import ai from "../images/index/tec/ai.webp";
-import blurBg from "../images/index/bg-blur-2.webp";
+
 
 import { getCollection } from "astro:content";
 const allPosts = await getCollection("proyectos");
@@ -308,7 +308,6 @@ const mobile =
 
 <style
 		define:vars={{
-			blurBg: `url("${blurBg.src}")`,
 			totalWidthMobile: mobile,
 		}}
 	>
