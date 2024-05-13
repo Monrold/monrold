@@ -224,7 +224,7 @@ const allPosts = await getCollection("proyectos");
 
 			<div class="overflow-x-scroll snap-x snap-mandatory">
 				<div>
-					<ul class="flex" style=`${allPosts.length * 600}vw`>
+					<ul class="flex" style={`width: ${allPosts.length * 300}px;`}>
 						{
 							allPosts.slice(0, 3).map((project) => (
 								<li class="project text-gray-100 lg:px-0 snap-center hover:cursor-pointer py-2">
