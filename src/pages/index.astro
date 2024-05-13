@@ -15,7 +15,7 @@ import ai from "../images/index/tec/ai.webp";
 import { getCollection } from "astro:content";
 const allPosts = await getCollection("proyectos");
 
-const mobile = `${allPosts.slice(0, 3).length * 390}px`;
+
 ---
 
 <Layout
@@ -224,7 +224,7 @@ const mobile = `${allPosts.slice(0, 3).length * 390}px`;
 
 			<div class="overflow-x-scroll snap-x snap-mandatory">
 				<div>
-					<ul class="flex" id="wi">
+					<ul class="flex" id="wi" style=`${allPosts.slice(0, 3).length * 390}px`>
 						{
 							allPosts.slice(0, 3).map((project) => (
 								<li class="project text-gray-100 lg:px-0 snap-center hover:cursor-pointer py-2">
@@ -321,12 +321,10 @@ const mobile = `${allPosts.slice(0, 3).length * 390}px`;
 
 <style
 	define:vars={{
-		totalWidthMobile: mobile,
+
 	}}
 >
-	#wi {
-		width: var(--totalWidthMobile);
-	}
+
 	.project:hover .o,
 	.project:hover .title {
 		outline-color: #3f7ad9;
