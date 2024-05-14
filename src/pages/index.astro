@@ -14,7 +14,6 @@ import ai from "../images/index/tec/ai.webp";
 
 import { getCollection } from "astro:content";
 const allPosts = await getCollection("proyectos");
-
 ---
 
 <Layout
@@ -205,7 +204,10 @@ const allPosts = await getCollection("proyectos");
 			</div>
 		</div>
 		<div class="">
-			<div class=" bg-gradient-to-r from-indigo-600 to-blue-500 absolute  object-cover inset-0 blur-3xl opacity-40 z-0"></div>
+			<div
+				class="bg-gradient-to-r from-indigo-600 to-blue-500 absolute object-cover inset-0 blur-3xl opacity-40 z-0"
+			>
+			</div>
 		</div>
 	</main>
 	<div class="projects-container px-2">
@@ -223,10 +225,15 @@ const allPosts = await getCollection("proyectos");
 
 			<div class="overflow-x-scroll snap-x snap-mandatory">
 				<div>
-					<ul class="flex w-[1200px]">
+					<ul
+						class="flex"
+						style={{
+							width: `${allPosts.slice(0, 3).length * 400}px`,
+						}}
+					>
 						{
 							allPosts.slice(0, 3).map((project) => (
-								<li class="project text-gray-100 lg:px-0 snap-center hover:cursor-pointer py-2">
+								<li class="project text-gray-100  snap-center hover:cursor-pointer w-[97vw] px-1 lg:w-auto py-2">
 									<a
 										class="pointer rounded-md"
 										href={`/proyectos/${project.slug}`}
@@ -318,24 +325,11 @@ const allPosts = await getCollection("proyectos");
 	></script>
 </Layout>
 
-<style
-	define:vars={{
-
-	}}
->
-
+<style define:vars={{}}>
 	.project:hover .o,
 	.project:hover .title {
 		outline-color: #3f7ad9;
 		color: rgb(156, 163, 175);
-	}
-	.project {
-		margin: 0 20px;
-	}
-	@media screen and (min-width: 400px) {
-		.project {
-			margin: 0 4px;
-		}
 	}
 	.gradient-bg {
 		position: relative;
