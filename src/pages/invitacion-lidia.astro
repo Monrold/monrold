@@ -1,0 +1,74 @@
+---
+import Lili from "../images/invitacion-lili/foto-lidia.jpg";
+import itinerario from "../images/invitacion-lili/itinerario.png";
+import tienda from "../images/invitacion-lili/tienda.jpg";
+import regalo from "../images/invitacion-lili/regalo.png"
+---
+
+<style>
+    .gradient {
+            height: 200px;
+            background: linear-gradient(to bottom, rgba(6, 78, 59, 1) 0%, rgba(6, 78, 59, 0) 100%);
+        }
+</style>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <main>
+            <section>
+                <div class="bg-emerald-950 py-20 lg:hidden">
+                    <h2 class="text-4xl text-white text-center font-thin px-5">
+                        Estas invitado a compartir y festejar el cumpleaños de
+                        Lili
+                    </h2>
+                </div>
+                <div class="relative lg:hidden">
+                    <div class="gradient absolute"></div>
+                    <img class="h-[80vh] w-full object-cover" src={Lili.src} alt="" />
+                </div>
+                <div class="bg-emerald-950 lg:hidden">
+                    <div>
+                        <p class="text-white text-center text-2xl pt-8">Domingo 18 de Agosto</p>
+                        <p class="text-white text-center text-2xl ">A las 4 pm</p>
+                        <div class="py-8 px-4">
+                            <div class="bg-white rounded-md text-2xl text-center pb-4">
+                                <p class="p-5">Acompañanos en Rancho Museo las pintas en Ixtlahuaca hidalgo.</p>
+                                <a class="bg-emerald-950 text-white px-20 py-2 rounded-md" href="">Ir desde maps</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-emerald-950">
+                    <img src={itinerario.src} alt="">
+                    <p class="text-white text-center pb-10 font-thin">El temazcal es opcional, favor de confirmar tu entrada al mismo.</p>
+                </div>
+                <div class="bg-emerald-950">
+                    <img class="object-cover h-[40vh] w-full" src={tienda.src} alt="">
+                    <p class="text-white text-center font-thin pt-12 pb-6 px-10">Trae tu tienda de campaña y la noche será más larga. </p>
+                    <img src={regalo.src} alt="">
+                </div>
+                <div
+                    class="lg:bg-emerald-950 lg:flex lg:items-center lg:justify-center lg:h-screen"
+                >
+                    <h3 class="text-4xl text-white">
+                        Invitación sólo disponible para dispositivos móviles
+                    </h3>
+                </div>      
+                <script
+                    src="https://static.elfsight.com/platform/platform.js"
+                    data-use-service-core
+                    defer></script>
+                <div
+                    class="elfsight-app-a010bcbe-27b0-4a4d-9092-b5a390eec9f4"
+                    data-elfsight-app-lazy
+                >
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
