@@ -1,0 +1,125 @@
+---
+import name from "../images/invitacion-miguel/name.png";
+import harry1 from "../images/invitacion-miguel/harry-1.png";
+import harry2 from "../images/invitacion-miguel/harry-2.png";
+import outfit from "../images/invitacion-miguel/outfit.png";
+---
+
+<style>
+    .gradient {
+        height: 200px;
+        background: linear-gradient(
+            to bottom,
+            rgba(6, 78, 59, 1) 0%,
+            rgba(6, 78, 59, 0) 100%
+        );
+    }
+    .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .popup-content {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .popup-button {
+        background: #2d6a4f;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <section class="">
+            <div class="bg-[#0a131a] py-10 lg:hidden">
+                <h2 class="text-2xl text-white text-center font-thin px-5 pb-4">
+                    Acompañame a celebrar este día lleno de Magia.
+                </h2>
+                <div class="lg:hidden">
+                    <img class="py-5" src={name.src} alt="" />
+                </div>
+                <img class="py-2" src={harry1.src} alt="" />
+            </div>
+
+            <div class="bg-[#0a131a] lg:hidden">
+                <div>
+                    <p class="text-white text-center text-2xl">
+                        Domingo 18 de Agosto
+                    </p>
+                    <p class="text-white text-center text-2xl pb-8">
+                        A las 2 pm
+                    </p>
+                    <div class="py-2 px-4">
+                        <div
+                            class="bg-sky-950 rounded-md text-2xl text-center pb-4"
+                        >
+                            <p class="p-5 text-white">
+                                Acompañanos en Parque la cabaña Real Toledo
+                            </p>
+                            <a
+                                class="bg-[#0a131a] text-white px-20 py-2 rounded-md text-sm"
+                                href="https://maps.apple.com/?address=55988%20Temascalapa,%20Edo.%20M%C3%A9x.,%20M%C3%A9xico&auid=13045829115242531308&ll=19.899956,-98.880844&lsp=7618&q=55988%20Temascalapa,%20Edo.%20M%C3%A9x."
+                                >Ir desde maps</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-[#0a131a] py-4 lg:hidden">
+                <img src={harry2.src} alt="" />
+                <img src={outfit.src} class="px-2 py-8" alt="" />
+            </div>
+
+            <div
+                class="hidden pb-10 lg:bg-[#0a131a] lg:flex lg:items-center lg:justify-center lg:h-screen"
+            >
+                <h3 class="text-4xl text-white">
+                    Invitación sólo disponible para dispositivos móviles
+                </h3>
+            </div>
+
+            <script
+                src="https://static.elfsight.com/platform/platform.js"
+                data-use-service-core
+                defer></script>
+            <div
+                class="elfsight-app-992ef9c3-d2e8-436c-b43d-6008807173a0"
+                data-elfsight-app-lazy
+            >
+            </div>
+        </section>
+        <script>
+            document.addEventListener("DOMContentLoaded", (event) => {
+                const popup = document.getElementById("popup");
+                const popupButton = document.getElementById("popup-button");
+
+                if (popup && popupButton) {
+                    popupButton.addEventListener("click", () => {
+                        popup.style.display = "none";
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
