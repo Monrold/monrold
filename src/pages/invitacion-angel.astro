@@ -10,7 +10,7 @@ import outfit from "../images/invitacion-miguel/outfit.png";
         height: 200px;
         background: linear-gradient(
             to bottom,
-            rgba(6, 78, 59, 1) 0%,
+            rgba(#0a131a) 0%,
             rgba(6, 78, 59, 0) 100%
         );
     }
@@ -28,14 +28,14 @@ import outfit from "../images/invitacion-miguel/outfit.png";
     }
 
     .popup-content {
-        background: white;
+        background: #0a131a;
         padding: 20px;
         border-radius: 8px;
         text-align: center;
     }
 
     .popup-button {
-        background: #2d6a4f;
+        background: #1e90ff;
         color: white;
         padding: 10px 20px;
         border: none;
@@ -51,6 +51,14 @@ import outfit from "../images/invitacion-miguel/outfit.png";
         <title>Document</title>
     </head>
     <body>
+        <div class="popup-overlay" id="popup">
+            <div class="popup-content">
+                <h2 class="text-white pb-4">¡Bienvenido!</h2>
+                <button class="popup-button" id="popup-button"
+                    >Da click para ingresar</button
+                >
+            </div>
+        </div>
         <section class="">
             <div class="bg-[#0a131a] py-10 lg:hidden">
                 <h2 class="text-2xl text-white text-center font-thin px-5 pb-4">
