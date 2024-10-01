@@ -1,0 +1,86 @@
+---
+import Layout from "../layouts/Layout.astro";
+import icono from "../images/precios/icono-monrold.svg";
+---
+
+<Layout
+    title="Un precio único para una estrategia integral que impulsa tus ventas."
+>
+<main class="h-[80vh] flex flex-col justify-center">
+    <section class="max-w-screen-lg mx-auto">
+        <h1 class="text-4xl text-white text-center">
+            Un <span class="text-[#6762DF]">precio único</span> para un impacto único.
+        </h1>
+        <p class="text-center text-gray-400 px-72">
+            Nuestro plan esta dirigido 100% a la conversión de ventas para tu
+            negocio o proyecto
+        </p>
+    </section>
+    <section class="max-w-screen-lg mx-auto">
+        <div class="border border-[#6762DF] rounded-xl p-8">
+            <div class="flex text-white">
+                <div class="w-2/3">
+                    <h2 class="text-2xl mb-4">Plan Business</h2>
+                    <p class="mb-4">
+                        Nuestro servicio está diseñado para aumentar tus ventas.
+                        Nos especializamos en atraer clientes a través de
+                        publicaciones, reels e historias pagadas, garantizando
+                        el máximo impacto en tus resultados.
+                    </p>
+                    <div class="flex space-x-8 text-[#7E7C97]">
+                        <div>
+                            <ul>
+                                <li>
+                                    20 publicaciones (reels, historias, post)
+                                </li>
+                                <li>Diseño de tu feed</li>
+                                <li>Manejo de Facebook, Instagram y Tiktok</li>
+                                <li>Segmentación de campañas pagadas</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>
+                                    Leads segmentados e interesados en el
+                                    producto o servicio
+                                </li>
+                                <li>
+                                    Grabación 1 vez a la semana, diseño y
+                                    edición
+                                </li>
+                                <li>Reporte de resultados</li>
+                                <li>
+                                    Análisis de contenido, estadísticas y
+                                    resultados
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-1/3 text-center bg-[#1C1B2F] rounded-lg">
+                    <div class="my-auto mx-8 text-[#7E7C97] space-y-2">
+                        <img class="mx-auto" src={icono.src} alt="">
+                        <h3 class="text-xl">Paga Mes a Mes</h3>
+                        <div>
+                            <div class="flex justify-center items-end">
+                                <h4 class="text-4xl">$3,000</h4>
+                                <p>MXN</p>
+                            </div>
+                            <p>+10% de comisión por venta</p>
+                        </div>
+                        <div class="my-4">
+                            <a href="" class="px-4 py-2 bg-[#6762DF] text-white rounded"
+                                >Agenda una reunión</a
+                            >
+                        </div>
+                        <p>
+                            El paquete requiere al menos $4,000 mxn mensuales
+                            para campañas pagadas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</Layout>
