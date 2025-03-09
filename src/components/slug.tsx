@@ -1,8 +1,7 @@
-
-export default function SlugPage(props) {
+export default function SlugPage({ Slug }) {
     return (
         <div>
-            {props.Slug}
+            {Slug}
         </div>
-    )
+    );
 }

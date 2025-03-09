@@ -15,13 +15,14 @@ import icon from "/public/favicon.svg";
                     src={icon.src}
                     alt="Logotipo Monrold morado"
                 />
-                <p class="text-gray-100 pl-8 monrold">Monrold</p>
+                <p class="text-gray-100 pl-8 monrold">Luis Montaño</p>
             </a>
         </div>
         <ul class="flex items-center space-x-12 text-gray-100">
-            <li><a class="hover:opacity-80" href="/proyectos">Proyectos</a></li>
-            <li class="hidden"><a class="hover:opacity-80" href="">Blog</a></li>
-            <li><a class="hover:opacity-80" href="">Agendas digitales</a></li>
+            <li class="hidden">
+                <a class="hover:opacity-80" href="/blog">Blog</a>
+            </li>
+
             <li>
                 <button class="text-gray-400 z-10 md:w-auto w-full">
                     <a
@@ -84,11 +85,11 @@ import icon from "/public/favicon.svg";
             aria-label="Regresa al Home"
         >
             <img
-                class="w-6 hover:w-7 hover:transition-all hover:delay-150 absolute inset-0 my-auto"
+                class="w-6 hover:w-7 hover:transition-all hover:delay-150 my-auto"
                 src={icon.src}
                 alt="Logotipo Monrold morado"
             />
-            Monrold
+            <p class="text-white ml-2">Luis Montaño</p>
         </a>
         <button id="btn" class="hover:opacity-80">
             <svg
@@ -96,7 +97,7 @@ import icon from "/public/favicon.svg";
                 id="burger"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 448 512"
-                aria-label="Abrir menú" 
+                aria-label="Abrir menú"
                 ><path
                     d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
                 ></path></svg
@@ -106,7 +107,7 @@ import icon from "/public/favicon.svg";
                 id="close"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 384 512"
-                aria-label="Cerrar menú" 
+                aria-label="Cerrar menú"
                 ><path
                     d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
                 ></path></svg
@@ -137,13 +138,13 @@ import icon from "/public/favicon.svg";
     </div>
     <ul id="content" class="space-y-4 text-xl text-gray-100 px-4 w-full">
         <li class="border-gray-500 border-b py-4">
-            <a class="hover:opacity-80" href="/proyectos">Proyectos</a>
+            <a class="hover:opacity-80 hidden invisible" href="/proyectos">Proyectos</a>
         </li>
-        <li class="border-gray-500 border-b py-4 hidden">
-            <a class="hover:opacity-80" href="">Blog</a>
+        <li class="border-gray-500 hidden invisible">
+            <a class="hover:opacity-80 hidden invisible" href="">Blog</a>
         </li>
-        <li class="border-gray-500 border-b pt-4 pb-6">
-            <a class="hover:opacity-80" href="">Agendas digitales</a>
+        <li class="border-gray-500  pb- hidden invisible">
+            <a class="hover:opacity-80 hidden invisible" href="">Agendas digitales</a>
         </li>
         <li class="pt-4 pb-6">
             <a
