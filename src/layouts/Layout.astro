@@ -12,9 +12,10 @@ import "@fontsource/rubik/900.css";
 interface Props {
 	title: string;
 	description: string;
+	children: any;
 }
 
-const {title, description} = Astro.props;
+const {title, description, children} = Astro.props;
 ---
 
 <!doctype html>
