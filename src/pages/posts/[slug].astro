@@ -1,0 +1,64 @@
+---
+import { contentfulClient } from "../../lib/contentful";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import type { Blog } from "../../lib/contentful";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+    const { items } = await contentfulClient.getEntries<Blog>({
+        content_type: "blog",
+    });
+    const pages = items.map((item) => ({
+        params: { slug: item.fields.titulo },
+        props: {
+            titulo: item.fields.titulo,
+            resumen: item.fields.resumen,
+            cuerpo: documentToHtmlString(item.fields.cuerpo),
+            fecha: new Date(item.fields.fecha).toLocaleDateString(),
+            images: item.fields.images,
+            imagenPortada: item.fields.imagenPortada,
+        },
+    }));
+    return pages;
+}
+
+const { titulo, cuerpo, fecha, images, resumen, imagenPortada } = Astro.props;
+---
+
+<Layout title={titulo} description={resumen}>
+    
+    <div class="max-w-3xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <article class="">
+            <a href="/blog" class="text-white text-xl">
+                <p class="mb-2">&larr;</p>
+            </a>
+            <div class="mb-6">
+                {
+                    imagenPortada &&
+                        "fields" in imagenPortada &&
+                        imagenPortada.fields?.file?.url && (
+                            <img
+                                src={imagenPortada.fields.file.url}
+                                alt={titulo}
+                                class="rounded-lg w-full mb-4"
+                            />
+                        )
+                }
+            </div>
+            <header class="mb-8">
+                <h1 class="text-5xl text-gray-100">
+                    {titulo}
+                </h1>
+                <time datetime={fecha} class="text-sm text-gray-400">
+                    {fecha}
+                </time>
+            </header>
+
+         
+            <div id="article-content" set:html={cuerpo} />
+          
+        </article>
+    </div>
+</Layout>
+
+

@@ -1,0 +1,104 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { contentfulClient } from "../lib/contentful";
+import type { Blog } from "../lib/contentful";
+
+const entries = await contentfulClient.getEntries<Blog>({
+    content_type: "blog",
+});
+
+// Ordena los artículos por la fecha de publicación (asumiendo que 'date' es un campo de tipo Date en Contentful)
+const posts = entries.items.map((item) => {
+    const { titulo, imagenPortada, resumen, cuerpo, images, fecha } =
+        item.fields;
+    return {
+        titulo,
+        imagenPortada,
+        resumen,
+        cuerpo,
+        images,
+        fecha: new Date(fecha).toLocaleDateString(),
+    };
+});
+
+// Ordena los artículos por fecha (nuevo primero)
+const sortedPosts = posts.sort(
+    (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
+);
+
+// El primer post será el más reciente
+const featuredPost = sortedPosts[0];
+// El resto de los posts serán los artículos debajo del destacado
+const otherPosts = sortedPosts.slice(1);
+---
+
+<Layout
+    title="Blog"
+    description="Explora nuestros artículos sobre diseño, arquitectura y más."
+>
+    <main class="max-w-screen-lg mx-auto my-10">
+        <!-- Featured Post -->
+        <section class="mb-12 border-b border-gray-400 pb-10">
+            <article
+                class="rounded-lg overflow-hidden flex flex-col md:flex-row"
+            >
+                <!-- Imagen a la izquierda -->
+                {
+                    featuredPost.imagenPortada &&
+                    "fields" in featuredPost.imagenPortada &&
+                    featuredPost.imagenPortada.fields?.file?.url ? (
+                        <img
+                            src={featuredPost.imagenPortada.fields.file.url}
+                            alt={featuredPost.titulo}
+                            class="md:w-1/2 h-80 object-cover rounded-lg"
+                        />
+                    ) : (
+                        <p>URL de imagen de portada destacada no disponible</p>
+                    )
+                }
+                <!-- Texto a la derecha -->
+                <div class="p-6 flex flex-col justify-center md:w-1/2">
+                    <h2 class="text-4xl text-gray-200">
+                        {featuredPost.titulo}
+                    </h2>
+                    <p class="text-lg text-gray-500">
+                        {featuredPost.resumen}
+                    </p>
+                    <a
+                        href={`/posts/${featuredPost.titulo}/`}
+                        class="text-indigo-600 hover:text-indigo-800 mt-4 inline-block"
+                    >
+                        Leer más &rarr;
+                    </a>
+                </div>
+            </article>
+        </section>
+
+        <!-- Grid of Other Blog Posts -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+                otherPosts.map((post) => (
+                    <article class="rounded-lg overflow-hidden">
+                        <img
+                            src={post.images[0].fields.file.url}
+                            alt={post.titulo}
+                            class="w-full h-48 rounded-lg object-cover"
+                        />
+                        <div class="p-3">
+                            <h2 class="text-2xl  text-gray-300">
+                                {post.titulo}
+                            </h2>
+                            <p class="mt-2 text-gray-500">{post.resumen}</p>
+                            <a
+                                href={`/posts/${post.titulo}/`}
+                                class="text-indigo-600 hover:text-indigo-800 mt-4 block"
+                            >
+                                Leer más &rarr;
+                            </a>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+    </main>
+</Layout>
