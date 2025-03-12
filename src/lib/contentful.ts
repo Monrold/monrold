@@ -23,3 +23,5 @@ export const contentfulClient = contentful.createClient({
     : import.meta.env.CONTENTFUL_DELIVERY_TOKEN, // Token de entrega en producción.
   host: import.meta.env.DEV ? "preview.contentful.com" : "cdn.contentful.com", // Dependiendo de si estás en desarrollo o producción.
 });
+
+
