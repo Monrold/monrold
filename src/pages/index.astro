@@ -1,55 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import "@fontsource/squada-one/400.css";
-
+import ads from "../images/ads.png";
+import Progressline from "../components/progressline.astro";
+import metrics from "../images/metrics.png";
+import stroit from "../images/logos/stroit.webp";
+import dinamo from "../images/logos/dinamo.webp";
+import wapa from "../images/logos/wapa.webp";
 ---
 
 <style>
-    .title {
-        font-family: "Squada One", system-ui;
-        font-weight: 400;
-    }
-    .gradient-bg {
-        position: relative;
-    }
-    .gradient-bg::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-            to top,
-            #171527,
-            transparent,
-            #12101e
-        ); /* Corrige la sintaxis del gradiente */
-        z-index: 1; /* Asegura que el pseudoelemento esté detrás del contenido principal */
-    }
-
-    /* Animación para el ojo */
-    @keyframes eyeMovement {
-        0% {
-            transform: translate(0, 0);
-        }
-        25% {
-            transform: translate(40px, -40px);
-        }
-        50% {
-            transform: translate(-50px, 50px);
-        }
-        75% {
-            transform: translate(51px, 15px);
-        }
-        100% {
-            transform: translate(0, 0);
-        }
-    }
-
-    .animate-eye {
-        animation: eyeMovement 4s infinite ease-in-out;
-    }
     #gradient {
         background-image: linear-gradient(to left, #6b5ee7, #3faad9, #673fd9);
         -webkit-background-clip: text;
@@ -58,124 +17,94 @@ import "@fontsource/squada-one/400.css";
         background-size: 400%;
         animation: gradientAnimation 4s infinite alternate-reverse;
     }
-    @keyframes gradientAnimation {
-        from {
-            background-position: 0%;
-        }
-        to {
-            background-position: 100%;
-        }
-    }
-    /* Animación de borde fluido */
-    @keyframes border-walk {
-        0% {
-            border-top-color: transparent;
-            border-right-color: transparent;
-            border-bottom-color: transparent;
-            border-left-color: transparent;
-        }
-        25% {
-            border-top-color: transparent;
-            border-right-color: #6b5ee7;
-            border-bottom-color: transparent;
-            border-left-color: transparent;
-        }
-        50% {
-            border-top-color: transparent;
-            border-right-color: transparent;
-            border-bottom-color: #6b5ee7;
-            border-left-color: transparent;
-        }
-        75% {
-            border-top-color: transparent;
-            border-right-color: transparent;
-            border-bottom-color: transparent;
-            border-left-color: #6b5ee7;
-        }
-        100% {
-            border-top-color: #6b5ee7;
-            border-right-color: transparent;
-            border-bottom-color: transparent;
-            border-left-color: transparent;
-        }
-    }
+    .video-container {
+        background-color: #000; /* Fondo negro */
 
-    /* Clase para aplicar la animación de borde */
-    .animate-border {
-        border-width: 2px;
-        border-style: solid;
-        border-color: transparent;
-        animation: border-walk 4s linear infinite;
-    }
+        background-image:
+    /* Gradiente negro-transparente-negro de arriba a abajo */
+            linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 1),
+                rgba(0, 0, 0, 0) 30%,
+                rgba(0, 0, 0, 0) 70%,
+                rgba(0, 0, 0, 1)
+            ),
+            /* Cuadrícula vertical */
+                linear-gradient(
+                    to right,
+                    rgba(255, 255, 255, 0.1) 1px,
+                    transparent 1px
+                ),
+            /* Cuadrícula horizontal */
+                linear-gradient(
+                    to bottom,
+                    rgba(255, 255, 255, 0.1) 1px,
+                    transparent 1px
+                );
 
-    /* Control de retraso para cada banner para que solo uno se ilumine a la vez */
-    .animate-border-1 {
-        animation-delay: 0s;
-    }
+        background-size:
+            100% 100%,
+            /* gradiente */ 40px 40px,
+            /* líneas verticales */ 40px 40px; /* líneas horizontales */
 
-    .animate-border-2 {
-        animation-delay: 2s;
-    }
+        background-repeat: no-repeat, repeat, repeat;
+        background-position: top, center, center;
 
-    .animate-border-3 {
-        animation-delay: 4s;
+        border-radius: 16px;
+        padding: 12px;
     }
 </style>
 
-<Layout title="Publicidad Digital Efectiva con Meta Ads: Aumenta tus Ventas en Facebook e Instagram" description="Descubre cómo nuestras estrategias personalizadas de Meta Ads en Facebook e Instagram pueden aumentar tus ventas y generar leads cualificados. Optimización constante, resultados medibles y campañas diseñadas para negocios que buscan crecer. ¡Impulsa tu éxito con publicidad digital efectiva!">
-    <div class="bg-[#171527] text-white font-sans relative overflow-x-hidden">
-        <div class="relative gradient-bg">
-            <!-- Pseudo-elemento para el fondo con opacidad -->
-            <div
-                class="absolute inset-0 bg-gradient-to-r from-[#6B5EE7] to-[#3F7AD9] opacity-40 z-0"
-            >
-            </div>
+<Layout title="Este es un titulo" description="como estas compadre">
+    <!--Section 1 -->
+    <section class="relative w-full h-screen overflow-hidden">
+        <!-- Video de fondo -->
+        <video
+            autoplay
+            muted
+            loop
+            playsinline
+            class="absolute top-0 left-0 w-full h-full object-cover z-0"
+        >
+            <source
+                src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/video-fondo-background-monrold.mov"
+                type="video/mp4"
+            />
+            Tu navegador no soporta videos HTML5.
+        </video>
 
-            <!-- Contenedor con el contenido que no tiene opacidad -->
-            <div class="bg-transparent rounded-md px-4 py-2 text-gray-100 z-10">
-                <div
-                    class="h-[65vh] flex items-center justify-center text-white relative max-w-screen-xl mx-auto"
+        <!-- Gradiente encima del video (de abajo a arriba) -->
+        <div
+            class="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/70 to-transparent"
+        >
+        </div>
+
+        <!-- Texto centrado sobre el video -->
+        <div
+            class="relative z-20 flex flex-col justify-center items-center h-full text-center px-6 text-white"
+        >
+            <h1 class="text-4xl md:text-6xl mb-6 max-w-3xl">
+                ¿Por qué tus campañas en Instagram y Facebook no generan <span
+                    class="font-medium text-[#6b5ee7]"
+                    id="gradient">las ventas que esperas?</span
                 >
-                    <div>
-                        <!-- Rectángulo Blanco con Círculo Negro dentro -->
-                        <p class="text-7xl lg:text-9xl text-center title">
-                            HAZ QUE
-                        </p>
-                        <section
-                            class="flex items-center justify-center text-center px-6 space-x-4"
-                        >
-                            <div
-                                class="w-[90vw] md:w-[40vw] lg:w-[25vw] h-24 lg:h-32 bg-gray-300 relative flex justify-center items-center rounded-full overflow-hidden"
-                            >
-                                <!-- Círculo Negro más alto dentro del Rectángulo -->
-                                <div
-                                    class="eye w-32 h-32 lg:w-48 lg:h-48 bg-black rounded-full absolute top-[-12px] animate-eye"
-                                >
-                                </div>
-                            </div>
-                        </section>
-                        <p class="text-7xl lg:text-9xl text-center title">
-                            TE VEAN
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!-- Íconos alrededor del contenedor -->
-            <div
-                class="absolute top-0 left-0 right-0 bottom-0 flex justify-between items-center p-6"
-            >
-                <!-- Íconos flotantes -->
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 max-w-xl">
+                No se trata de solo pagar anuncios. Se trata de entender cómo
+                compran tus clientes.
+            </p>
+            <div>
                 <div
-                    class="absolute left-5 left-30 md:left-[35vw] top-10 flex justify-center items-center z-10 -rotate-12 opacity-70"
+                    class="absolute left-5 left-30 md:left-[35vw] top-20 lg:top-32 flex justify-center items-center z-10 -rotate-12 opacity-90"
                 >
                     <img
-                        src='https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/facebook-icon.svg'
+                        src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/facebook-icon.svg"
                         alt="Logotipo de facebook"
                         class="w-12 h-12 md:w-14 md:h-14"
                     />
                 </div>
                 <div
-                    class="absolute right-2 sm:rigth-30 md:right-[30vw] top-12 md:top-24 w-40 h-20 rounded-full flex justify-center items-center z-10 rotate-6 opacity-70"
+                    class="absolute right-2 sm:rigth-30 md:right-[30vw] top-12 md:top-24 w-40 h-20 rounded-full flex justify-center items-center z-10 rotate-6 opacity-90"
                 >
                     <img
                         src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/Instagram-icone.svg"
@@ -184,304 +113,585 @@ import "@fontsource/squada-one/400.css";
                     />
                 </div>
                 <div
-                    class="absolute left-2 sm:left-30 md:left-[30vw] bottom-5 w-40 h-20 flex justify-center items-center z-10 -rotate-6 opacity-70"
+                    class="absolute left-2 sm:left-30 md:left-[30vw] bottom-5 w-40 lg:bottom-32 h-20 flex justify-center items-center z-10 -rotate-6 opacity-90"
                 >
                     <img
-                        src='https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/whatsapp-icon.svg'
+                        src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/whatsapp-icon.svg"
                         alt="Logotipo de Whatsapp"
                         class="w-12 h-12 md:w-14 md:h-14"
                     />
                 </div>
                 <div
-                    class="absolute right-1 sm:rigth-30 md:right-[30vw] bottom-12 w-40 h-20 flex justify-center items-center z-10 rotate-12 opacity-70"
+                    class="absolute right-1 sm:rigth-30 md:right-[30vw] bottom-12 lg:bottom-32 w-40 h-20 flex justify-center items-center z-10 rotate-12 opacity-90"
                 >
                     <img
-                        src='https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/meta-icon.svg'
+                        src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/meta-icon.svg"
                         alt="Logotipo de Meta"
                         class="w-12 h-12 md:w-14 md:h-14"
                     />
                 </div>
             </div>
         </div>
-
-        <!-- Hero Section -->
-        <section class="flex flex-col items-center justify-center text-center">
-            <h2 class="text-4xl font-bold text-[#6b5ee7]" id="gradient">
-                Publicidad que Convierte
-            </h2>
-            <h1 class="text-lg mt-4 max-w-2xl text-gray-300 px-4">
-                Impulsa tus ventas con estrategias de Meta Ads en Facebook e
-                Instagram, diseñadas para generar leads cualificados que
-                realmente compran por WhatsApp.
-            </h1>
-        </section>
-
-        <!-- Beneficios -->
-        <section class="py-2 px-6 text-center flex justify-center">
-            <div
-                class="mt-10 flex overflow-x-auto space-x-6 max-w-full mx-auto"
-            >
-                <!-- Primer Banner -->
-                <div
-                    class="bg-[#1c1932] p-6 rounded-xl shadow-md w-[300px] flex-shrink-0 cursor-pointer hover:border animate-border animate-border-1"
-                >
-                    <h3 class="text-xl font-semibold text-white">
-                        Estrategias Personalizadas
-                    </h3>
-                    <p class="text-gray-300 mt-2">
-                        Cada negocio es único, adapto mis estrategias para
-                        maximizar tu ROI.
-                    </p>
-                </div>
-
-                <!-- Segundo Banner -->
-                <div
-                    class="bg-[#1c1932] p-6 rounded-xl shadow-md w-[300px] flex-shrink-0 cursor-pointer hover:border animate-border animate-border-2"
-                >
-                    <h3 class="text-xl font-semibold text-white">
-                        Optimización Constante
-                    </h3>
-                    <p class="text-gray-300 mt-2">
-                        Analizo y ajusto cada campaña para mejorar continuamente
-                        los resultados.
-                    </p>
-                </div>
-
-                <!-- Tercer Banner -->
-                <div
-                    class="bg-[#1c1932] p-6 rounded-xl shadow-md w-[300px] flex-shrink-0 cursor-pointer hover:border animate-border animate-border-3"
-                >
-                    <h3 class="text-xl font-semibold text-white">
-                        Resultados Reales
-                    </h3>
-                    <p class="text-gray-300 mt-2">
-                        Trabajo con empresas que invierten hasta +100,000 MXN en
-                        ads y obtienen ventas hasta por $2,000,000 MXN.
-                    </p>
-                </div>
-            </div>
-        </section>
-        <!-- Contenedor de imágenes que se muestran cuando se hace clic en los banners -->
-        <div class="mt-5 flex justify-center">
-            <img
-                src='https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/money.webp'
-                alt="Imagen de dinero con los iconos de las publicaciones de meta y contenido generado como reels e imagenes"
-                class="w-[80vw] max-w-[900px] object-cover h-72 rounded-xl shadow-md"
-            />
-        </div>
-
-        <!-- Testimonios -->
-        <h2 class="text-3xl font-bold text-[#6b5ee7] text-center mt-10 px-4">
-            Lo que Dicen Nuestros Clientes
-        </h2>
-        <section
-            class="px-6 text-center flex justify-center max-w-screen-lg mx-auto"
-        >
-            <div
-                class="mt-10 flex overflow-x-auto space-x-6 max-w-full mx-auto"
-            >
-                <!-- Testimonio 1 -->
-                <div
-                    class="bg-[#2d2943] p-6 rounded-xl shadow-md w-[300px] flex-shrink-0 cursor-pointer hover:border"
-                >
-                    <p class="text-lg italic mb-4">
-                        "Gracias a las estrategias personalizadas de Meta Ads,
-                        logramos aumentar nuestras ventas un 40% en solo 3
-                        meses. ¡Los resultados han sido impresionantes!"
-                    </p>
-                    <p class="font-semibold">CEO</p>
-                    <p class="text-sm text-gray-400">Stroit surfaces</p>
-                </div>
-
-                <!-- Testimonio 2 -->
-                <div
-                    class="bg-[#2d2943] p-6 rounded-xl shadow-md w-[300px] flex-shrink-0 cursor-pointer hover:border"
-                >
-                    <p class="text-lg italic mb-4">
-                        "Trabajar con [Tu Empresa] ha sido una experiencia
-                        increíble. Su enfoque en la optimización constante
-                        realmente marca la diferencia en nuestros resultados."
-                    </p>
-                    <p class="font-semibold">Gerente</p>
-                    <p class="text-sm text-gray-400">
-                        Gerente de Marketing en ABC Corp
-                    </p>
-                </div>
-
-                <!-- Testimonio 3 -->
-                <div
-                    class="bg-[#2d2943] p-6 rounded-xl shadow-md w-[300px] flex-shrink-0 cursor-pointer hover:border"
-                >
-                    <p class="text-lg italic mb-4">
-                        "Recomiendo totalmente sus servicios. No solo generamos
-                        más leads, sino que también mejoramos significativamente
-                        nuestro retorno de inversión."
-                    </p>
-                    <p class="font-semibold">Carlos Gómez</p>
-                    <p class="text-sm text-gray-400">
-                        Director de Marketing en Tech Solutions
-                    </p>
-                </div>
-
-                <!-- Testimonio 4 -->
-                <div
-                    class="bg-[#2d2943] p-6 rounded-xl shadow-md w-[300px] flex-shrink-0 cursor-pointer hover:border"
-                >
-                    <p class="text-lg italic mb-4">
-                        "Gracias al enfoque personalizado de Meta Ads, nuestro
-                        negocio creció un 25%."
-                    </p>
-                    <p class="font-semibold">Sofia Reyes</p>
-                    <p class="text-sm text-gray-400">
-                        Marketing Manager en FinTech
-                    </p>
-                </div>
-
-                <!-- Testimonio 5 -->
-                <div
-                    class="bg-[#2d2943] p-6 rounded-xl shadow-md w-[300px] flex-shrink-0 cursor-pointer hover:border"
-                >
-                    <p class="text-lg italic mb-4">
-                        "El equipo de [Tu Empresa] realmente entiende nuestras
-                        necesidades. ¡Los resultados superaron nuestras
-                        expectativas!"
-                    </p>
-                    <p class="font-semibold">Juan Pérez</p>
-                    <p class="text-sm text-gray-400">
-                        Gerente Comercial en Global Tech
-                    </p>
-                </div>
-
-                <!-- Testimonio 6 -->
-                <div
-                    class="bg-[#2d2943] p-6 rounded-xl shadow-md w-[300px] flex-shrink-0 cursor-pointer hover:border"
-                >
-                    <p class="text-lg italic mb-4">
-                        "La optimización constante de las campañas ha sido la
-                        clave para nuestras ventas crecientes."
-                    </p>
-                    <p class="font-semibold">Ana Gómez</p>
-                    <p class="text-sm text-gray-400">
-                        Directora de Marketing en E-commerce
-                    </p>
-                </div>
-
-                <!-- Testimonio 7: Instagram -->
-                <div
-                    class="bg-[#2d2943] p-6 rounded-xl shadow-md w-[300px] flex-shrink-0 cursor-pointer hover:border"
-                >
-                    <p class="text-lg italic mb-4">
-                        "Descubre más sobre nuestros proyectos y resultados en
-                        mi Instagram."
-                    </p>
-                    <p class="font-semibold">[Tu Nombre]</p>
-                    <p class="text-sm text-gray-400">
-                        Sígueme para más detalles
-                    </p>
-                    <a
-                        href="https://www.instagram.com/tuinstagram"
-                        target="_blank"
-                        class="text-[#6b5ee7] hover:underline">@tuinstagram</a
-                    >
-                </div>
-            </div>
-        </section>
-
-        <!-- perfil -->
-        <section
-            class="py-10 px-6 text-center text-white flex flex-col md:flex-row max-w-screen-lg mx-auto hidden"
-        >
-            <!-- Banner horizontal -->
-            <div class="relative md:w-1/2 h-[60vh]">
-                <img
-                    src='https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/perfil.jpg'
-                    alt="Foto de Luis Montaño con lentes"
-                    class="w-full h-full rounded-lg object-cover"
-                />
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-[#171527] to-transparent rounded-lg"
-                >
-                </div>
-            </div>
-
-            <div class="md:w-1/2 text-left px-4 my-auto">
-                <h2 class="text-3xl font-bold text-[#6b5ee7] mb-6">Sobre Mí</h2>
-
-                <div class="max-w-3xl mx-auto text-gray-400">
-                    <p class="text-lg mb-4">
-                        Soy <span class="" id="gradient">Luis Montaño,</span> trafficker
-                        especializado en Meta Ads con más de 3 años de experiencia
-                        ayudando a múltiples clientes a crecer a través de estrategias
-                        de publicidad personalizadas.
-                    </p>
-                    <p class="text-lg mb-4">
-                        Mi enfoque se basa en entender a fondo las necesidades
-                        de cada cliente, creando campañas efectivas y
-                        optimizadas que entregan resultados medibles. Mi
-                        objetivo es ayudarte a alcanzar tus metas comerciales
-                        mediante publicidad digital bien dirigida y eficiente.
-                    </p>
-                    <p class="text-lg">
-                        Si buscas un experto en Meta Ads para llevar tu negocio
-                        al siguiente nivel, ¡estoy aquí para ayudarte!
-                    </p>
-                </div>
-            </div>
-        </section>
-
-         <!-- followers -->
-         <section
-         class="py-10 px-6 text-center text-white flex flex-col md:flex-row max-w-screen-lg mx-auto"
-     >
-        
-
-         <div class="md:w-1/2 text-left px-4 my-auto">
-             <h2 class="text-3xl font-bold mb-6" id="gradient">No necesitas miles de seguidores para empezar a vender. 🎯</h2>
-
-             <div class="max-w-3xl mx-auto text-gray-400">
-                 <p class="text-lg mb-4">
-                    Con la estrategia adecuada, puedes atraer clientes y generar ventas desde hoy.
-                 </p>
-                 
-             </div>
-         </div>
-          <!-- Banner horizontal -->
-          <div class="relative md:w-1/2 h-[60vh]">
-            <img
-                src='https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/followers.webp'
-                alt="Banner de mi trabajo"
-                class="w-full h-full rounded-lg object-cover"
-            />
-            
-        </div>
-     </section>
-
-        <!-- CTA -->
-        <section class="mb-24 mt-10 px-6 text-center">
-            <h2 class="text-3xl font-bold text-[#6b5ee7]">
-                ¿Listo para aumentar tus ventas?
-            </h2>
-            <p class="text-gray-300">
-                Agenda una consulta gratuita por WhatsApp y descubre cómo
-                podemos hacer crecer tu negocio. 🚀
-            </p>
-            <a
-                class="space-x-1 bg-gradient-to-r from-[#6B5EE7] to-[#6B5EE7] rounded-md px-4 py-2 text-gray-100 hover:ring-1 hover:ring-[#3FAAD9] inline-block mt-4"
-                href="https://wa.link/62c89k"
-            >
-                <div class="flex space-x-2">
-                    <svg
-                        class="w-4 fill-gray-100"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 448 512"
-                    >
-                        <path
-                            d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
-                        ></path></svg
-                    >
-                    <p>Contáctame</p>
-                </div></a
-            >
-        </section>
+    </section>
+    <div class="max-w-screen-xl mx-auto">
+        <img
+            src={ads.src}
+            alt=""
+            data-scroll
+            class="mx-auto px-2 opacity-0 translate-y-10 transition-all duration-700"
+        />
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const elements = document.querySelectorAll("[data-scroll]");
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add(
+                                "opacity-100",
+                                "translate-y-0",
+                            );
+                            observer.unobserve(entry.target); // evita que se repita
+                        }
+                    });
+                },
+                { threshold: 0.1 },
+            );
+
+            elements.forEach((el) => observer.observe(el));
+        });
+    </script>
+
+    <!--Ciclo de ventas -->
+    <Progressline />
+
+    <!--Flecha -->
+    <div class="flex flex-col items-center gap-2 my-14">
+        <!-- Línea con gradiente -->
+        <div
+            class="w-1 h-32 bg-gradient-to-b from-black via-[#4cc3ff] to-[#a07eff] rounded-full"
+        >
+        </div>
+
+        <!-- Bullet animado -->
+        <div class="w-4 h-4 bg-[#a07eff] rounded-full animate-bounce shadow-lg">
+        </div>
+    </div>
+
+    <!--Contenido -->
+    <section class="bg-black text-white px-6 video-container">
+        <div class="max-w-screen-lg mx-auto">
+            <div class="text-center mx-auto">
+                <h2 class="text-4xl font-medium mb-2">
+                    Con contenido que realmente vende
+                </h2>
+                <p class="text-gray-400 mb-2 px-4 md:px-20">
+                    Editamos el contenido visual que tu marca necesita para
+                    destacar en cada etapa del proceso de compra. Desde reels
+                    dinámicos y videos horizontales hasta imágenes para redes
+                    sociales y anuncios, producimos contenido que educa,
+                    persuade y convierte.
+                </p>
+                <div
+                    class="rounded-2xl px-4 py-4 overflow-x-auto whitespace-nowrap flex md:justify-center gap-3 text-sm scrollbar-hide"
+                >
+                    <span
+                        class="bg-white text-black px-4 py-2 rounded-full font-medium"
+                        >Reels</span
+                    >
+                    <span
+                        class="bg-gray-100 text-black px-4 py-2 rounded-full font-medium"
+                        >Imágenes</span
+                    >
+                    <span
+                        class="bg-gray-200 text-black px-4 py-2 rounded-full font-medium"
+                        >Carruseles</span
+                    >
+                    <span
+                        class="bg-gray-300 text-black px-4 py-2 rounded-full font-medium"
+                        >Historias</span
+                    >
+                    <span
+                        class="bg-gray-400 text-black px-4 py-2 rounded-full font-medium"
+                        >Portadas</span
+                    >
+                    <span
+                        class="bg-gray-500 text-black px-4 py-2 rounded-full font-medium"
+                        >Video horizontal</span
+                    >
+                </div>
+            </div>
+            <div class="md:w-1/3 mx-auto">
+                <video
+                    src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/monrold-reels-3.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    class="rounded-2xl"></video>
+            </div>
+        </div>
+    </section>
+
+    <!--Iteramos -->
+    <div
+        class="flex flex-col md:flex-row items-center max-w-6xl mx-auto px-4 py-12 gap-8"
+    >
+        <div class="md:w-1/2 text-left">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-4 text-white">
+                Iteramos con los resultados para mejorar continuamente
+            </h2>
+            <p class="text-gray-400 text-lg leading-relaxed">
+                Cada campaña es una oportunidad para aprender y optimizar. Por
+                eso, estamos en comunicación constante con tu equipo de ventas:
+                analizamos los resultados, escuchamos sus comentarios y hacemos
+                ajustes estratégicos para que el contenido y los anuncios
+                funcionen cada vez mejor.
+            </p>
+
+            <div
+                class="my-6 h-1 w-full rounded"
+                style="background: linear-gradient(to right, #000000, #4c6ef5, #a855f7);"
+            >
+            </div>
+
+            <p class="text-gray-400 text-base mt-6">
+                Realizamos pruebas continuas y afinamos cada detalle para que
+                los mensajes conecten con tu audiencia y conviertan mejor. No
+                dejamos nada al azar.
+            </p>
+        </div>
+        <div class="md:w-1/2">
+            <img
+                src={metrics.src}
+                alt="Colaboración y análisis de resultados"
+                class="rounded-2xl shadow-lg w-full object-cover max-h-96"
+            />
+        </div>
+    </div>
+
+    <!--Precio -->
+    <section class="bg-black py-20 px-6 text-center text-white">
+        <h2 class="text-3xl md:text-5xl font-medium mb-8">
+            ¿Por qué trabajar conmigo?
+        </h2>
+        <p class="text-xl max-w-4xl mx-auto mb-10">
+            No vendemos clics ni promesas. Trabajamos con campañas enfocadas en
+            resultados reales: ventas. Solo cobramos una comisión si generamos
+            resultados.
+        </p>
+        <div
+            class="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 justify-center"
+        >
+            <!-- Tabla 1: Modelo de trabajo -->
+            <div
+                class="relative p-8 rounded-3xl inline-block text-left border border-gray-300 bg-transparent flex-1"
+            >
+                <div
+                    class="bg-gray-700 border border-purple- rounded-full inline-block"
+                >
+                    <p class="px-2 text-white text-xs py-1">Premium</p>
+                </div>
+                <h3 class="text-4xl mt-2">Un precio único</h3>
+                <p>Para resultados únicos</p>
+                <div class="mt-10 text-white text-2xl">
+                    <div class="">
+                        $3,500 MXN <span class="text-xs"
+                            >/Mes + Comisiones por resultados</span
+                        >
+                    </div>
+                    <p class="text-sm italic mb-10 text-white/70">
+                        Incluye IVA
+                    </p>
+                </div>
+                <div
+                    class="my-6 h-1 w-full rounded"
+                    style="background: linear-gradient(to right, #000000, #4c6ef5, #a855f7);"
+                >
+                </div>
+                <ul class="mb-8 mt-4 space-y-5 text-gray-300">
+                    <li class="flex items-center gap-3 text-lg">
+                        <svg
+                            class="w-6 h-6 flex-shrink-0 text-gradient"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Edición de video e imágenes
+                    </li>
+                    <li class="flex items-center gap-3 text-lg">
+                        <svg
+                            class="w-6 h-6 flex-shrink-0 text-gradient"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Análisis de métricas
+                    </li>
+                    <li class="flex items-center gap-3 text-lg">
+                        <svg
+                            class="w-6 h-6 flex-shrink-0 text-gradient"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Análisis de respuestas
+                    </li>
+                    <li class="flex items-center gap-3 text-lg">
+                        <svg
+                            class="w-6 h-6 flex-shrink-0 text-gradient"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Creación de estrategia para META Ads
+                    </li>
+                    <li class="flex items-center gap-3 text-lg">
+                        <svg
+                            class="w-6 h-6 flex-shrink-0 text-gradient"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Creación de campañas segmentadas META Ads
+                    </li>
+                    <li class="flex items-center gap-3 text-lg">
+                        <svg
+                            class="w-6 h-6 flex-shrink-0 text-gradient"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Sugerencia para colaboraciones
+                    </li>
+                    <li class="flex items-center gap-3 text-lg">
+                        <svg
+                            class="w-6 h-6 flex-shrink-0 text-gradient"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Reporte mensual de resultados
+                    </li>
+                </ul>
+
+                <!-- Call to Action -->
+                <div class="mt-10 flex justify-center">
+                    <a
+                        href="https://monrold.setmore.com/luismontano"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex w-full justify-center items-center gap-2 px-6 py-4 text-gray-200 rounded-xl bg-gradient-to-r from-black via-[#4c6ef5] to-[#a855f7] hover:opacity-90 transition duration-300"
+                    >
+                        <!-- Icono de calendario -->
+                        <svg
+                            class="w-5 h-5 text-gray-200"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <rect
+                                x="3"
+                                y="4"
+                                width="18"
+                                height="18"
+                                rx="2"
+                                ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Agendar reunión
+                    </a>
+                </div>
+            </div>
+
+            <!--+ -->
+            <span
+                class="text-8xl my-auto bg-gradient-to-r from-black via-[#4c6ef5] to-[#a855f7] text-transparent bg-clip-text"
+                >+</span
+            >
+
+            <!-- Tabla 2: Comisión por resultados -->
+            <div
+                class="relative p-8 rounded-3xl inline-block text-left border border-gray-300 bg-transparent flex-1"
+            >
+                <div
+                    class="bg-gray-700 border border-purple- rounded-full inline-block"
+                >
+                    <p class="px-2 text-white text-xs py-1">
+                        Calculadora de comisiones
+                    </p>
+                </div>
+                <h3 class="text-4xl mt-2">Comisión</h3>
+                <p>Entre más inviertes, menos comisión pagas</p>
+                <p class="text-xs text-gray-400 italic">
+                    Esta sólo es la inversión para META Ads
+                </p>
+
+                <div class="mt-10 mb-10 text-white text-2xl space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl">$5,000 MXN</span>
+                        <span class="text-sm text-white/70">5% de comisión</span
+                        >
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl">$10,000 MXN</span>
+                        <span class="text-sm text-white/70">4% de comisión</span
+                        >
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl">$20,000 MXN</span>
+                        <span class="text-sm text-white/70">3% de comisión</span
+                        >
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl">$30,000 MXN</span>
+                        <span class="text-sm text-white/70"
+                            >1.5% de comisión</span
+                        >
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl">$40,000 MXN o más</span>
+                        <span class="text-sm text-white/70"
+                            >1.2% de comisión</span
+                        >
+                    </div>
+                </div>
+
+                <div
+                    class="my-6 h-1 w-full rounded"
+                    style="background: linear-gradient(to right, #000000, #4c6ef5, #a855f7);"
+                >
+                </div>
+
+                <ul class="mb-8 mt-4 space-y-5 text-gray-300">
+                    <li class="flex items-center gap-3 text-lg">
+                        <svg
+                            class="w-6 h-6 flex-shrink-0 text-gradient"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Solo pagas si generamos ventas
+                    </li>
+                    <li class="flex items-center gap-3 text-lg">
+                        <svg
+                            class="w-6 h-6 flex-shrink-0 text-gradient"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Contrato mínimo 3 meses
+                    </li>
+                    <li class="flex items-center gap-3 text-lg">
+                        <svg
+                            class="w-6 h-6 flex-shrink-0 text-gradient"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Estructurado para negocios y empresas de cualquier tamaño.
+                    </li>
+                </ul>
+
+                <!-- Call to Action -->
+                <div class="mt-10 flex justify-center">
+                    <a
+                        href="https://monrold.setmore.com/luismontano"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex w-full justify-center items-center gap-2 px-6 py-4 text-gray-200 rounded-xl bg-gradient-to-r from-black via-[#3a3a3a] to-[#666666] hover:opacity-90 transition duration-300"
+                    >
+                        <!-- Icono de calendario -->
+                        <svg
+                            class="w-5 h-5 text-gray-200"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <rect
+                                x="3"
+                                y="4"
+                                width="18"
+                                height="18"
+                                rx="2"
+                                ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Agendar reunión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Trabajamos -->
+    <section class="w-full bg-black py-12 px-4 md:px-16 text-center">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-xl md:text-4xl font-medium text-white">
+                Trabajamos con empresas que invierten hasta
+                <span
+                    class="text-3xl font-bold bg-gradient-to-r from-black via-[#4c6ef5] to-[#a855f7] text-transparent bg-clip-text"
+                    >+100,000 MXN</span
+                >
+                en ads y obtienen ventas hasta por
+                <span class="font-bold text-[#4c6ef5]">$4,000,000 MXN</span>.
+            </p>
+
+            <div class="mt-10 flex justify-center items-center gap-8 flex-wrap">
+                <!-- Logo 1 -->
+                <a
+                    href="https://www.instagram.com/stroitsurfaces/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src={stroit.src}
+                        alt="Logotipo de una marca de motos llamada stroit surfaces vende placas arquitectónicas como mármol"
+                        class="h-16 md:h-24 object-contain transition-opacity hover:opacity-80"
+                    />
+                </a>
+
+                <!-- Logo 2 -->
+                <a
+                    href="https://www.instagram.com/dinamotocicletas/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src={dinamo.src}
+                        alt="Logotipo de una amrca de motos llamada dínamo"
+                        class="h-12 md:h-16 object-contain transition-opacity hover:opacity-80"
+                    />
+                </a>
+
+                <!-- Logo 3 -->
+                <a
+                    href="https://www.instagram.com/wapamx_/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src={wapa.src}
+                        alt="Logotipo de un estudio de belleza llamado wapa studio"
+                        class="h-14 md:h-20 object-contain transition-opacity hover:opacity-80"
+                    />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!--cierre -->
+    <section
+        class="bg-black py-14 px-6 flex flex-col items-center text-center max-w-screen-xl mx-auto"
+    >
+    <div
+    class="rounded-3xl p-12 w-full text-white relative overflow-hidden"
+    style="
+      background-color: #18181b;
+      background-image:
+        linear-gradient(to top, #18181b, transparent),
+        repeating-linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.05) 0,
+          rgba(255, 255, 255, 0.05) 1px,
+          transparent 1px,
+          transparent 20px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.05) 0,
+          rgba(255, 255, 255, 0.05) 1px,
+          transparent 1px,
+          transparent 20px
+        );
+    "
+  >
+    <h2 class="text-3xl md:text-4xl font-medium mb-2">
+      ¿Listo para generar llevar a tu negocio al siguiente nivel?
+    </h2>
+    <p class="text-gray-200 mb-10">
+      Agenda una llamada o escríbeme directamente por WhatsApp.
+    </p>
+    <div class="flex flex-col sm:flex-row justify-center gap-6">
+      <a
+        href="https://wa.link/62c89k"
+        class="inline-block bg-gradient-to-r from-black via-[#4c6ef5] to-[#a855f7] text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:brightness-110 transition"
+      >
+        Hablemos por WhatsApp
+      </a>
+      <a
+        href="https://www.setmore.com/bookingpage"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block border-2 border-white text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-white hover:text-black transition"
+      >
+        Agendar llamada
+      </a>
+    </div>
+  </div>
+  
+  
+  
+    </section>
 </Layout>

@@ -12,7 +12,7 @@ import "@fontsource/rubik/900.css";
 interface Props {
 	title: string;
 	description: string;
-	children: any;
+	children?: any;
 }
 
 const { title, description, children } = Astro.props;
@@ -33,7 +33,7 @@ const { title, description, children } = Astro.props;
 		/>
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="text-gray-200">
 		<Nav />
 		<slot />
 		<Footer />
@@ -41,7 +41,7 @@ const { title, description, children } = Astro.props;
 </html>
 <style is:global>
 	html {
-		background: #12101e;
+		background: black;
 	}
 	body {
 		font-family: "Rubik", sans-serif;

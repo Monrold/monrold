@@ -1,0 +1,303 @@
+<style>
+    .gradient-container {
+        /* Fondo con gradiente continuo */
+        background: none; /* quitamos para que no se vea doble */
+        position: relative;
+        padding: 1rem 0;
+        /* ancho total para el gradiente: ajusta si quieres */
+    }
+
+    /* Líneas rellenas con gradiente que va aumentando de ancho */
+    .line {
+        background-image: linear-gradient(to right, #6b5ee7, #3faad9, #673fd9);
+        background-size: 300% 100%; /* o 400% según quieras */
+        background-repeat: no-repeat;
+        /* Para que el fondo se mueva junto con la posición de la línea */
+        background-position: left center;
+        transition: width 0.3s ease;
+    }
+
+    /* Puntos con gradiente que coincide con su posición */
+    .dot {
+        /* Sin fondo al inicio */
+        background: white;
+        border: 2px solid black; /* o el color de borde que quieras */
+        transition:
+            background-position 0.3s ease,
+            background 0.3s ease;
+    }
+
+    .dot.active {
+        background-image: linear-gradient(to right, #6b5ee7, #3faad9, #673fd9);
+        background-size: 300% 100%;
+        background-repeat: no-repeat;
+        border-color: #3faad9;
+    }
+</style>
+
+<section class="bg-black text-gray-300 mt-20 md:mt-44  px-6">
+    <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-medium md:text-5xl mb-12">
+            Tu cliente necesita un camino claro para comprar
+        </h2>
+        <!-- Línea de progreso con círculos grandes rellenos -->
+        <!-- NUEVO DISEÑO CON LÓGICA FUNCIONAL -->
+        <div class="relative w-full mb-10 gradient-container">
+            <div class="flex items-center justify-between px-6 md:px-32">
+                <div class="flex items-center w-full">
+                    <!-- Dot 1 -->
+                    <div
+                        id="dot-1"
+                        class="dot w-10 h-10 rounded-full border-4 border-transparent transition-colors duration-300"
+                    >
+                    </div>
+                    <!-- Line 1 -->
+                    <div
+                        class="flex-1 h-1 bg-gray-300 mx-2 md:mx-4 relative overflow-hidden"
+                    >
+                        <div
+                            id="line-1"
+                            class="line h-full absolute top-0 left-0"
+                            style="width: 0%"
+                        >
+                        </div>
+                    </div>
+
+                    <!-- Dot 2 -->
+                    <div
+                        id="dot-2"
+                        class="dot w-10 h-10 rounded-full border-4 border-transparent transition-colors duration-300"
+                    >
+                    </div>
+                    <!-- Line 2 -->
+                    <div
+                        class="flex-1 h-1 bg-gray-300 mx-2 md:mx-4 relative overflow-hidden"
+                    >
+                        <div
+                            id="line-2"
+                            class="line h-full absolute top-0 left-0"
+                            style="width: 0%"
+                        >
+                        </div>
+                    </div>
+
+                    <!-- Dot 3 -->
+                    <div
+                        id="dot-3"
+                        class="dot w-10 h-10 rounded-full border-4 border-transparent transition-colors duration-300"
+                    >
+                    </div>
+                    <!-- Line 3 -->
+                    <div
+                        class="flex-1 h-1 bg-gray-300 mx-2 md:mx-4 relative overflow-hidden"
+                    >
+                        <div
+                            id="line-3"
+                            class="line h-full absolute top-0 left-0"
+                            style="width: 0%"
+                        >
+                        </div>
+                    </div>
+
+                    <!-- Dot 4 -->
+                    <div
+                        id="dot-4"
+                        class="dot w-10 h-10 rounded-full border-4 border-transparent transition-colors duration-300"
+                    >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido scrolleable -->
+        <div
+            id="timeline-scroll"
+            class="flex overflow-x-auto snap-x snap-mandatory space-x-4 px-4 md:grid md:grid-cols-4 md:space-x-0"
+        >
+        <div class="min-w-[80%] md:min-w-0 snap-center mx-4 md:px-2 text-start">
+            <h3 class="text-xl font-bold mb-2">01. Presentación</h3>
+            <p class="text-gray-500">
+              Hacemos que tu marca conecte con quienes aún no te conocen, generando visibilidad frente al público ideal.
+            </p>
+          </div>
+          
+          <div class="min-w-[80%] md:min-w-0 snap-center mx-4 md:px-2 text-start">
+            <h3 class="text-xl font-bold mb-2">02. Evaluación</h3>
+            <p class="text-gray-500">
+              Mostramos el valor de tus productos o servicios en comparación con la competencia, ayudando al cliente a tomar una decisión informada.
+            </p>
+          </div>
+          
+          <div class="min-w-[80%] md:min-w-0 snap-center mx-4 md:px-2 text-start">
+            <h3 class="text-xl font-bold mb-2">03. Conversión</h3>
+            <p class="text-gray-500">
+              Adaptamos el mensaje para cerrar la venta en el momento clave, utilizando anuncios directos, urgencia y ofertas irresistibles.
+            </p>
+          </div>
+          
+          <div class="min-w-[80%] md:min-w-0 snap-center mx-4 md:px-2 text-start">
+            <h3 class="text-xl font-bold mb-2">04. Ascensión</h3>
+            <p class="text-gray-500">
+              Diseñamos estrategias para que el cliente vuelva a comprarte, a través de seguimiento, recomendaciones o ventas cruzadas.
+            </p>
+          </div>
+          
+        </div>
+
+        <script type="module">
+            import confetti from "https://cdn.skypack.dev/canvas-confetti";
+          
+            const dots = [
+              document.getElementById("dot-1"),
+              document.getElementById("dot-2"),
+              document.getElementById("dot-3"),
+              document.getElementById("dot-4"),
+            ];
+            const lines = [
+              document.getElementById("line-1"),
+              document.getElementById("line-2"),
+              document.getElementById("line-3"),
+            ];
+          
+            function lanzarMonedas() {
+              confetti({
+                particleCount: 50,
+                spread: 60,
+                origin: { y: 0.6 },
+                colors: ["#FFD700", "#FFC700", "#FFB700"],
+                shapes: ["circle"],
+                scalar: 1.2,
+              });
+            }
+          
+            // Función para actualizar el progreso en líneas y puntos
+            function updateProgress(progress) {
+              // Dividimos el progreso total (0 a 100) en 3 segmentos para las 3 líneas
+              // Cada segmento es aprox 33.33%
+              const segmentPercent = 100 / lines.length;
+          
+              // Actualizamos el ancho de cada línea
+              lines.forEach((line, i) => {
+                const segmentStart = segmentPercent * i;
+                const segmentEnd = segmentPercent * (i + 1);
+          
+                if (progress >= segmentEnd) {
+                  // Línea completa si el progreso pasó este segmento
+                  line.style.width = "100%";
+                } else if (progress <= segmentStart) {
+                  // Línea vacía si no ha llegado a este segmento
+                  line.style.width = "0%";
+                } else {
+                  // Línea parcial dentro del segmento
+                  const segmentProgress = ((progress - segmentStart) / segmentPercent) * 100;
+                  line.style.width = `${segmentProgress}%`;
+                }
+              });
+          
+              // Actualizamos los puntos: solo se activan cuando la línea llega exactamente a ellos
+              dots.forEach((dot, i) => {
+                if (i === 0) {
+                  dot.classList.add("active"); // Primer punto siempre activo
+                  return;
+                }
+                // Punto se activa solo si el progreso >= i * segmentPercent (exacto)
+                if (progress >= i * segmentPercent) {
+                  dot.classList.add("active");
+                } else {
+                  dot.classList.remove("active");
+                }
+              });
+            }
+          
+            if (window.innerWidth >= 768) {
+              // Desktop: animación automática a velocidad constante
+          
+              const progressSection = document.querySelector(".relative.w-full.mb-10");
+          
+              let animationId = null;
+              let progress = 0;
+              const speed = 0.5; // Velocidad constante (puedes ajustar entre 0.1 y 1)
+          
+              function animate() {
+                if (progress < 100) {
+                  progress += speed;
+                  if (progress > 100) progress = 100;
+                  updateProgress(progress);
+                  animationId = requestAnimationFrame(animate);
+                } else {
+                  lanzarMonedas();
+                }
+              }
+          
+              function reset() {
+                if (animationId) cancelAnimationFrame(animationId);
+                progress = 0;
+                updateProgress(progress);
+              }
+          
+              const observer = new IntersectionObserver(
+                (entries) => {
+                  entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                      animate();
+                    } else {
+                      reset();
+                    }
+                  });
+                },
+                { threshold: 0.5 }
+              );
+          
+              if (progressSection) observer.observe(progressSection);
+          
+            } else {
+              // Mobile: control por scroll horizontal
+          
+              const scrollContainer = document.getElementById("timeline-scroll");
+              let confettiFiredMobile = false;
+          
+              function onScroll() {
+                const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+                const scrollLeft = scrollContainer.scrollLeft;
+                const progress = (scrollLeft / maxScroll) * 100;
+                updateProgress(progress);
+          
+                if (progress >= 100 && !confettiFiredMobile) {
+                  confettiFiredMobile = true;
+                  lanzarMonedas();
+                }
+                if (progress < 100) {
+                  confettiFiredMobile = false;
+                }
+              }
+          
+              function resetMobile() {
+                updateProgress(0);
+                confettiFiredMobile = false;
+              }
+          
+              const progressSectionMobile = document.querySelector(".relative.w-full.mb-10");
+          
+              const observerMobile = new IntersectionObserver(
+                (entries) => {
+                  entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                      scrollContainer.addEventListener("scroll", onScroll);
+                    } else {
+                      scrollContainer.removeEventListener("scroll", onScroll);
+                      resetMobile();
+                    }
+                  });
+                },
+                { threshold: 0.5 }
+              );
+          
+              if (progressSectionMobile && scrollContainer) {
+                observerMobile.observe(progressSectionMobile);
+              }
+            }
+          </script>
+          
+          
+    </div>
+</section>
