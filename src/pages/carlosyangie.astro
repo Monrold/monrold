@@ -5,11 +5,98 @@ import regalo from "../images/regalo.webp";
 import vestido from "../images/vestido.png";
 import flowers from "../images/flowers.webp";
 import "@fontsource/libre-baskerville";
+import dresscode from "../images/vestido-traje.webp";
 ---
 
 <style>
   body {
     font-family: "Libre Baskerville", serif;
+  }
+  .audio-player {
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(197, 132, 102, 0.6);
+    padding: 8px 16px;
+    border-radius: 55px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 9999;
+    width: auto;
+    max-width: 320px;
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: white;
+    transition: fill 0.3s ease;
+  }
+
+  button:hover {
+    fill: #d8b07f;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .volume-slider {
+    -webkit-appearance: none;
+    width: 120px;
+    height: 6px;
+    border-radius: 12px;
+    background: rgba(215, 142, 109, 0.8);
+    cursor: pointer;
+    position: relative;
+  }
+
+  .volume-slider::-webkit-slider-runnable-track {
+    height: 6px;
+    background: rgba(132, 77, 51, 0.8);
+    border-radius: 12px;
+  }
+  .volume-slider::-moz-range-track {
+    height: 6px;
+    background: rgba(132, 77, 51, 0.8);
+    border-radius: 12px;
+  }
+
+  .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    margin-top: -5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s;
+  }
+  .volume-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s;
+  }
+
+  .volume-slider::-webkit-slider-thumb:hover,
+  .volume-slider::-moz-range-thumb:hover {
+    background-color: #d8b07f;
   }
 </style>
 
@@ -34,6 +121,209 @@ import "@fontsource/libre-baskerville";
     </style>
   </head>
   <body class="text-white min-h-screen">
+    <!-- Modal de invitación -->
+    <!-- Modal Invitación -->
+    <div
+      id="audio-modal"
+      class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[9999] p-6"
+    >
+      <div
+        class="bg-white rounded-lg shadow-lg max-w-sm w-full p-8 text-center flex flex-col items-center justify-center"
+      >
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">¡Bienvenido!</h2>
+        <p class="mb-6 text-gray-600">
+          Para disfrutar la mejor experiencia, da click en "Ver invitación".
+        </p>
+        <button
+          id="btn-activate-audio"
+          style="
+    background-color: #844d33cc;
+    color: white;
+    padding: 16px 34px;
+    border-radius: 8px;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    white-space: nowrap;
+    min-width: 140px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  "
+        >
+          Ver invitación
+        </button>
+      </div>
+    </div>
+
+    <!-- Audio Oculto -->
+    <audio
+      id="background-audio"
+      src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/september-tierra-viento-y-fuego.mp3"
+      loop
+      muted
+      preload="auto"></audio>
+
+    <!-- Controles Audio -->
+    <div class="audio-player" role="region" aria-label="Control de audio">
+      <button id="play-pause" aria-label="Reproducir/Pausar" type="button">
+        <!-- Play icon por defecto -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 384 512"
+          id="icon-play"
+          style="display: inline;"
+        >
+          <path
+            d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"
+          ></path>
+        </svg>
+        <!-- Pause icon oculto inicialmente -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 320 512"
+          id="icon-pause"
+          style="display: none;"
+        >
+          <path
+            d="M48 64C21.5 64 0 85.5 0 112L0 400c0 26.5 21.5 48 48 48l32 0c26.5 0 48-21.5 48-48l0-288c0-26.5-21.5-48-48-48L48 64zm192 0c-26.5 0-48 21.5-48 48l0 288c0 26.5 21.5 48 48 48l32 0c26.5 0 48-21.5 48-48l0-288c0-26.5-21.5-48-48-48l-32 0z"
+          ></path>
+        </svg>
+      </button>
+
+      <input
+        id="volume-slider"
+        class="volume-slider"
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value="0.5"
+        aria-label="Control de volumen"
+      />
+    </div>
+
+    <script>
+      function setupAudioPlayer() {
+        const audio = document.getElementById(
+          "background-audio",
+        ) as HTMLAudioElement | null;
+        const playPauseBtn = document.getElementById(
+          "play-pause",
+        ) as HTMLButtonElement | null;
+        const iconPlay = document.getElementById(
+          "icon-play",
+        ) as SVGSVGElement | null;
+        const iconPause = document.getElementById(
+          "icon-pause",
+        ) as SVGSVGElement | null;
+        const volumeSlider = document.getElementById(
+          "volume-slider",
+        ) as HTMLInputElement | null;
+
+        const audioModal = document.getElementById(
+          "audio-modal",
+        ) as HTMLElement | null;
+        const btnActivateAudio = document.getElementById(
+          "btn-activate-audio",
+        ) as HTMLButtonElement | null;
+
+        if (!audio) {
+          console.error("El audio no existe o no es un elemento audio válido");
+          return;
+        }
+        if (!playPauseBtn) {
+          console.error("El botón play/pause no existe o no es válido");
+          return;
+        }
+        if (!iconPlay) {
+          console.error("El icono play no existe o no es un SVG");
+          return;
+        }
+        if (!iconPause) {
+          console.error("El icono pause no existe o no es un SVG");
+          return;
+        }
+        if (!volumeSlider) {
+          console.error("El slider de volumen no existe o no es un input");
+          return;
+        }
+        if (!audioModal) {
+          console.error("El modal no existe");
+          return;
+        }
+        if (!btnActivateAudio) {
+          console.error("El botón de activar audio no existe o no es un botón");
+          return;
+        }
+
+        function updatePlayPauseIcon() {
+          if (!audio) return;
+          if (audio.paused) {
+            iconPlay!.style.display = "inline"; // <-- agregamos "!" aquí
+            iconPause!.style.display = "none"; // <-- y aquí
+          } else {
+            iconPlay!.style.display = "none"; // <-- y aquí
+            iconPause!.style.display = "inline"; // <-- y aquí
+          }
+        }
+
+        playPauseBtn.addEventListener("click", () => {
+          if (!audio) return;
+          if (audio.paused) {
+            audio.muted = false;
+            audio.play().catch(console.error);
+          } else {
+            audio.pause();
+          }
+          updatePlayPauseIcon();
+        });
+
+        volumeSlider.addEventListener("input", () => {
+          if (!audio) return;
+          audio.volume = parseFloat(volumeSlider.value);
+          audio.muted = volumeSlider.value === "0";
+        });
+
+        audio.volume = volumeSlider ? parseFloat(volumeSlider.value) : 1;
+        audio.muted = true; // muteamos para autoplay
+        updatePlayPauseIcon();
+
+        audio.play().catch(() => {
+          audio.muted = true;
+          updatePlayPauseIcon();
+        });
+
+        function handleScrollPlay() {
+          if (!audio) return;
+          if (audio.paused) {
+            audio.muted = false;
+            audio
+              .play()
+              .then(updatePlayPauseIcon)
+              .catch(() => {
+                audio.muted = true;
+                updatePlayPauseIcon();
+              });
+          }
+          window.removeEventListener("scroll", handleScrollPlay);
+        }
+        window.addEventListener("scroll", handleScrollPlay, { passive: true });
+
+        btnActivateAudio.addEventListener("click", () => {
+          if (!audio) return;
+          audio.muted = false;
+          audio.play().catch(console.error);
+          audioModal.style.display = "none";
+          updatePlayPauseIcon();
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", setupAudioPlayer);
+    </script>
+
     <div class="lg:hidden flex flex-col items-center">
       <!-- Título -->
       <section class="">
@@ -93,19 +383,75 @@ import "@fontsource/libre-baskerville";
       </script>
 
       <!-- Vitral -->
-      <section class="mt-5 flex flex-col items-center">
-        <img class="h-16 opacity-50 mx-12" src={vestido.src} alt="" />
-        <p class="text-xl">Dress Code</p>
-        <p class="opacity-75 text-center text-xs px-24">
-          Vestimenta formal, pero cómodos para bailar.
-        </p>
-      </section>
 
-      <section class="px-12 text-center text-xs my-8 border-t mx-10 py-4">
-        <!-- En este día especial, celebramos el amor y la unión de dos almas. Estamos emocionados por lo que el futuro nos depara.-->
-        <p>
-          Ya no necesitamos subir al ⚡️Olimpo… ya encontramos nuestro hogar.
+      <section class="mt-20 flex flex-col items-center">
+        <p class="text-xl">Dress Code</p>
+        <img class="h-44 opacity-90 mx-12" src={dresscode.src} alt="" />
+        <p class="opacity-75 text-center text-xs px-10">
+          Queremos que cada uno de ustedes se sienta especial y luzca
+          espectacular en nuestro día.
         </p>
+        <p class="border-b pb-3 mb-5 mt-4">Colores no permitidos</p>
+
+        <div
+          class="grid grid-cols-2 gap-8 max-w-xs mx-auto p-4 rounded border-b mb-2 pb-3"
+        >
+          <!-- Blanco -->
+          <div class="flex flex-col items-center">
+            <div class="w-20 h-20 rounded-full bg-white border border-gray-300">
+            </div>
+            <span class="mt-2 text-xs text-white font-semibold">Blanco</span>
+          </div>
+
+          <!-- Rojo intenso -->
+          <div class="flex flex-col items-center">
+            <div
+              class="w-20 h-20 rounded-full"
+              style="background-color: #c81717;"
+            >
+            </div>
+            <span class="mt-2 text-xs text-white font-semibold"
+              >Rojo intenso</span
+            >
+          </div>
+
+          <!-- Rosa pastel -->
+          <div class="flex flex-col items-center">
+            <div
+              class="w-20 h-20 rounded-full"
+              style="background-color: #F8BBD0;"
+            >
+            </div>
+            <span class="mt-2 text-xs text-white font-semibold"
+              >Rosa pastel</span
+            >
+          </div>
+
+          <!-- Azul pastel -->
+          <div class="flex flex-col items-center">
+            <div
+              class="w-20 h-20 rounded-full"
+              style="background-color: #B3E5FC;"
+            >
+            </div>
+            <span class="mt-2 text-xs text-white font-semibold"
+              >Azul pastel</span
+            >
+          </div>
+
+          <!-- Amarillo pastel -->
+          <div class="flex flex-col items-center col-span-2">
+            <div
+              class="w-20 h-20 rounded-full"
+              style="background-color: #FFF9C4;"
+            >
+            </div>
+            <span class="mt-2 text-xs text-white font-semibold"
+              >Amarillo pastel</span
+            >
+          </div>
+        </div>
+        <p class="text-xs mb-20">Colores claros o pastel en general</p>
       </section>
 
       <div class="relative">
@@ -143,7 +489,7 @@ import "@fontsource/libre-baskerville";
                 </div>
               </div>
               <a
-                href="https://maps.app.goo.gl/LJKRsh1tHQ7irCDP9"
+                href="https://maps.app.goo.gl/u9tfj9M8HrtULbzT8?g_st=com.google.maps.preview.copy"
                 target="_blank"
                 class="inline-block mt-2 px-6 py-2 bg-[#5e2e24] text-white rounded-full hover:bg-[#4a241d] transition text-xs"
               >
@@ -197,6 +543,13 @@ import "@fontsource/libre-baskerville";
           </div>
         </section>
       </div>
+
+      <section class="px-12 text-center text-xs mt-8 mx-10 py-4">
+        <!-- En este día especial, celebramos el amor y la unión de dos almas. Estamos emocionados por lo que el futuro nos depara.-->
+        <p>
+          Ya no necesitamos subir al ⚡️Olimpo… ya encontramos nuestro hogar.
+        </p>
+      </section>
 
       <!-- Confirmar asistencia -->
       <section class="mt-10 text-center">
