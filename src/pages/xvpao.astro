@@ -1,0 +1,537 @@
+---
+import portada from "../images/invitacion-pao/portada.png";
+import hacienda from "../images/invitacion-pao/hacienda.jpg";
+import regalo from "../images/invitacion-pao/regalo.webp";
+import vestido from "../images/invitacion-pao/vestido.png";
+import flor from "../images/invitacion-pao/flor-1.png";
+import foto1 from "../images/invitacion-pao/pao-1.jpg";
+import foto2 from "../images/invitacion-pao/pao-2.jpg";
+import foto3 from "../images/invitacion-pao/pao-3.jpg";
+import foto4 from "../images/invitacion-pao/pao-4.jpg";
+import flowers from "../images/flowers.webp";
+import "@fontsource/libre-baskerville";
+import dresscode from "../images/vestido-traje.webp";
+---
+
+<style>
+    .video-pao {
+        border-radius: 4rem; /* equivalente a rounded-md en Tailwind */
+        overflow: hidden;
+        display: block; /* para evitar espacios extra debajo del video */
+        width: 100%; /* opcional, para que el video tome todo el ancho del contenedor */
+    }
+    body {
+        font-family: "Libre Baskerville", serif;
+    }
+    .audio-player {
+        position: fixed;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(35, 49, 86, 0.6);
+        padding: 8px 16px;
+        border-radius: 55px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: auto;
+        max-width: 320px;
+    }
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        fill: white;
+        transition: fill 0.3s ease;
+    }
+
+    button:hover {
+        fill: #151560;
+    }
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .volume-slider {
+        -webkit-appearance: none;
+        width: 120px;
+        height: 6px;
+        border-radius: 12px;
+        background: rgba(35, 49, 89, 0.8);
+        cursor: pointer;
+        position: relative;
+    }
+
+    .volume-slider::-webkit-slider-runnable-track {
+        height: 6px;
+        background: rgba(35, 49, 89, 0.8);
+        border-radius: 12px;
+    }
+    .volume-slider::-moz-range-track {
+        height: 6px;
+        background: rgba(35, 49, 89, 0.8);
+        border-radius: 12px;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: white;
+        cursor: pointer;
+        margin-top: -5px;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.2s;
+    }
+    .volume-slider::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: white;
+        cursor: pointer;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.2s;
+    }
+
+    .volume-slider::-webkit-slider-thumb:hover,
+    .volume-slider::-moz-range-thumb:hover {
+        background-color: #d8b07f;
+    }
+</style>
+
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Boda de Carlos y Angie</title>
+        <meta
+            property="og:image"
+            content="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/og-image-pao-xv.png"
+        />
+        <meta
+            property="og:description"
+            content="Te invitamos a celebrar con nosotros. ¡Confirma tu asistencia y acompáñanos en este día tan especial!"
+        />
+        <style>
+            body {
+                background-color: rgba(35, 49, 86, 1); /* terracota */
+                font-family: "Segoe UI", sans-serif;
+            }
+        </style>
+    </head>
+    <body class="text-white min-h-screen">
+        <!-- Modal de invitación -->
+        <!-- Modal Invitación -->
+        <div
+            id="audio-modal"
+            class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[9999] p-6"
+        >
+            <div
+                class="bg-white rounded-lg shadow-lg max-w-sm w-full p-8 text-center flex flex-col items-center justify-center"
+            >
+                <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+                    ¡Bienvenido!
+                </h2>
+                <p class="mb-6 text-gray-600">
+                    Para disfrutar la mejor experiencia, da click en "Ver
+                    invitación".
+                </p>
+                <button
+                    id="btn-activate-audio"
+                    style="
+    background-color: #1e3255;
+    color: white;
+    padding: 16px 34px;
+    border-radius: 8px;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    white-space: nowrap;
+    min-width: 140px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  "
+                >
+                    Ver invitación
+                </button>
+            </div>
+        </div>
+
+        <!-- Audio Oculto -->
+        <audio
+            id="background-audio"
+            src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/musica-pao-xv.mp3"
+            loop
+            muted
+            preload="auto"></audio>
+
+        <!-- Controles Audio -->
+        <div class="audio-player" role="region" aria-label="Control de audio">
+            <button
+                id="play-pause"
+                aria-label="Reproducir/Pausar"
+                type="button"
+            >
+                <!-- Play icon por defecto -->
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 384 512"
+                    id="icon-play"
+                    style="display: inline;"
+                >
+                    <path
+                        d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"
+                    ></path>
+                </svg>
+                <!-- Pause icon oculto inicialmente -->
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 320 512"
+                    id="icon-pause"
+                    style="display: none;"
+                >
+                    <path
+                        d="M48 64C21.5 64 0 85.5 0 112L0 400c0 26.5 21.5 48 48 48l32 0c26.5 0 48-21.5 48-48l0-288c0-26.5-21.5-48-48-48L48 64zm192 0c-26.5 0-48 21.5-48 48l0 288c0 26.5 21.5 48 48 48l32 0c26.5 0 48-21.5 48-48l0-288c0-26.5-21.5-48-48-48l-32 0z"
+                    ></path>
+                </svg>
+            </button>
+
+            <input
+                id="volume-slider"
+                class="volume-slider"
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.5"
+                aria-label="Control de volumen"
+            />
+        </div>
+
+        <script>
+            function setupAudioPlayer() {
+                const audio = document.getElementById(
+                    "background-audio",
+                ) as HTMLAudioElement | null;
+                const playPauseBtn = document.getElementById(
+                    "play-pause",
+                ) as HTMLButtonElement | null;
+                const iconPlay = document.getElementById(
+                    "icon-play",
+                ) as SVGSVGElement | null;
+                const iconPause = document.getElementById(
+                    "icon-pause",
+                ) as SVGSVGElement | null;
+                const volumeSlider = document.getElementById(
+                    "volume-slider",
+                ) as HTMLInputElement | null;
+
+                const audioModal = document.getElementById(
+                    "audio-modal",
+                ) as HTMLElement | null;
+                const btnActivateAudio = document.getElementById(
+                    "btn-activate-audio",
+                ) as HTMLButtonElement | null;
+
+                if (!audio) {
+                    console.error(
+                        "El audio no existe o no es un elemento audio válido",
+                    );
+                    return;
+                }
+                if (!playPauseBtn) {
+                    console.error(
+                        "El botón play/pause no existe o no es válido",
+                    );
+                    return;
+                }
+                if (!iconPlay) {
+                    console.error("El icono play no existe o no es un SVG");
+                    return;
+                }
+                if (!iconPause) {
+                    console.error("El icono pause no existe o no es un SVG");
+                    return;
+                }
+                if (!volumeSlider) {
+                    console.error(
+                        "El slider de volumen no existe o no es un input",
+                    );
+                    return;
+                }
+                if (!audioModal) {
+                    console.error("El modal no existe");
+                    return;
+                }
+                if (!btnActivateAudio) {
+                    console.error(
+                        "El botón de activar audio no existe o no es un botón",
+                    );
+                    return;
+                }
+
+                function updatePlayPauseIcon() {
+                    if (!audio) return;
+                    if (audio.paused) {
+                        iconPlay!.style.display = "inline"; // <-- agregamos "!" aquí
+                        iconPause!.style.display = "none"; // <-- y aquí
+                    } else {
+                        iconPlay!.style.display = "none"; // <-- y aquí
+                        iconPause!.style.display = "inline"; // <-- y aquí
+                    }
+                }
+
+                playPauseBtn.addEventListener("click", () => {
+                    if (!audio) return;
+                    if (audio.paused) {
+                        audio.muted = false;
+                        audio.play().catch(console.error);
+                    } else {
+                        audio.pause();
+                    }
+                    updatePlayPauseIcon();
+                });
+
+                volumeSlider.addEventListener("input", () => {
+                    if (!audio) return;
+                    audio.volume = parseFloat(volumeSlider.value);
+                    audio.muted = volumeSlider.value === "0";
+                });
+
+                audio.volume = volumeSlider
+                    ? parseFloat(volumeSlider.value)
+                    : 1;
+                audio.muted = true; // muteamos para autoplay
+                updatePlayPauseIcon();
+
+                audio.play().catch(() => {
+                    audio.muted = true;
+                    updatePlayPauseIcon();
+                });
+
+                function handleScrollPlay() {
+                    if (!audio) return;
+                    if (audio.paused) {
+                        audio.muted = false;
+                        audio
+                            .play()
+                            .then(updatePlayPauseIcon)
+                            .catch(() => {
+                                audio.muted = true;
+                                updatePlayPauseIcon();
+                            });
+                    }
+                    window.removeEventListener("scroll", handleScrollPlay);
+                }
+                window.addEventListener("scroll", handleScrollPlay, {
+                    passive: true,
+                });
+
+                btnActivateAudio.addEventListener("click", () => {
+                    if (!audio) return;
+                    audio.muted = false;
+                    audio.play().catch(console.error);
+                    audioModal.style.display = "none";
+                    updatePlayPauseIcon();
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", setupAudioPlayer);
+        </script>
+
+        <div class="lg:hidden flex flex-col items-center">
+            <!-- Título -->
+            <section class="">
+                <img src={portada.src} alt="" />
+            </section>
+
+            <section class="mt-10 text-center z-10 relative mb-5">
+                <h2 class="text-2xl font-semibold">Sólo faltan:</h2>
+                <div>
+                    <p class="mb-4 opacity-45">16 de Agosto</p>
+                </div>
+                <div
+                    id="countdown"
+                    class="flex justify-center gap-6 text-[#fffcfa]"
+                >
+                    <div class="flex flex-col items-center">
+                        <span id="days" class="text-3xl font-bold">--</span>
+                        <span class="text-sm mt-1">días</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span id="hours" class="text-3xl">--</span>
+                        <span class="text-sm mt-1">horas</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span id="minutes" class="text-3xl">--</span>
+                        <span class="text-sm mt-1">minutos</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span id="seconds" class="text-3xl">--</span>
+                        <span class="text-sm mt-1">segundos</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pt-10">
+                <p class="px-8 text-center  text-sm/6">
+                    Hoy guardo en mis brazos la estrella divina que fue mi
+                    niñez. Y hoy, mi adolescencia con alas de ángel se eleva
+                    hacia el cielo por primera vez. Por eso quiero compartir con
+                    mis padres y contigo mis Quince Años
+                </p>
+            </section>
+
+            <script is:inline>
+                const countdown = () => {
+                    const endDate = new Date("2025-08-16T00:00:00");
+                    const now = new Date();
+                    const diff = endDate - now;
+
+                    if (diff <= 0) {
+                        document.getElementById("countdown").innerHTML =
+                            "¡Ya llegó el gran día!";
+                        return;
+                    }
+
+                    const seconds = Math.floor((diff / 1000) % 60);
+                    const minutes = Math.floor((diff / 1000 / 60) % 60);
+                    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+                    document.getElementById("days").textContent = days;
+                    document.getElementById("hours").textContent = hours;
+                    document.getElementById("minutes").textContent = minutes;
+                    document.getElementById("seconds").textContent = seconds;
+                };
+
+                countdown(); // primera ejecución
+                setInterval(countdown, 1000); // cada segundo
+            </script>
+
+            <!-- Vitral -->
+
+            <section class="mt-20 flex flex-col items-center">
+                <p class="text-xl">Dress Code</p>
+                <img
+                    class="h-24 opacity-90 mx-12 my-4"
+                    src={vestido.src}
+                    alt=""
+                />
+                <p class="opacity-75 text-center text-xs px-10 pb-10">
+                    Queremos verte disfrutando, sintiéndote tú mismo y cómodo.
+                    Elige lo que más te guste para acompañarnos en este día tan
+                    especial.
+                </p>
+            </section>
+
+            <section>
+                <img class="mb-5 max-w-md w-96" src={flor.src} alt="" />
+            </section>
+
+            <div class="px-6">
+                <div
+                    class="bg-[#fffcfa] rounded-t-[80px] rounded-b-[40px] w-full max-w-xl mx-auto shadow-lg overflow-hidden"
+                >
+                    <!-- Imagen con arco superior -->
+                    <img
+                        src={hacienda.src}
+                        alt="Hacienda del Encino"
+                        class="w-full h-60 object-cover rounded-t-[80px]"
+                    />
+
+                    <!-- Contenido -->
+                    <div class="p-8 text-center">
+                        <h2 class="text-2xl font-semibold text-black">
+                            Lugar del evento
+                        </h2>
+                        <p class="text-xs text-[#1e3255] mb-4">
+                            Privada Veneto, los viñedos, 43845 zempoala.
+                        </p>
+
+                        <div
+                            class="grid grid-cols-2 gap-4 max-w-xs mx-auto mb-4 text-[#1e3255]"
+                        >
+                            <div
+                                class="border border-[#1e3255] rounded-xl p-4 col-span-2 text-center"
+                            >
+                                <p class="text-sm font-semibold">Fiesta</p>
+                                <p class="text-xs mt-1">
+                                    A partir de las 15:00 hrs
+                                </p>
+                            </div>
+                        </div>
+
+                        <a
+                            href="https://maps.app.goo.gl/jL6fvGfBWNzzYHoV9"
+                            target="_blank"
+                            class="inline-block mt-2 px-6 py-2 bg-[#1e3255] text-white rounded-full hover:bg-[#0f1a2d] transition text-xs"
+                        >
+                            Ir desde Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <section>
+                <img class="mt-7 max-w-md w-96 -scale-100" src={flor.src} alt="" />
+            </section>
+
+            <div class="rounded-md overflow-hidden mt-10">
+                <video
+                    loop
+                    playsinline
+                    autoplay
+                    muted
+                    class="px-6 video-pao"
+                    src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/video-pao-invitacion.mp4"
+                ></video>
+            </div>
+
+            <!-- Confirmar asistencia -->
+            <section class="mt-10 text-center">
+                <a
+                    href="https://wa.link/90ypn2"
+                    class="bg-white text-[#1e3255] px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-[#f0e5dc] transition flex items-center gap-2"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"
+                        class="w-6 h-6 fill-current"
+                    >
+                        <path
+                            d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+                        ></path>
+                    </svg>
+                    Confirmar asistencia
+                </a>
+            </section>
+
+            <!-- Footer -->
+            <footer class="mb-10 mt-3 text-sm opacity-75 text-center">
+                Con cariño, Pao 💫
+            </footer>
+        </div>
+        <div class="hidden lg:block bg-[#1e3255] h-screen">
+            <div class="flex justify-center items-center h-full">
+                <p class="my-auto text-white">
+                    Solo disponible para dispositivos moviles
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
