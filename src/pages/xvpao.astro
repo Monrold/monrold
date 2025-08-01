@@ -1,10 +1,10 @@
 ---
-import portada from "../images/invitacion-pao/portada.png";
+import portada from "../images/invitacion-pao/portada-2.png";
 import hacienda from "../images/invitacion-pao/hacienda.jpg";
 import regalo from "../images/invitacion-pao/regalo.webp";
 import vestido from "../images/invitacion-pao/vestido.png";
 import flor from "../images/invitacion-pao/flor-1.png";
-import '../styles/global.css';
+import "../styles/global.css";
 import foto1 from "../images/invitacion-pao/pao-1.jpg";
 import foto2 from "../images/invitacion-pao/pao-2.jpg";
 import foto3 from "../images/invitacion-pao/pao-3.jpg";
@@ -425,20 +425,34 @@ import dresscode from "../images/vestido-traje.webp";
             </script>
 
             <!-- Vitral -->
-
-            <section class="mt-20 flex flex-col items-center">
+            <div class="p-6 mt-10 rounded overflow-hidden">
+                <img
+                    class="rounded-xl w-full h-auto"
+                    src={foto1.src}
+                    alt="foto pao 1"
+                />
+            </div>
+            <section class="mt-10 flex flex-col items-center">
                 <p class="text-xl">Dress Code</p>
                 <img
                     class="h-24 opacity-90 mx-12 my-4"
                     src={vestido.src}
                     alt=""
                 />
+
                 <p class="opacity-75 text-center text-xs px-10 pb-10">
                     Queremos verte disfrutando, sintiéndote tú mismo y cómodo.
                     Elige lo que más te guste para acompañarnos en este día tan
                     especial.
                 </p>
             </section>
+            <div class="p-6 mb-5 rounded overflow-hidden">
+                <img
+                    class="rounded-xl w-full h-auto"
+                    src={foto2.src}
+                    alt="foto pao 1"
+                />
+            </div>
 
             <section>
                 <img class="mb-5 max-w-md w-96" src={flor.src} alt="" />
