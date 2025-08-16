@@ -1,0 +1,30 @@
+---
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <section class="relative">
+            <!-- Fondo negro que se queda fijo -->
+            <div
+                class="bg-black h-screen sticky top-0 z-0 flex items-center justify-center"
+            >
+                <p class="text-white text-2xl">Esto es una prueba</p>
+            </div>
+
+            <!-- Sección roja que sube -->
+            <div class="bg-red-500 h-screen sticky top-0 z-10">
+                <p class="p-8">Esta es la siguiente parte</p>
+            </div>
+            <div class="bg-red-800 h-screen relative z-20">
+                <p class="p-8">Esta es la siguiente parte</p>
+            </div>
+        </section>
+    </body>
+</html>
