@@ -146,25 +146,34 @@ import Form from "../components/aylin/form.astro";
         </style>
     </head>
     <body class="text-white min-h-screen relative">
-        <section class="">
-            <div
-                id="audio-modal"
-                class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[9999] p-6"
-            >
+        <div class="hidden md:block">
+            <div class="flex flex-col items-center justify-center h-screen text-[#344665]">
+                <img class="w-15 mb-10" src={logo1.src} alt="">
+               <p> Sólo disponible para dispositivos móviles.</p>
+            </div>
+        </div>
+        <div class="block md:hidden">
+            <section class="">
                 <div
-                    class="bg-white rounded-lg shadow-lg max-w-sm w-full p-8 text-center flex flex-col items-center justify-center"
+                    id="audio-modal"
+                    class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[9999] p-6"
                 >
-                    <h2 class="text-4xl font-semibold mb-4 text-gray-800 titulos">
-                        ¡Bienvenido!
-                    </h2>
-                    <p class="mb-6 text-gray-600">
-                        Para disfrutar la mejor experiencia, da click en "Ver
-                        invitación".
-                    </p>
-                    <button
-                    class="poppins"
-                        id="btn-activate-audio"
-                        style="
+                    <div
+                        class="bg-white rounded-lg shadow-lg max-w-sm w-full p-8 text-center flex flex-col items-center justify-center"
+                    >
+                        <h2
+                            class="text-4xl font-semibold mb-4 text-gray-800 titulos"
+                        >
+                            ¡Bienvenido!
+                        </h2>
+                        <p class="mb-6 text-gray-600">
+                            Para disfrutar la mejor experiencia, da click en
+                            "Ver invitación".
+                        </p>
+                        <button
+                            class="poppins"
+                            id="btn-activate-audio"
+                            style="
     background-color:#344665;
     color: white;
     padding: 16px 34px;
@@ -179,301 +188,359 @@ import Form from "../components/aylin/form.astro";
     justify-content: center;
     text-align: center;
   "
-                    >
-                        Ver invitación
-                    </button>
+                        >
+                            Ver invitación
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Audio Oculto -->
-            <audio
-                id="background-audio"
-                src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/aylin-cancion-boda.mp3"
-                loop
-                muted
-                preload="auto"></audio>
+                <!-- Audio Oculto -->
+                <audio
+                    id="background-audio"
+                    src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/aylin-cancion-boda.mp3"
+                    loop
+                    muted
+                    preload="auto"></audio>
 
-            <!-- Controles Audio -->
-            <div
-                class="audio-player"
-                role="region"
-                aria-label="Control de audio"
-            >
-                <button
-                    id="play-pause"
-                    aria-label="Reproducir/Pausar"
-                    type="button"
+                <!-- Controles Audio -->
+                <div
+                    class="audio-player"
+                    role="region"
+                    aria-label="Control de audio"
                 >
-                    <!-- Play icon por defecto -->
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 384 512"
-                        id="icon-play"
-                        style="display: inline;"
+                    <button
+                        id="play-pause"
+                        aria-label="Reproducir/Pausar"
+                        type="button"
                     >
-                        <path
-                            d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"
-                        ></path>
-                    </svg>
-                    <!-- Pause icon oculto inicialmente -->
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 320 512"
-                        id="icon-pause"
-                        style="display: none;"
-                    >
-                        <path
-                            d="M48 64C21.5 64 0 85.5 0 112L0 400c0 26.5 21.5 48 48 48l32 0c26.5 0 48-21.5 48-48l0-288c0-26.5-21.5-48-48-48L48 64zm192 0c-26.5 0-48 21.5-48 48l0 288c0 26.5 21.5 48 48 48l32 0c26.5 0 48-21.5 48-48l0-288c0-26.5-21.5-48-48-48l-32 0z"
-                        ></path>
-                    </svg>
-                </button>
+                        <!-- Play icon por defecto -->
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 384 512"
+                            id="icon-play"
+                            style="display: inline;"
+                        >
+                            <path
+                                d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"
+                            ></path>
+                        </svg>
+                        <!-- Pause icon oculto inicialmente -->
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 320 512"
+                            id="icon-pause"
+                            style="display: none;"
+                        >
+                            <path
+                                d="M48 64C21.5 64 0 85.5 0 112L0 400c0 26.5 21.5 48 48 48l32 0c26.5 0 48-21.5 48-48l0-288c0-26.5-21.5-48-48-48L48 64zm192 0c-26.5 0-48 21.5-48 48l0 288c0 26.5 21.5 48 48 48l32 0c26.5 0 48-21.5 48-48l0-288c0-26.5-21.5-48-48-48l-32 0z"
+                            ></path>
+                        </svg>
+                    </button>
 
-                <input
-                    id="volume-slider"
-                    class="volume-slider"
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value="0.5"
-                    aria-label="Control de volumen"
-                />
-            </div>
+                    <input
+                        id="volume-slider"
+                        class="volume-slider"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        value="0.5"
+                        aria-label="Control de volumen"
+                    />
+                </div>
 
-            <script>
-                function setupAudioPlayer() {
-                    const audio = document.getElementById(
-                        "background-audio",
-                    ) as HTMLAudioElement | null;
-                    const playPauseBtn = document.getElementById(
-                        "play-pause",
-                    ) as HTMLButtonElement | null;
-                    const iconPlay = document.getElementById(
-                        "icon-play",
-                    ) as SVGSVGElement | null;
-                    const iconPause = document.getElementById(
-                        "icon-pause",
-                    ) as SVGSVGElement | null;
-                    const volumeSlider = document.getElementById(
-                        "volume-slider",
-                    ) as HTMLInputElement | null;
+                <script>
+                    function setupAudioPlayer() {
+                        const audio = document.getElementById(
+                            "background-audio",
+                        ) as HTMLAudioElement | null;
+                        const playPauseBtn = document.getElementById(
+                            "play-pause",
+                        ) as HTMLButtonElement | null;
+                        const iconPlay = document.getElementById(
+                            "icon-play",
+                        ) as SVGSVGElement | null;
+                        const iconPause = document.getElementById(
+                            "icon-pause",
+                        ) as SVGSVGElement | null;
+                        const volumeSlider = document.getElementById(
+                            "volume-slider",
+                        ) as HTMLInputElement | null;
 
-                    const audioModal = document.getElementById(
-                        "audio-modal",
-                    ) as HTMLElement | null;
-                    const btnActivateAudio = document.getElementById(
-                        "btn-activate-audio",
-                    ) as HTMLButtonElement | null;
+                        const audioModal = document.getElementById(
+                            "audio-modal",
+                        ) as HTMLElement | null;
+                        const btnActivateAudio = document.getElementById(
+                            "btn-activate-audio",
+                        ) as HTMLButtonElement | null;
 
-                    if (!audio) {
-                        console.error(
-                            "El audio no existe o no es un elemento audio válido",
-                        );
-                        return;
-                    }
-                    if (!playPauseBtn) {
-                        console.error(
-                            "El botón play/pause no existe o no es válido",
-                        );
-                        return;
-                    }
-                    if (!iconPlay) {
-                        console.error("El icono play no existe o no es un SVG");
-                        return;
-                    }
-                    if (!iconPause) {
-                        console.error(
-                            "El icono pause no existe o no es un SVG",
-                        );
-                        return;
-                    }
-                    if (!volumeSlider) {
-                        console.error(
-                            "El slider de volumen no existe o no es un input",
-                        );
-                        return;
-                    }
-                    if (!audioModal) {
-                        console.error("El modal no existe");
-                        return;
-                    }
-                    if (!btnActivateAudio) {
-                        console.error(
-                            "El botón de activar audio no existe o no es un botón",
-                        );
-                        return;
-                    }
-
-                    function updatePlayPauseIcon() {
-                        if (!audio) return;
-                        if (audio.paused) {
-                            iconPlay!.style.display = "inline"; // <-- agregamos "!" aquí
-                            iconPause!.style.display = "none"; // <-- y aquí
-                        } else {
-                            iconPlay!.style.display = "none"; // <-- y aquí
-                            iconPause!.style.display = "inline"; // <-- y aquí
+                        if (!audio) {
+                            console.error(
+                                "El audio no existe o no es un elemento audio válido",
+                            );
+                            return;
                         }
-                    }
-
-                    playPauseBtn.addEventListener("click", () => {
-                        if (!audio) return;
-                        if (audio.paused) {
-                            audio.muted = false;
-                            audio.play().catch(console.error);
-                        } else {
-                            audio.pause();
+                        if (!playPauseBtn) {
+                            console.error(
+                                "El botón play/pause no existe o no es válido",
+                            );
+                            return;
                         }
-                        updatePlayPauseIcon();
-                    });
-
-                    volumeSlider.addEventListener("input", () => {
-                        if (!audio) return;
-                        audio.volume = parseFloat(volumeSlider.value);
-                        audio.muted = volumeSlider.value === "0";
-                    });
-
-                    audio.volume = volumeSlider
-                        ? parseFloat(volumeSlider.value)
-                        : 1;
-                    audio.muted = true; // muteamos para autoplay
-                    updatePlayPauseIcon();
-
-                    audio.play().catch(() => {
-                        audio.muted = true;
-                        updatePlayPauseIcon();
-                    });
-
-                    function handleScrollPlay() {
-                        if (!audio) return;
-                        if (audio.paused) {
-                            audio.muted = false;
-                            audio
-                                .play()
-                                .then(updatePlayPauseIcon)
-                                .catch(() => {
-                                    audio.muted = true;
-                                    updatePlayPauseIcon();
-                                });
+                        if (!iconPlay) {
+                            console.error(
+                                "El icono play no existe o no es un SVG",
+                            );
+                            return;
                         }
-                        window.removeEventListener("scroll", handleScrollPlay);
-                    }
-                    window.addEventListener("scroll", handleScrollPlay, {
-                        passive: true,
-                    });
-
-                    btnActivateAudio.addEventListener("click", () => {
-                        if (!audio) return;
-                        audio.muted = false;
-                        audio.play().catch(console.error);
-                        audioModal.style.display = "none";
-                        updatePlayPauseIcon();
-                    });
-                }
-
-                document.addEventListener("DOMContentLoaded", setupAudioPlayer);
-            </script>
-        </section>
-
-        <section class="sticky top-0 z-0">
-            <div class="lg:hidden flex flex-col items-center">
-                <!-- Título -->
-                <section class="flex items-center flex-col">
-                    <img class="mt-15 w-10" src={logo1.src} alt="" />
-                    <div class="w-px h-20 bg-[#344665] my-5"></div>
-                    <img class="" src={font.src} alt="" />
-                </section>
-
-                <section class="text-center z-10 relative mb-5 mt-5">
-                    <div>
-                        <p class="mb-4 opacity-45 text-black">7 de Febrero</p>
-                    </div>
-                    <div
-                        id="countdown"
-                        class="flex justify-center gap-6 text-[#344665]"
-                    >
-                        <div class="flex flex-col items-center">
-                            <span id="days" class="text-2xl font-bold">--</span>
-                            <span class="text-xs mt-1">días</span>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <span id="hours" class="text-2xl">--</span>
-                            <span class="text-xs mt-1">horas</span>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <span id="minutes" class="text-2xl">--</span>
-                            <span class="text-xs mt-1">minutos</span>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <span id="seconds" class="text-2xl">--</span>
-                            <span class="text-xs mt-1">segundos</span>
-                        </div>
-                    </div>
-                </section>
-
-                <script is:inline>
-                    const countdown = () => {
-                        const endDate = new Date("2026-02-07T00:00:00");
-                        const now = new Date();
-                        const diff = endDate - now;
-
-                        if (diff <= 0) {
-                            document.getElementById("countdown").innerHTML =
-                                "¡Ya llegó el gran día!";
+                        if (!iconPause) {
+                            console.error(
+                                "El icono pause no existe o no es un SVG",
+                            );
+                            return;
+                        }
+                        if (!volumeSlider) {
+                            console.error(
+                                "El slider de volumen no existe o no es un input",
+                            );
+                            return;
+                        }
+                        if (!audioModal) {
+                            console.error("El modal no existe");
+                            return;
+                        }
+                        if (!btnActivateAudio) {
+                            console.error(
+                                "El botón de activar audio no existe o no es un botón",
+                            );
                             return;
                         }
 
-                        const seconds = Math.floor((diff / 1000) % 60);
-                        const minutes = Math.floor((diff / 1000 / 60) % 60);
-                        const hours = Math.floor(
-                            (diff / (1000 * 60 * 60)) % 24,
-                        );
-                        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        function updatePlayPauseIcon() {
+                            if (!audio) return;
+                            if (audio.paused) {
+                                iconPlay!.style.display = "inline"; // <-- agregamos "!" aquí
+                                iconPause!.style.display = "none"; // <-- y aquí
+                            } else {
+                                iconPlay!.style.display = "none"; // <-- y aquí
+                                iconPause!.style.display = "inline"; // <-- y aquí
+                            }
+                        }
 
-                        document.getElementById("days").textContent = days;
-                        document.getElementById("hours").textContent = hours;
-                        document.getElementById("minutes").textContent =
-                            minutes;
-                        document.getElementById("seconds").textContent =
-                            seconds;
-                    };
+                        playPauseBtn.addEventListener("click", () => {
+                            if (!audio) return;
+                            if (audio.paused) {
+                                audio.muted = false;
+                                audio.play().catch(console.error);
+                            } else {
+                                audio.pause();
+                            }
+                            updatePlayPauseIcon();
+                        });
 
-                    countdown(); // primera ejecución
-                    setInterval(countdown, 1000); // cada segundo
+                        volumeSlider.addEventListener("input", () => {
+                            if (!audio) return;
+                            audio.volume = parseFloat(volumeSlider.value);
+                            audio.muted = volumeSlider.value === "0";
+                        });
+
+                        audio.volume = volumeSlider
+                            ? parseFloat(volumeSlider.value)
+                            : 1;
+                        audio.muted = true; // muteamos para autoplay
+                        updatePlayPauseIcon();
+
+                        audio.play().catch(() => {
+                            audio.muted = true;
+                            updatePlayPauseIcon();
+                        });
+
+                        function handleScrollPlay() {
+                            if (!audio) return;
+                            if (audio.paused) {
+                                audio.muted = false;
+                                audio
+                                    .play()
+                                    .then(updatePlayPauseIcon)
+                                    .catch(() => {
+                                        audio.muted = true;
+                                        updatePlayPauseIcon();
+                                    });
+                            }
+                            window.removeEventListener(
+                                "scroll",
+                                handleScrollPlay,
+                            );
+                        }
+                        window.addEventListener("scroll", handleScrollPlay, {
+                            passive: true,
+                        });
+
+                        btnActivateAudio.addEventListener("click", () => {
+                            if (!audio) return;
+                            audio.muted = false;
+                            audio.play().catch(console.error);
+                            audioModal.style.display = "none";
+                            updatePlayPauseIcon();
+                        });
+                    }
+
+                    document.addEventListener(
+                        "DOMContentLoaded",
+                        setupAudioPlayer,
+                    );
                 </script>
-            </div>
-        </section>
-        <section class="relative z-5 mt-screen-height p-6 flex flex-col mt-10">
-            <img class="w-40" src={foto1.src} alt="" />
-            <img class="w-32 pt-5 ml-auto" src={foto2.src} alt="" />
-            <img class="w-54 pt-5 mr-auto" src={foto3.src} alt="" />
-        </section>
-        <section class="sticky top-32 bg-[#FFFDFB] z-[6] mt-26">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-px h-20 bg-black mb-5"></div>
-                <p class="text-[#344665] text-center py-3 p-8 poppins">
-                    El amor nos encontró, y desde entonces ha escrito cada
-                    página de nuestra historia.
-                </p>
-                <p class="text-[#344665] text-center pt-3 pb-10 p-8 poppins">
-                    Ahora comienza un nuevo capítulo, uno que queremos escribir
-                    junto a quienes han estado siempre: nuestra familia y
-                    amigos.
-                </p>
-            </div>
-        </section>
-        <!--ceremonia -->
-        <section class="sticky top-0 z-[7] bg-[#FFFDFB]">
-            <div class="flex flex-col items-center justify-center">
-                <img src={iglesia.src} alt="" />
+            </section>
+
+            <section class="sticky top-0 z-0">
+                <div class="lg:hidden flex flex-col items-center">
+                    <!-- Título -->
+                    <section class="flex items-center flex-col">
+                        <img class="mt-15 w-10" src={logo1.src} alt="" />
+                        <div class="w-px h-20 bg-[#344665] my-5"></div>
+                        <img class="" src={font.src} alt="" />
+                    </section>
+
+                    <section class="text-center z-10 relative mb-5 mt-5">
+                        <div>
+                            <p class="mb-4 opacity-45 text-black">
+                                7 de Febrero
+                            </p>
+                        </div>
+                        <div
+                            id="countdown"
+                            class="flex justify-center gap-6 text-[#344665]"
+                        >
+                            <div class="flex flex-col items-center">
+                                <span id="days" class="text-2xl font-bold"
+                                    >--</span
+                                >
+                                <span class="text-xs mt-1">días</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <span id="hours" class="text-2xl">--</span>
+                                <span class="text-xs mt-1">horas</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <span id="minutes" class="text-2xl">--</span>
+                                <span class="text-xs mt-1">minutos</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <span id="seconds" class="text-2xl">--</span>
+                                <span class="text-xs mt-1">segundos</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <script is:inline>
+                        const countdown = () => {
+                            const endDate = new Date("2026-02-07T00:00:00");
+                            const now = new Date();
+                            const diff = endDate - now;
+
+                            if (diff <= 0) {
+                                document.getElementById("countdown").innerHTML =
+                                    "¡Ya llegó el gran día!";
+                                return;
+                            }
+
+                            const seconds = Math.floor((diff / 1000) % 60);
+                            const minutes = Math.floor((diff / 1000 / 60) % 60);
+                            const hours = Math.floor(
+                                (diff / (1000 * 60 * 60)) % 24,
+                            );
+                            const days = Math.floor(
+                                diff / (1000 * 60 * 60 * 24),
+                            );
+
+                            document.getElementById("days").textContent = days;
+                            document.getElementById("hours").textContent =
+                                hours;
+                            document.getElementById("minutes").textContent =
+                                minutes;
+                            document.getElementById("seconds").textContent =
+                                seconds;
+                        };
+
+                        countdown(); // primera ejecución
+                        setInterval(countdown, 1000); // cada segundo
+                    </script>
+                </div>
+            </section>
+            <section
+                class="relative z-5 mt-screen-height p-6 flex flex-col mt-10"
+            >
+                <img class="w-40" src={foto1.src} alt="" />
+                <img class="w-32 pt-5 ml-auto" src={foto2.src} alt="" />
+                <img class="w-54 pt-5 mr-auto" src={foto3.src} alt="" />
+            </section>
+            <section class="sticky top-32 bg-[#FFFDFB] z-[6] mt-26">
                 <div class="flex flex-col items-center justify-center">
-                    <h2 class="text-[#344665] text-6xl titulos mt-5">
-                        Cremonía
-                    </h2>
+                    <div class="w-px h-20 bg-black mb-5"></div>
+                    <p class="text-[#344665] text-center py-3 p-8 poppins">
+                        El amor nos encontró, y desde entonces ha escrito cada
+                        página de nuestra historia.
+                    </p>
+                    <p
+                        class="text-[#344665] text-center pt-3 pb-10 p-8 poppins"
+                    >
+                        Ahora comienza un nuevo capítulo, uno que queremos
+                        escribir junto a quienes han estado siempre: nuestra
+                        familia y amigos.
+                    </p>
+                </div>
+            </section>
+            <!--ceremonia -->
+            <section class="sticky top-0 z-[7] bg-[#FFFDFB]">
+                <div class="flex flex-col items-center justify-center">
+                    <img src={iglesia.src} alt="" />
+                    <div class="flex flex-col items-center justify-center">
+                        <h2 class="text-[#344665] text-6xl titulos mt-5">
+                            Cremonía
+                        </h2>
+                        <p class="text-center text-[#344665] titulos text-xl">
+                            4:30 pm a 5:30 pm
+                        </p>
+                        <p class="text-center text-[#344665] poppins mt-8">
+                            Finca la fortaleza
+                        </p>
+                        <p
+                            class="text-center text-[#344665] poppins text-xs px-10 mt-2"
+                        >
+                            Dalias 4, Santa María Cuevas, 55610 Zumpango de
+                            Ocampo, Méx.
+                        </p>
+                        <a
+                            href="https://maps.app.goo.gl/roRsuuYsbf2xubh37"
+                            class="bg-[#1a2434] poppins px-4 py-1 my-4"
+                            >Ubicación</a
+                        >
+                    </div>
+                    <div class="w-px h-20 bg-black mb-5"></div>
+                </div>
+            </section>
+            <!--recepción -->
+            <section class="sticky top-0 z-[8] bg-[#FFFDFB]">
+                <div class="flex flex-col items-center justify-center">
+                    <img src={salon.src} alt="" />
+                    <div class="flex flex-col items-center justify-center">
+                        <p
+                            class="text-[#344665] text-center text-xs mt-5 mb-[-4px] poppins"
+                        >
+                            Coctel de bienvenida y
+                        </p>
+                        <h2
+                            class="text-[#344665] text-6xl titulos text-center mt-0"
+                        >
+                            Recepción
+                        </h2>
+
+                        Recepción.
+                    </div>
                     <p class="text-center text-[#344665] titulos text-xl">
-                        4:30 pm a 5:30 pm
+                        5:30 pm a 6:00 pm
                     </p>
                     <p class="text-center text-[#344665] poppins mt-8">
-                        Finca la fortaleza
+                        Finca la fortaleza -- Salón
                     </p>
                     <p
                         class="text-center text-[#344665] poppins text-xs px-10 mt-2"
@@ -481,235 +548,208 @@ import Form from "../components/aylin/form.astro";
                         Dalias 4, Santa María Cuevas, 55610 Zumpango de Ocampo,
                         Méx.
                     </p>
-                    <a href="https://maps.app.goo.gl/roRsuuYsbf2xubh37" class="bg-[#1a2434] poppins px-4 py-1 my-4"
-                        >Ubicación</a
+                    <a
+                        href="https://maps.app.goo.gl/roRsuuYsbf2xubh37"
+                        class="bg-[#1a2434] poppins px-4 py-1 my-4">Ubicación</a
                     >
-                </div>
-                <div class="w-px h-20 bg-black mb-5"></div>
-            </div>
-        </section>
-        <!--recepción -->
-        <section class="sticky top-0 z-[8] bg-[#FFFDFB]">
-            <div class="flex flex-col items-center justify-center">
-                <img src={salon.src} alt="" />
-                <div class="flex flex-col items-center justify-center">
-                    <p
-                        class="text-[#344665] text-center text-xs mt-5 mb-[-4px] poppins"
-                    >
-                        Coctel de bienvenida y
-                    </p>
-                    <h2
-                        class="text-[#344665] text-6xl titulos text-center mt-0"
-                    >
-                        Recepción
-                    </h2>
-
-                    Recepción.
-                </div>
-                <p class="text-center text-[#344665] titulos text-xl">
-                    5:30 pm a 6:00 pm
-                </p>
-                <p class="text-center text-[#344665] poppins mt-8">
-                    Finca la fortaleza -- Salón
-                </p>
-                <p
-                    class="text-center text-[#344665] poppins text-xs px-10 mt-2"
-                >
-                    Dalias 4, Santa María Cuevas, 55610 Zumpango de Ocampo, Méx.
-                </p>
-                <a href="https://maps.app.goo.gl/roRsuuYsbf2xubh37" class="bg-[#1a2434] poppins px-4 py-1 my-4"
-                    >Ubicación</a
-                >
-                <div class="w-px h-20 bg-black mb-5"></div>
-            </div>
-        </section>
-        <div class="relative">
-            <section class="sticky top-0 z-[9] bg-[#FFFDFB]">
-                <div>
-                    <Itinerario />
+                    <div class="w-px h-20 bg-black mb-5"></div>
                 </div>
             </section>
-        </div>
-        <section class="sticky top-0 z-[10] bg-[#FFFDFB]">
-            <img src={foto4.src} alt="" />
-        </section>
-        <section class="sticky top-0 z-[10] bg-[#FFFDFB]">
-            <img src={foto5.src} alt="" />
-        </section>
-        <section class="sticky top-0 z-[10] bg-[#FFFDFB]">
-            <img src={foto6.src} alt="" />
-        </section>
-        <section class="sticky top-0 z-[11] bg-[#FFFDFB]">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-px h-36 bg-[#344665] mb-5"></div>
-                <h2
-                    class="text-6xl/8 titulos text-[#344665] text-center px-10 pt-5"
-                >
-                    Código de vestimenta
-                </h2>
-                <p class="poppins text-2xl mt-15 text-[#344665]">FORMAL</p>
-                <div class="mt-1 text-center">
-                    <p class="text-[#344665] poppins text-xs">
-                        Mujeres: Vestido de gala
-                    </p>
-                    <p class="text-[#344665] poppins text-xs">Hombres: Traje</p>
-                </div>
+            <div class="relative">
+                <section class="sticky top-0 z-[9] bg-[#FFFDFB]">
+                    <div>
+                        <Itinerario />
+                    </div>
+                </section>
             </div>
-            <div class="pt-5 pb-24">
-                <p
-                    class="pb-2 mb-4 text-[#344665] font-semibold text-center mt-10"
-                >
-                    Colores no permitidos
-                </p>
-
-                <div
-                    class="grid grid-cols-4 justify-items-center gap-x-0.5 gap-y-2 max-w-xs mx-auto px-8 rounded border-b pb-2"
-                >
-                    <!-- Blanco -->
-                    <div
-                        class="w-10 h-10 rounded-full bg-white border border-gray-300"
-                    >
-                    </div>
-                    <!-- D8BFA0 -->
-                    <div
-                        class="w-10 h-10 rounded-full"
-                        style="background-color: #D8BFA0;"
-                    >
-                    </div>
-                    <!-- 586C85 -->
-                    <div
-                        class="w-10 h-10 rounded-full"
-                        style="background-color: #586C85;"
-                    >
-                    </div>
-                    <!-- 5F432D -->
-                    <div
-                        class="w-10 h-10 rounded-full"
-                        style="background-color: #5F432D;"
-                    >
-                    </div>
-                    <!-- EBA341 -->
-                    <div
-                        class="w-10 h-10 rounded-full"
-                        style="background-color: #EBA341;"
-                    >
-                    </div>
-                    <!-- ABA245 -->
-                    <div
-                        class="w-10 h-10 rounded-full"
-                        style="background-color: #ABA245;"
-                    >
-                    </div>
-                    <!-- D9DFDB -->
-                    <div
-                        class="w-10 h-10 rounded-full"
-                        style="background-color: #D9DFDB;"
-                    >
-                    </div>
-                    <!-- 7B7B7B -->
-                    <div
-                        class="w-10 h-10 rounded-full"
-                        style="background-color: #7B7B7B;"
-                    >
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="sticky top-0 z-[11] bg-[#FFFDFB]">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-px h-32 bg-[#344665] mb-5"></div>
-                <h2
-                    class="text-6xl/8 titulos text-[#344665] text-center px-10 pt-5"
-                >
-                    Mesa de regalos
-                </h2>
-                <p
-                    class="text-[#344665] text-center px-12 mt-8 poppins text-xs"
-                >
-                    Su presencia es el regalo más valioso en nuestro día
-                    especial, pero sabemos que algunos querrán darnos más.
-                </p>
-            </div>
-            <div class="mt-10 pb-36">
-                <!-- Bloque 1 -->
+            <section class="sticky top-0 z-[10] bg-[#FFFDFB]">
+                <img src={foto4.src} alt="" />
+            </section>
+            <section class="sticky top-0 z-[10] bg-[#FFFDFB]">
+                <img src={foto5.src} alt="" />
+            </section>
+            <section class="sticky top-0 z-[10] bg-[#FFFDFB]">
+                <img src={foto6.src} alt="" />
+            </section>
+            <section class="sticky top-0 z-[11] bg-[#FFFDFB]">
                 <div class="flex flex-col items-center justify-center">
-                    <img
-                        src={liver.src}
-                        alt="Logotipo liverpool"
-                        class="w-40"
-                    />
-                    <a
-                        href=""
-                        class="bg-[#344665] px-6 py-2 mt-3 poppins text-xs"
-                    >
-                        Regalar
-                    </a>
-                </div>
-            </div>
-        </section>
-        <!-- Sección 1: normal (relative), se ve completa -->
-        <section class="relative z-[11] bg-[#FFFDFB] pb-32">
-            <div class="flex flex-col items-center justify-center">
-                <img src={hospedaje.src} alt="Fotos del hospedaje" />
-                <h2
-                    class="text-6xl/10 titulos text-[#344665] text-center px-10 pt-10"
-                >
-                    Sugerencia de hospedaje
-                </h2>
-                <p class="text-[#344665] poppins mt-10 mb-2">
-                    Hospedaje en Finca La Fortaleza
-                </p>
-                <div class="w-px h-20 bg-[#344665]"></div>
-                <p class="text-xs text-[#344665] text-center mt-2 px-10">
-                    Sabemos que algunos vienen de lejos para celebrar con
-                    nosotros, por eso te ofrecemos la comodidad de hospedarte a
-                    solo unos pasos de la fiesta.
-                </p>
-
-                <video
-                    class="w-full max-w-lg mx-auto rounded-lg px-6 mt-10"
-                    muted
-                    src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/aylin-hospedaje.mp4"
-                    controls
-                    preload="metadata"
-                    poster="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/aylin-caban%CC%83as.jpeg"
-                >
-                    Tu navegador no soporta la etiqueta de video.
-                </video>
-            </div>
-        </section>
-
-        <!-- Sección 2: el header es sticky; el <Form/> queda debajo y genera el scroll -->
-        <section class="bg-[#FFFDFB]">
-            <!-- HEADER STICKY -->
-            <div class="sticky top-0 z-[12] bg-[#FFFDFB]">
-                <img
-                    src={foto7.src}
-                    alt="Confirmar asistencia"
-                    class="w-full mb-6"
-                />
-                <div class="flex flex-col items-center justify-center px-6">
+                    <div class="w-px h-36 bg-[#344665] mb-5"></div>
                     <h2
-                        class="text-5xl/8 titulos text-[#344665] text-center px-10 mb-4"
+                        class="text-6xl/8 titulos text-[#344665] text-center px-10 pt-5"
                     >
-                        Confirma tu asistencia
+                        Código de vestimenta
                     </h2>
-                    <p class="text-[#344665] text-center px-10 mb-6 text-xs">
-                        Para ayudarnos a planear mejor nuestro día especial, por
-                        favor contesta este pequeño formulario de Google y
-                        confirma tu asistencia.
+                    <p class="poppins text-2xl mt-15 text-[#344665]">FORMAL</p>
+                    <div class="mt-1 text-center">
+                        <p class="text-[#344665] poppins text-xs">
+                            Mujeres: Vestido de gala
+                        </p>
+                        <p class="text-[#344665] poppins text-xs">
+                            Hombres: Traje
+                        </p>
+                    </div>
+                </div>
+                <div class="pt-5 pb-24">
+                    <p
+                        class="pb-2 mb-4 text-[#344665] font-semibold text-center mt-10"
+                    >
+                        Colores no permitidos
+                    </p>
+
+                    <div
+                        class="grid grid-cols-4 justify-items-center gap-x-0.5 gap-y-2 max-w-xs mx-auto px-8 rounded border-b pb-2"
+                    >
+                        <!-- Blanco -->
+                        <div
+                            class="w-10 h-10 rounded-full bg-white border border-gray-300"
+                        >
+                        </div>
+                        <!-- D8BFA0 -->
+                        <div
+                            class="w-10 h-10 rounded-full"
+                            style="background-color: #D8BFA0;"
+                        >
+                        </div>
+                        <!-- 586C85 -->
+                        <div
+                            class="w-10 h-10 rounded-full"
+                            style="background-color: #586C85;"
+                        >
+                        </div>
+                        <!-- 5F432D -->
+                        <div
+                            class="w-10 h-10 rounded-full"
+                            style="background-color: #5F432D;"
+                        >
+                        </div>
+                        <!-- EBA341 -->
+                        <div
+                            class="w-10 h-10 rounded-full"
+                            style="background-color: #EBA341;"
+                        >
+                        </div>
+                        <!-- ABA245 -->
+                        <div
+                            class="w-10 h-10 rounded-full"
+                            style="background-color: #ABA245;"
+                        >
+                        </div>
+                        <!-- D9DFDB -->
+                        <div
+                            class="w-10 h-10 rounded-full"
+                            style="background-color: #D9DFDB;"
+                        >
+                        </div>
+                        <!-- 7B7B7B -->
+                        <div
+                            class="w-10 h-10 rounded-full"
+                            style="background-color: #7B7B7B;"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="sticky top-0 z-[11] bg-[#FFFDFB]">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-px h-32 bg-[#344665] mb-5"></div>
+                    <h2
+                        class="text-6xl/8 titulos text-[#344665] text-center px-10 pt-5"
+                    >
+                        Mesa de regalos
+                    </h2>
+                    <p
+                        class="text-[#344665] text-center px-12 mt-8 poppins text-xs"
+                    >
+                        Su presencia es el regalo más valioso en nuestro día
+                        especial, pero sabemos que algunos querrán darnos más.
                     </p>
                 </div>
-            </div>
+                <div class="mt-10 pb-36">
+                    <!-- Bloque 1 -->
+                    <div class="flex flex-col items-center justify-center">
+                        <img
+                            src={liver.src}
+                            alt="Logotipo liverpool"
+                            class="w-40"
+                        />
+                        <a
+                            href=""
+                            class="bg-[#344665] px-6 py-2 mt-3 poppins text-xs"
+                        >
+                            Regalar
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <!-- Sección 1: normal (relative), se ve completa -->
+            <section class="relative z-[11] bg-[#FFFDFB] pb-32">
+                <div class="flex flex-col items-center justify-center">
+                    <img src={hospedaje.src} alt="Fotos del hospedaje" />
+                    <h2
+                        class="text-6xl/10 titulos text-[#344665] text-center px-10 pt-10"
+                    >
+                        Sugerencia de hospedaje
+                    </h2>
+                    <p class="text-[#344665] poppins mt-10 mb-2">
+                        Hospedaje en Finca La Fortaleza
+                    </p>
+                    <div class="w-px h-20 bg-[#344665]"></div>
+                    <p class="text-xs text-[#344665] text-center mt-2 px-10">
+                        Sabemos que algunos vienen de lejos para celebrar con
+                        nosotros, por eso te ofrecemos la comodidad de
+                        hospedarte a solo unos pasos de la fiesta.
+                    </p>
 
-            <!-- CONTENIDO QUE SCROLLEA BAJO EL STICKY -->
-            <div class="sticky top-0 bg-white overflow-y-auto z-50 h-screen">
-                <Form />
-            </div>
+                    <video
+                        class="w-full max-w-lg mx-auto rounded-lg px-6 mt-10"
+                        muted
+                        src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/aylin-hospedaje.mp4"
+                        controls
+                        preload="metadata"
+                        poster="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/aylin-caban%CC%83as.jpeg"
+                    >
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                </div>
+            </section>
 
-        </section>
-        <footer class="relative z-[14] text-[#344665] py-10 bg-[#FFFDFB]">
-             <p class="titulos text-3xl text-center">Con cariño Aylin y Alan 💍</p>
-        </footer>
+            <!-- Sección 2: el header es sticky; el <Form/> queda debajo y genera el scroll -->
+            <section class="bg-[#FFFDFB]">
+                <!-- HEADER STICKY -->
+                <div class="sticky top-0 z-[12] bg-[#FFFDFB]">
+                    <img
+                        src={foto7.src}
+                        alt="Confirmar asistencia"
+                        class="w-full mb-6"
+                    />
+                    <div class="flex flex-col items-center justify-center px-6">
+                        <h2
+                            class="text-5xl/8 titulos text-[#344665] text-center px-10 mb-4"
+                        >
+                            Confirma tu asistencia
+                        </h2>
+                        <p
+                            class="text-[#344665] text-center px-10 mb-6 text-xs"
+                        >
+                            Para ayudarnos a planear mejor nuestro día especial,
+                            por favor contesta este pequeño formulario de Google
+                            y confirma tu asistencia.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CONTENIDO QUE SCROLLEA BAJO EL STICKY -->
+                <div
+                    class="sticky top-0 bg-white overflow-y-auto z-50 h-screen"
+                >
+                    <Form />
+                </div>
+            </section>
+            <footer class="relative z-[14] text-[#344665] py-10 bg-[#FFFDFB]">
+                <p class="titulos text-3xl text-center">
+                    Con cariño Aylin y Alan 💍
+                </p>
+            </footer>
+        </div>
     </body>
 </html>
