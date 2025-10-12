@@ -23,6 +23,7 @@ import foto7 from "../images/aylin/foto-7.png";
 import liver from "../images/aylin/liver.svg";
 import hospedaje from "../images/aylin/hospedaje.jpg";
 import Form from "../components/aylin/form.astro";
+import palacio from "../images/aylin/palacio.png";
 ---
 
 <style>
@@ -585,7 +586,6 @@ import Form from "../components/aylin/form.astro";
                                 </h3>
                                 <p class="text-[#344665] mt-1 text-sm">
                                     Aderly Martínez e Israel Juárez
-
                                 </p>
                             </div>
 
@@ -594,7 +594,7 @@ import Form from "../components/aylin/form.astro";
                                     Lazo y Anillos
                                 </h3>
                                 <p class="text-[#344665] mt-1 text-sm">
-                                    Javier Carrillo y Judith Pastrana 
+                                    Javier Carrillo y Judith Pastrana
                                 </p>
                             </div>
 
@@ -603,7 +603,7 @@ import Form from "../components/aylin/form.astro";
                                     Arras
                                 </h3>
                                 <p class="text-[#344665] mt-1 text-sm">
-                                    Manuel Gonzales  y Cari Sarti
+                                    Manuel Gonzales y Cari Sarti
                                 </p>
                             </div>
 
@@ -612,7 +612,8 @@ import Form from "../components/aylin/form.astro";
                                     Testigos Civil
                                 </h3>
                                 <p class="text-[#344665] mt-1 text-sm">
-                                    Isaac Pastrana, Luis Montaño y Susana Sánchez
+                                    Isaac Pastrana, Luis Montaño y Susana
+                                    Sánchez
                                 </p>
                             </div>
                         </div>
@@ -641,82 +642,101 @@ import Form from "../components/aylin/form.astro";
             </section>
             <section class="sticky top-0 z-[11] bg-[#FFFDFB]">
                 <div class="flex flex-col items-center justify-center">
-                    <div class="w-px h-36 bg-[#344665] mb-5"></div>
+                    <div class="w-px h-28 bg-[#344665] mb-4"></div>
                     <h2
-                        class="text-6xl/8 titulos text-[#344665] text-center px-10 pt-5"
+                        class="text-5xl/7 titulos text-[#344665] text-center px-8 pt-4"
                     >
                         Código de vestimenta
                     </h2>
-                    <p class="poppins text-2xl mt-15 text-[#344665]">FORMAL</p>
-                    <div class="mt-1 text-center">
-                        <p class="text-[#344665] poppins text-xs">
-                            Mujeres: Vestido de gala
+
+                    <div class="mt-4 text-center">
+                        <p class="titulos text-[#344665] text-4xl">Mujeres</p>
+                        <p class="text-[#344665] poppins text-[12px]">
+                            Vestido de gala <span class="opacity-70"
+                                >(prohibido el azul)</span
+                            >
                         </p>
-                        <p class="text-[#344665] poppins text-xs">
-                            Hombres: Traje
-                        </p>
+
+                        <div class="mt-4">
+                            <p class="titulos text-[#344665] text-4xl">
+                                Hombres
+                            </p>
+                            <p class="text-[#344665] poppins text-[12px]">
+                                Traje completo <span class="opacity-70"
+                                    >(prohibido el azul)</span
+                                >
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="pt-5 pb-24">
+
+                <div class="pt-6 pb-14">
                     <p
-                        class="pb-2 mb-4 text-[#344665] font-semibold text-center mt-10"
+                        class="pb-2 mb-4 text-[#344665] font-semibold text-center mt-8"
                     >
                         Colores no permitidos
                     </p>
 
                     <div
-                        class="grid grid-cols-4 justify-items-center gap-x-0.5 gap-y-2 max-w-xs mx-auto px-8 rounded border-b pb-2"
+                        class="grid grid-cols-3 justify-items-center gap-x-4 gap-y-5 max-w-xs mx-auto px-6 rounded border-b pb-5"
                     >
-                        <!-- Blanco -->
-                        <div
-                            class="w-10 h-10 rounded-full bg-white border border-gray-300"
-                        >
+                        <!-- Gris Oxford -->
+                        <div class="flex flex-col items-center">
+                            <div
+                                class="w-11 h-11 rounded-full border border-gray-400"
+                                style="background-color: #4B4B4B;"
+                            >
+                            </div>
+                            <span
+                                class="mt-1 text-[11px] text-[#344665] font-medium"
+                                >Gris Oxford</span
+                            >
+                            <span class="text-[10px] text-[#344665]/70"
+                                >Pantone 425 C</span
+                            >
                         </div>
-                        <!-- D8BFA0 -->
-                        <div
-                            class="w-10 h-10 rounded-full"
-                            style="background-color: #D8BFA0;"
-                        >
+
+                        <!-- Gris Claro -->
+                        <div class="flex flex-col items-center">
+                            <div
+                                class="w-11 h-11 rounded-full border border-gray-300"
+                                style="background-color: #D3D3D3;"
+                            >
+                            </div>
+                            <span
+                                class="mt-1 text-[11px] text-[#344665] font-medium"
+                                >Gris Claro</span
+                            >
+                            <span class="text-[10px] text-[#344665]/70"
+                                >Pantone 427 C</span
+                            >
                         </div>
-                        <!-- 586C85 -->
-                        <div
-                            class="w-10 h-10 rounded-full"
-                            style="background-color: #586C85;"
-                        >
+
+                        <!-- Azul Niebla -->
+                        <div class="flex flex-col items-center">
+                            <div
+                                class="w-11 h-11 rounded-full border border-gray-300"
+                                style="background-color: #344665;"
+                            >
+                            </div>
+                            <span
+                                class="mt-1 text-[11px] text-[#344665] font-medium"
+                                >Azul Niebla</span
+                            >
+                            <span class="text-[10px] text-[#344665]/70"
+                                >Pantone 5445 C</span
+                            >
                         </div>
-                        <!-- 5F432D -->
-                        <div
-                            class="w-10 h-10 rounded-full"
-                            style="background-color: #5F432D;"
-                        >
-                        </div>
-                        <!-- EBA341 -->
-                        <div
-                            class="w-10 h-10 rounded-full"
-                            style="background-color: #EBA341;"
-                        >
-                        </div>
-                        <!-- ABA245 -->
-                        <div
-                            class="w-10 h-10 rounded-full"
-                            style="background-color: #ABA245;"
-                        >
-                        </div>
-                        <!-- D9DFDB -->
-                        <div
-                            class="w-10 h-10 rounded-full"
-                            style="background-color: #D9DFDB;"
-                        >
-                        </div>
-                        <!-- 7B7B7B -->
-                        <div
-                            class="w-10 h-10 rounded-full"
-                            style="background-color: #7B7B7B;"
-                        >
-                        </div>
+                    </div>
+
+                    <div class="text-center text-[12px] px-8 mt-5">
+                        <p class="text-[#344665] font-semibold">
+                            Gris claro exclusivo para el novio 🤍
+                        </p>
                     </div>
                 </div>
             </section>
+
             <section class="sticky top-0 z-[11] bg-[#FFFDFB]">
                 <div class="flex flex-col items-center justify-center">
                     <div class="w-px h-32 bg-[#344665] mb-5"></div>
@@ -732,23 +752,40 @@ import Form from "../components/aylin/form.astro";
                         especial, pero sabemos que algunos querrán darnos más.
                     </p>
                 </div>
-                <div class="mt-10 pb-36">
-                    <!-- Bloque 1 -->
+
+                <div class="mt-10 pb-36 flex flex-col items-center gap-12">
+                    <!-- Bloque 1: Liverpool -->
                     <div class="flex flex-col items-center justify-center">
                         <img
                             src={liver.src}
-                            alt="Logotipo liverpool"
-                            class="w-40"
+                            alt="Logotipo Liverpool"
+                            class="w-32"
                         />
                         <a
                             href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51655724"
-                            class="bg-[#344665] px-6 py-2 mt-3 poppins text-xs"
+                            class="bg-[#344665] text-white px-6 py-2 mt-3 poppins text-xs"
+                        >
+                            Regalar
+                        </a>
+                    </div>
+
+                    <!-- Bloque 2: Palacio de Hierro -->
+                    <div class="flex flex-col items-center justify-center">
+                        <img
+                            src={palacio.src}
+                            alt="Logotipo Palacio de Hierro"
+                            class="w-40"
+                        />
+                        <a
+                            href="https://www.elpalaciodehierro.com/on/demandware.store/Sites-palacio-MX-Site/es_MX/Celebra-List?list=401835"
+                            class="bg-[#344665] text-white px-6 py-2 mt-3 poppins text-xs"
                         >
                             Regalar
                         </a>
                     </div>
                 </div>
             </section>
+
             <!-- Sección 1: normal (relative), se ve completa -->
             <section class="relative z-[11] bg-[#FFFDFB]">
                 <div class="flex flex-col items-center justify-center">
