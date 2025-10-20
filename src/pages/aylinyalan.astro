@@ -621,7 +621,6 @@ import palacio from "../images/aylin/palacio.png";
                 </div>
             </section>
 
-            
             <section class="sticky top-0 z-[10] bg-[#FFFDFB]">
                 <img src={foto4.src} alt="" />
             </section>
@@ -671,11 +670,12 @@ import palacio from "../images/aylin/palacio.png";
                         Colores no permitidos
                     </p>
 
+                    
                     <div
-                        class="grid grid-cols-3 justify-items-center gap-x-4 gap-y-5 max-w-xs mx-auto px-6 rounded border-b pb-5"
+                        class="grid grid-cols-4 justify-items-center gap-x-4 gap-y-5 max-w-xs mx-auto px-4 py-4 "
                     >
                         <!-- Gris Oxford -->
-                        <div class="flex flex-col items-center">
+                        <div class="flex flex-col items-center text-center">
                             <div
                                 class="w-11 h-11 rounded-full border border-gray-400"
                                 style="background-color: #4B4B4B;"
@@ -683,15 +683,16 @@ import palacio from "../images/aylin/palacio.png";
                             </div>
                             <span
                                 class="mt-1 text-[11px] text-[#344665] font-medium"
-                                >Gris Oxford</span
                             >
-                            <span class="text-[10px] text-[#344665]/70"
-                                >Pantone 425 C</span
-                            >
+                                Gris Oxford
+                            </span>
+                            <span class="text-[10px] text-[#344665]/70">
+                                Pantone 425 C
+                            </span>
                         </div>
 
                         <!-- Gris Claro -->
-                        <div class="flex flex-col items-center">
+                        <div class="flex flex-col items-center text-center">
                             <div
                                 class="w-11 h-11 rounded-full border border-gray-300"
                                 style="background-color: #D3D3D3;"
@@ -699,15 +700,16 @@ import palacio from "../images/aylin/palacio.png";
                             </div>
                             <span
                                 class="mt-1 text-[11px] text-[#344665] font-medium"
-                                >Gris Claro</span
                             >
-                            <span class="text-[10px] text-[#344665]/70"
-                                >Pantone 427 C</span
-                            >
+                                Gris Claro
+                            </span>
+                            <span class="text-[10px] text-[#344665]/70">
+                                Pantone 427 C
+                            </span>
                         </div>
 
                         <!-- Azul Niebla -->
-                        <div class="flex flex-col items-center">
+                        <div class="flex flex-col items-center text-center">
                             <div
                                 class="w-11 h-11 rounded-full border border-gray-300"
                                 style="background-color: #586C85;"
@@ -715,145 +717,174 @@ import palacio from "../images/aylin/palacio.png";
                             </div>
                             <span
                                 class="mt-1 text-[11px] text-[#586C85] font-medium"
-                                >Azul Niebla</span
                             >
-                            <span class="text-[10px] text-[#586C85]/70"
-                                >Pantone 7545 C</span
+                                Azul Niebla
+                            </span>
+                            <span class="text-[10px] text-[#586C85]/70">
+                                Pantone 7545 C
+                            </span>
+                        </div>
+
+                        <!-- Beige -->
+                        <div class="flex flex-col items-center text-center">
+                            <div
+                                class="w-11 h-11 rounded-full border "
+                                style="background-color: #D8CAB4;"
+                            ></div>
+                                
+                                <span
+                                    class="mt-1 text-[11px] text-[#927E65] font-medium"
+                                >
+                                    Beige
+                                </span>
+                                <span class="text-[10px] text-[#927E65]/70">
+                                    Pantone 468 C
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="text-center text-[12px] px-8 mt-5">
+                            <p class="text-[#344665] font-semibold">
+                                Gris claro exclusivo para el novio 🤍
+                            </p>
+                            <p class="text-[#344665] font-semibold">
+                                Blanco exclusivo para la novia 🤍
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="sticky top-0 z-[11] bg-[#FFFDFB]">
+                    <div class="flex flex-col items-center justify-center">
+                        <div class="w-px h-32 bg-[#344665] mb-5"></div>
+                        <h2
+                            class="text-6xl/8 titulos text-[#344665] text-center px-10 pt-5"
+                        >
+                            Mesa de regalos
+                        </h2>
+                        <p
+                            class="text-[#344665] text-center px-12 mt-8 poppins text-xs"
+                        >
+                            Su presencia es el regalo más valioso en nuestro día
+                            especial, pero sabemos que algunos querrán darnos
+                            más.
+                        </p>
+                    </div>
+
+                    <div class="mt-10 pb-36 flex flex-col items-center gap-12">
+                        <!-- Bloque 1: Liverpool -->
+                        <div class="flex flex-col items-center justify-center">
+                            <img
+                                src={liver.src}
+                                alt="Logotipo Liverpool"
+                                class="w-32"
+                            />
+                            <p class="text-gray-500 text-xs">
+                                N evento: 51655724
+                            </p>
+                            <a
+                                href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51655724"
+                                class="bg-[#344665] text-white px-6 py-2 mt-3 poppins text-xs"
                             >
+                                Regalar
+                            </a>
+                        </div>
+
+                        <!-- Bloque 2: Palacio de Hierro -->
+                        <div class="flex flex-col items-center justify-center">
+                            <img
+                                src={palacio.src}
+                                alt="Logotipo Palacio de Hierro"
+                                class="w-40"
+                            />
+                            <p class="text-gray-500 text-xs">
+                                N evento: 401835
+                            </p>
+                            <a
+                                href="https://www.elpalaciodehierro.com/on/demandware.store/Sites-palacio-MX-Site/es_MX/Celebra-List?list=401835"
+                                class="bg-[#344665] text-white px-6 py-2 mt-3 poppins text-xs"
+                            >
+                                Regalar
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección 1: normal (relative), se ve completa -->
+                <section class="relative z-[11] bg-[#FFFDFB]">
+                    <div class="flex flex-col items-center justify-center">
+                        <img src={hospedaje.src} alt="Fotos del hospedaje" />
+                        <h2
+                            class="text-6xl/10 titulos text-[#344665] text-center px-10 pt-10"
+                        >
+                            Sugerencia de hospedaje
+                        </h2>
+                        <p class="text-[#344665] poppins mt-10 mb-2">
+                            Hospedaje en Finca La Fortaleza
+                        </p>
+                        <div class="w-px h-20 bg-[#344665]"></div>
+                        <p
+                            class="text-xs text-[#344665] text-center mt-2 px-10"
+                        >
+                            Sabemos que algunos vienen de lejos para celebrar
+                            con nosotros, por eso te ofrecemos la comodidad de
+                            hospedarte a solo unos pasos de la fiesta.
+                        </p>
+
+                        <video
+                            class="w-full max-w-lg mx-auto rounded-lg px-6 mt-10"
+                            muted
+                            src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/aylin-hospedaje-2.mp4"
+                            controls
+                            preload="metadata"
+                            poster="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/aylin-caban%CC%83as.jpeg"
+                        >
+                            Tu navegador no soporta la etiqueta de video.
+                        </video>
+                        <div class="w-px h-32 bg-[#344665] mb-5"></div>
+                    </div>
+                </section>
+
+                <!-- Sección 2: el header es sticky; el <Form/> queda debajo y genera el scroll -->
+                <section class="bg-[#FFFDFB]">
+                    <!-- HEADER STICKY -->
+                    <div class="sticky top-0 z-[12] bg-[#FFFDFB]">
+                        <img
+                            src={foto7.src}
+                            alt="Confirmar asistencia"
+                            class="w-full mb-6"
+                        />
+                        <div
+                            class="flex flex-col items-center justify-center px-6"
+                        >
+                            <h2
+                                class="text-5xl/8 titulos text-[#344665] text-center px-10 mb-4"
+                            >
+                                Confirma tu asistencia
+                            </h2>
+                            <p
+                                class="text-[#344665] text-center px-10 mb-6 text-xs"
+                            >
+                                Para ayudarnos a planear mejor nuestro día
+                                especial, por favor contesta este pequeño
+                                formulario de Google y confirma tu asistencia.
+                            </p>
                         </div>
                     </div>
 
-                    <div class="text-center text-[12px] px-8 mt-5">
-                        <p class="text-[#344665] font-semibold">
-                            Gris claro exclusivo para el novio 🤍
-                        </p>
-                        <p class="text-[#344665] font-semibold">
-                            Blanco exclusivo para la novia 🤍
-                        </p>
+                    <!-- CONTENIDO QUE SCROLLEA BAJO EL STICKY -->
+                    <div class="sticky top-0 bg-white overflow-y-auto z-50">
+                        <Form />
                     </div>
-                </div>
-            </section>
-
-            <section class="sticky top-0 z-[11] bg-[#FFFDFB]">
-                <div class="flex flex-col items-center justify-center">
-                    <div class="w-px h-32 bg-[#344665] mb-5"></div>
-                    <h2
-                        class="text-6xl/8 titulos text-[#344665] text-center px-10 pt-5"
-                    >
-                        Mesa de regalos
-                    </h2>
-                    <p
-                        class="text-[#344665] text-center px-12 mt-8 poppins text-xs"
-                    >
-                        Su presencia es el regalo más valioso en nuestro día
-                        especial, pero sabemos que algunos querrán darnos más.
+                </section>
+                <footer
+                    class="relative z-[14] text-[#344665] py-10 bg-[#FFFDFB]"
+                >
+                    <p class="titulos text-3xl text-center">
+                        Con cariño Aylin y Alan 💍
                     </p>
-                </div>
-
-                <div class="mt-10 pb-36 flex flex-col items-center gap-12">
-                    <!-- Bloque 1: Liverpool -->
-                    <div class="flex flex-col items-center justify-center">
-                        <img
-                            src={liver.src}
-                            alt="Logotipo Liverpool"
-                            class="w-32"
-                        />
-                          <p class="text-gray-500 text-xs">N evento: 51655724</p>
-                        <a
-                            href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51655724"
-                            class="bg-[#344665] text-white px-6 py-2 mt-3 poppins text-xs"
-                        >
-                            Regalar
-                        </a>
-                    </div>
-
-                    <!-- Bloque 2: Palacio de Hierro -->
-                    <div class="flex flex-col items-center justify-center">
-                        <img
-                            src={palacio.src}
-                            alt="Logotipo Palacio de Hierro"
-                            class="w-40"
-                        />
-                         <p class="text-gray-500 text-xs">N evento: 401835</p>
-                        <a
-                            href="https://www.elpalaciodehierro.com/on/demandware.store/Sites-palacio-MX-Site/es_MX/Celebra-List?list=401835"
-                            class="bg-[#344665] text-white px-6 py-2 mt-3 poppins text-xs"
-                        >
-                            Regalar
-                        </a>
-                       
-                    </div>
-                </div>
+                </footer>
             </section>
-
-            <!-- Sección 1: normal (relative), se ve completa -->
-            <section class="relative z-[11] bg-[#FFFDFB]">
-                <div class="flex flex-col items-center justify-center">
-                    <img src={hospedaje.src} alt="Fotos del hospedaje" />
-                    <h2
-                        class="text-6xl/10 titulos text-[#344665] text-center px-10 pt-10"
-                    >
-                        Sugerencia de hospedaje
-                    </h2>
-                    <p class="text-[#344665] poppins mt-10 mb-2">
-                        Hospedaje en Finca La Fortaleza
-                    </p>
-                    <div class="w-px h-20 bg-[#344665]"></div>
-                    <p class="text-xs text-[#344665] text-center mt-2 px-10">
-                        Sabemos que algunos vienen de lejos para celebrar con
-                        nosotros, por eso te ofrecemos la comodidad de
-                        hospedarte a solo unos pasos de la fiesta.
-                    </p>
-
-                    <video
-                        class="w-full max-w-lg mx-auto rounded-lg px-6 mt-10"
-                        muted
-                        src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/aylin-hospedaje-2.mp4"
-                        controls
-                        preload="metadata"
-                        poster="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/aylin-caban%CC%83as.jpeg"
-                    >
-                        Tu navegador no soporta la etiqueta de video.
-                    </video>
-                    <div class="w-px h-32 bg-[#344665] mb-5"></div>
-                </div>
-            </section>
-
-            <!-- Sección 2: el header es sticky; el <Form/> queda debajo y genera el scroll -->
-            <section class="bg-[#FFFDFB]">
-                <!-- HEADER STICKY -->
-                <div class="sticky top-0 z-[12] bg-[#FFFDFB]">
-                    <img
-                        src={foto7.src}
-                        alt="Confirmar asistencia"
-                        class="w-full mb-6"
-                    />
-                    <div class="flex flex-col items-center justify-center px-6">
-                        <h2
-                            class="text-5xl/8 titulos text-[#344665] text-center px-10 mb-4"
-                        >
-                            Confirma tu asistencia
-                        </h2>
-                        <p
-                            class="text-[#344665] text-center px-10 mb-6 text-xs"
-                        >
-                            Para ayudarnos a planear mejor nuestro día especial,
-                            por favor contesta este pequeño formulario de Google
-                            y confirma tu asistencia.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- CONTENIDO QUE SCROLLEA BAJO EL STICKY -->
-                <div class="sticky top-0 bg-white overflow-y-auto z-50">
-                    <Form />
-                </div>
-            </section>
-            <footer class="relative z-[14] text-[#344665] py-10 bg-[#FFFDFB]">
-                <p class="titulos text-3xl text-center">
-                    Con cariño Aylin y Alan 💍
-                </p>
-            </footer>
         </div>
     </body>
 </html>
