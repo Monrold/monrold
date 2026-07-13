@@ -1,0 +1,222 @@
+---
+import fondoPadres from "../../images/itzelydanao/fondo-2.jpg";
+---
+
+<style>
+    .parents-wrapper {
+        max-width: 26rem;
+        margin: 0 auto;
+        text-align: center;
+
+        background: #F4EFE7;
+
+        padding: 2.5rem 1.75rem;
+
+        opacity: 0;
+        transform: translateY(40px);
+        filter: blur(8px);
+
+        transition:
+            opacity .8s ease,
+            transform .8s cubic-bezier(.22,.61,.36,1),
+            filter .8s ease;
+    }
+
+    .parents-wrapper.visible {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+
+    .parents-title {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: .8s ease;
+    }
+
+    .parents-wrapper.visible .parents-title {
+        opacity: 1;
+        transform: none;
+    }
+
+    .parents-block {
+        opacity: 0;
+        transform: translateY(25px);
+        transition: .8s ease;
+    }
+
+    .parents-wrapper.visible .parents-block {
+        opacity: 1;
+        transform: none;
+    }
+
+    .parents-bride {
+        transition-delay: .2s;
+    }
+
+    .parents-groom {
+        transition-delay: .4s;
+    }
+
+    .separator {
+        width: 60px;
+        height: 1px;
+        background: #967F59;
+
+        margin: 1.75rem auto;
+
+        transform: scaleX(0);
+        transform-origin: center;
+
+        transition: transform .8s ease .3s;
+    }
+
+    .parents-wrapper.visible .separator {
+        transform: scaleX(1);
+    }
+</style>
+
+<section class="relative overflow-hidden py-10">
+
+    <img
+        src={fondoPadres.src}
+        alt=""
+        class="absolute inset-0 h-full w-full object-cover"
+    />
+
+    <div
+        class="absolute inset-x-0 top-0 h-40 z-[1]
+        bg-gradient-to-b
+        from-[#F4EFE7]
+        via-[#F4EFE7]/90
+        to-transparent">
+    </div>
+
+    <div class="relative z-10 px-5">
+
+        <div class="parents-wrapper shadow-[0_16px_35px_rgba(68,16,21,.08)]">
+
+            <h2
+                class="parents-title font-title italic text-2xl leading-snug text-[#441015]">
+
+                Con la bendición de Dios
+                <br />
+                y de nuestros padres
+
+            </h2>
+
+            <!-- Padres novia -->
+
+            <div class="parents-block parents-bride mt-8">
+
+                <div class="space-y-2">
+
+                    <div>
+
+                        
+
+                        <h3 class="uppercase tracking-[.05em] text-[#582419] text-sm">
+
+                            Yazmin Itzel Obregón Sánchez
+
+                        </h3>
+
+                    </div>
+
+                    <div>
+
+                     
+                        <h3 class="uppercase tracking-[.05em] text-[#582419] text-sm">
+
+                            Pedro Jiménez Ceballos
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <p class="font-title italic text-xl text-[#967F59] mt-5">
+
+                    Padres de la novia
+
+                </p>
+
+            </div>
+
+            <div class="separator"></div>
+
+            <!-- Padres novio -->
+
+            <div class="parents-block parents-groom">
+
+                <div class="space-y-3">
+
+                    <div>
+
+                       
+
+                        <h3 class="uppercase tracking-[.05em] text-[#582419] text-sm">
+
+                            Rocío Roldán Rosillo
+
+                        </h3>
+
+                    </div>
+
+                    <div>
+
+                      
+
+                        <h3 class="uppercase tracking-[.05em] text-[#582419] text-sm">
+
+                            Isidro Alfonso Martínez Velázquez
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <p class="font-title italic text-xl text-[#967F59] mt-5">
+
+                    Padres del novio
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script is:inline>
+const parents = document.querySelector(".parents-wrapper");
+
+if (parents) {
+
+    const observer = new IntersectionObserver(
+
+        ([entry]) => {
+
+            if (entry.isIntersecting) {
+
+                parents.classList.add("visible");
+                observer.disconnect();
+
+            }
+
+        },
+
+        {
+            threshold: .3
+        }
+
+    );
+
+    observer.observe(parents);
+
+}
+</script>

@@ -1,0 +1,159 @@
+---
+import look1 from "../../images/itzelydanao/look-1.jpg";
+import look2 from "../../images/itzelydanao/look-2.jpg";
+import look3 from "../../images/itzelydanao/look-3.jpg";
+import look4 from "../../images/itzelydanao/look-4.jpg";
+---
+
+<section class="dress-section relative h-[400vh] md:hidden block">
+    <div class="sticky top-0 h-screen overflow-hidden">
+        <div id="dress-track" class="flex h-full will-change-transform">
+            <!-- Banner 1 -->
+
+            <article class="panel bg-[#F8F6F2] relative">
+                <h3 class="absolute z-10 text-white text-2xl">
+                    Ideas de Loook
+                </h3>
+                 <div class="flex items-center gap-3 mt-12 absolute">
+                                    <div class="w-16 h-px bg-[#C8A76A]"></div>
+
+                                    <div
+                                        class="w-2 h-2 rotate-45 border border-[#C8A76A]"
+                                    >
+                                    </div>
+
+                                    <div class="w-16 h-px bg-[#C8A76A]"></div>
+                                </div>
+                <div
+                    class="absolute inset-0
+        bg-gradient-to-t
+        from-[#2F0C10]/70
+        via-[#441015]/20
+        to-transparent"
+                >
+                </div>
+
+                <img
+                    class="w-full h-full object-cover"
+                    src={look1.src}
+                    alt=""
+                />
+            </article>
+
+            <!-- Banner 2 -->
+
+            <article
+                class="panel bg-[#C39583] flex items-center justify-center relative"
+            >
+                <div
+                    class="absolute inset-0
+        bg-gradient-to-t
+        from-[#2F0C10]/70
+        via-[#441015]/20
+        to-transparent"
+                >
+                </div>
+                <img
+                    class="w-full h-full object-cover"
+                    src={look2.src}
+                    alt="Ellas"
+                />
+            </article>
+
+            <!-- Banner 3 -->
+
+            <article
+                class="panel bg-[#C39583] flex items-center justify-center relative"
+            >
+                <div
+                    class="absolute inset-0
+        bg-gradient-to-t
+        from-[#2F0C10]/70
+        via-[#441015]/20
+        to-transparent"
+                >
+                </div>
+
+                <img
+                    class="w-full h-full object-cover"
+                    src={look3.src}
+                    alt=""
+                />
+            </article>
+
+            <!-- Banner 4 -->
+
+            <article class="panel bg-[#F4EFE7] relative">
+                <div
+                    class="absolute inset-0
+        bg-gradient-to-t
+        from-[#2F0C10]/80
+        via-[#441015]/20
+        to-transparent"
+                >
+                </div>
+
+                <img
+                    class="w-full h-full object-cover"
+                    src={look4.src}
+                    alt="Ellas"
+                />
+            </article>
+        </div>
+    </div>
+
+    <style>
+        .panel {
+            width: 100vw;
+
+            height: 100vh;
+
+            flex: none;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 3rem;
+
+            font-family: serif;
+        }
+
+        #dress-track {
+            transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+            will-change: transform;
+        }
+    </style>
+
+    <script is:inline>
+        const section = document.querySelector(".dress-section");
+        const track = document.getElementById("dress-track");
+        const panels = [...track.children];
+
+        function updateHorizontal() {
+            if (!section) return;
+
+            const rect = section.getBoundingClientRect();
+
+            // Altura total desplazable
+            const maxScroll = section.offsetHeight - window.innerHeight;
+
+            // Progreso 0 → 1
+            const progress = Math.min(Math.max(-rect.top / maxScroll, 0), 1);
+
+            // Panel al que debe hacer snap
+            const index = Math.round(progress * (panels.length - 1));
+
+            track.style.transform = `translate3d(-${index * window.innerWidth}px,0,0)`;
+        }
+
+        updateHorizontal();
+
+        window.addEventListener("scroll", updateHorizontal);
+
+        window.addEventListener("resize", updateHorizontal);
+    </script>
+</section>
