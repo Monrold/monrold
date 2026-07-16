@@ -1,0 +1,73 @@
+---
+import portada from "../../images/itzelydanao/cantolla.webp";
+---
+
+<section
+    id="cantolla"
+    class="relative h-screen overflow-hidden"
+>
+    <!-- Fondo -->
+    <img
+        src={portada.src}
+        alt="Globos de cantolla"
+        class="absolute inset-0 w-full h-full object-cover "
+    />
+
+    <!-- Velo vino -->
+    <div
+        class="absolute inset-0
+        bg-gradient-to-b
+        from-[#441015]/35
+        via-[#441015]/55
+        to-[#2F0C10]/75"
+    ></div>
+
+    <!-- Contenido -->
+    <div
+        class="relative z-10 h-full flex flex-col items-center justify-center px-8 text-center max-w-md mx-auto"
+    >
+        <p
+            class="uppercase tracking-[.35em] text-xs text-[#C39583] mb-6"
+        >
+            Un momento especial
+        </p>
+
+        <h2
+            class="font-title italic text-5xl leading-tight text-[#F8F6F2]"
+        >
+            Escribe tus mejores deseos
+        </h2>
+
+        <div class="w-20 h-px bg-[#C39583] my-8"></div>
+
+        <p class="text-[#F8F6F2]/90 text-lg leading-relaxed">
+            Lleva un mensaje lleno de cariño para nosotros y
+            <strong>trae tu propio globo de cantolla</strong>
+            para iluminar juntos una noche inolvidable.
+        </p>
+    </div>
+</section>
+
+<script is:inline>
+    const section = document.getElementById("cantolla");
+
+    if (section) {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    section.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                    });
+
+                    observer.disconnect(); // Solo ocurre una vez
+                }
+            },
+            {
+                threshold: 0.3,
+            },
+        );
+
+        observer.observe(section);
+    }
+</script>

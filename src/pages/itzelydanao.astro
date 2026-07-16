@@ -20,9 +20,9 @@ import "../styles/global.css";
 import portada from "../images/itzelydanao/portada-optimizada.jpg";
 import Regresivo from "../components/dan/regresivo.astro";
 import Bendicion from "../components/dan/bendicion.astro";
-import foto2 from "../images/itzelydanao/foto-2.jpg";
-import foto3 from "../images/itzelydanao/foto-3.jpg";
-import foto4 from "../images/itzelydanao/foto-4.jpg";
+import foto2 from "../images/itzelydanao/foto-2.webp";
+import foto3 from "../images/itzelydanao/foto-3.webp";
+import foto4 from "../images/itzelydanao/foto-4.webp";
 import parroquia from "../images/itzelydanao/capilla.webp";
 import recepcion from "../images/itzelydanao/recepcion.webp";
 import Code from "../components/dan/code.astro";
@@ -43,6 +43,7 @@ import color from "../images/itzelydanao/color.svg";
 import zapatilla from "../images/itzelydanao/zapatilla.svg";
 import bolsa from "../images/itzelydanao/bolsa.svg";
 import tenis from "../images/itzelydanao/tacon-y-teni.svg";
+import Cantolla from "../components/dan/cantolla.astro";
 ---
 
 <style>
@@ -356,10 +357,8 @@ import tenis from "../images/itzelydanao/tacon-y-teni.svg";
             >
                 <div
                     class="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-[40px]
-
            shadow-2xl max-w-sm w-full p-8
-
-           flex flex-col items-center text-center "
+           flex flex-col items-center text-center"
                 >
                     <h2
                         class="text-4xl font-semibold mb-4 text-white titulos font-title italic"
@@ -397,7 +396,7 @@ import tenis from "../images/itzelydanao/tacon-y-teni.svg";
             <!-- Audio Oculto -->
             <audio
                 id="background-audio"
-                src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/aylin-cancion-boda.mp3"
+                src="https://pub-c6f56a3478ba4de7a25f81a088d063ba.r2.dev/cancion-danao.mp3"
                 loop
                 muted
                 preload="auto"></audio>
@@ -1447,13 +1446,16 @@ import tenis from "../images/itzelydanao/tacon-y-teni.svg";
                 </article>
             </div>
         </section>
-
         <Code />
-        <Rompehielo />
+        
+        <Cantolla />
+         <Rompehielo />
         <Formulario />
-        <p class="titulos text-l text-center pb-10 block md:hidden bg-[#F8F6F2]">
-            Con cariño Itzel y Danao 💍
-        </p>
+                <p
+                    class="titulos text-l text-center pb-10 block md:hidden bg-[#F8F6F2]"
+                >
+                    Con cariño Itzel y Danao 💍
+                </p>
     </body>
 </html>
 
