@@ -1,59 +1,322 @@
 ---
 import Botonw from "../../components/dan/botonw.astro";
 const invitados = [
-  {
-    boletos: 5,
-    nombres: [
-      "Luis Montaño",
-      "María Montaño",
-      "Ana Montaño",
-      "Carlos Montaño",
-      "Fernanda Montaño",
-    ],
-  },
-
-  {
-    boletos: 3,
-    nombres: [
-      "Juan Hernández",
-      "Rosa Hernández",
-      "Miguel Hernández",
-    ],
-  },
-
-  {
-    boletos: 2,
-    nombres: [
-      "Pedro Gómez",
-      "Laura Gómez",
-    ],
-  },
-
-  // Continúa agregando aquí las demás familias...
+    {
+        boletos: 2,
+        nombres: ["Rocio Roldan"],
+    },
+    {
+        boletos: 4,
+        nombres: ["Aderly Martinez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Hiram Martinez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Juana Rosillo"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Julie Roldan"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Ailin Mendoza"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Eduardo Roldan"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Bismarck Sanchez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Carlos Montaño"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Luis Montaño"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Roman Roldan"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Alfonso Martinez"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Aurelia Velazquez"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Guadalupe Martinez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Emmanuel Martinez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Jesus Alvarado"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Jesus Alvarado Jr"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Andrea Alvarado"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Cuahutemoc Martinez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Victor Martinez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Lorena Martinez"],
+    },
+    {
+        boletos: 3,
+        nombres: ["Liliana Martinez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Daniela Martinez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Mitzi Martinez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Jorge Velazquez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Carlos Velazquez"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Mitzi Rojas"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Ivonne Rojas"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Gerardo Rodriguez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Jose Gonzalez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Rodolfo Hernandez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Francisco Ignorosa"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Ivan Ballesteros"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Luis Mendieta"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Oswaldo Espinoza"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Efrain Mayorga"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Constanza Agis"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Ricardo Aguilar"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Fernanda Ibarra"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Alejandro Figueroa"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Shu buleao"],
+    },
+    {
+        boletos: 3,
+        nombres: ["Jose Rodriguez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Yazmin Obregon"],
+    },
+    {
+        boletos: 4,
+        nombres: ["Pedro Jimenez"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Enedina Sanchez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Joaquin Obregon"],
+    },
+    {
+        boletos: 3,
+        nombres: ["Citlaly Obregon"],
+    },
+    {
+        boletos: 3,
+        nombres: ["Ilse Obregon"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Job Obregon"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Patricia Obregon"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Claudia Rivero"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Monse Rivero"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Michelle Rivero"],
+    },
+    {
+        boletos: 3,
+        nombres: ["Pedro Jimenez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Horacio Victoria Castillo"],
+    },
+    {
+        boletos: 2,
+        nombres: ["José Jimenez"],
+    },
+    {
+        boletos: 3,
+        nombres: ["Cesilia Jimenez"],
+    },
+    {
+        boletos: 3,
+        nombres: ["Irma Jimenez"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Diana Jimenez"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Jeorgina Ceballos"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Belisame Jimenez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Jessica Jimenez"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Eduardo Jimenez"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Brenda Jimenez"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Thelma Cazares"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Aracely Urbina"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Nayeli Estrada"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Jenny Saldivar"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Andre Roriguez"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Erik Bolaños"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Ileana Castillo"],
+    },
+    {
+        boletos: 1,
+        nombres: ["Pamela Jardon"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Patricia Gomez"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Ericka Rendon"],
+    },
+    {
+        boletos: 2,
+        nombres: ["Diana Oritiz"],
+    },
 ];
 ---
 
 <section class="bg-[#F8F6F2] py-20 px-8 block md:hidden">
-
     <div class="max-w-md mx-auto text-center">
-
-        <p
-            class="uppercase tracking-[.35em] text-[#967F59] text-xs"
-        >
+        <p class="uppercase tracking-[.35em] text-[#967F59] text-xs">
             Confirmación
         </p>
 
-        <h2
-            class="font-title italic text-5xl text-[#441015] mt-4"
-        >
+        <h2 class="font-title italic text-5xl text-[#441015] mt-4">
             Confirma tus boletos
         </h2>
 
-        <p
-            class="mt-6 text-[#582419] leading-relaxed"
-        >
-            Ingresa el nombre completo de cualquier integrante de tu familia
-            para consultar el número de boletos asignados.
+        <p class="mt-6 text-[#582419] leading-relaxed">
+            Ingresa tu nombre y primer apellido para consultar el número de
+            boletos asignados.
         </p>
 
         <input
@@ -89,41 +352,31 @@ const invitados = [
             Consultar boletos
         </button>
 
-        <div
-            id="resultado"
-            class="mt-8"
-        ></div>
-        <Botonw />
-
+        <div id="resultado" class="mt-8"></div>
+        <div class="mt-6">
+            <Botonw />
+        </div>
     </div>
-
 </section>
 
 <script define:vars={{ invitados }}>
+    const input = document.getElementById("nombreInvitado");
+    const boton = document.getElementById("btnBuscar");
+    const resultado = document.getElementById("resultado");
 
-const input = document.getElementById("nombreInvitado");
-const boton = document.getElementById("btnBuscar");
-const resultado = document.getElementById("resultado");
+    function buscar(nombre) {
+        const texto = nombre.trim().toLowerCase();
 
-function buscar(nombre){
+        return invitados.find((familia) =>
+            familia.nombres.some((persona) => persona.toLowerCase() === texto),
+        );
+    }
 
-    const texto = nombre.trim().toLowerCase();
+    function mostrarResultado() {
+        const familia = buscar(input.value);
 
-    return invitados.find(familia =>
-        familia.nombres.some(persona =>
-            persona.toLowerCase() === texto
-        )
-    );
-
-}
-
-function mostrarResultado(){
-
-    const familia = buscar(input.value);
-
-    if(!familia){
-
-        resultado.innerHTML = `
+        if (!familia) {
+            resultado.innerHTML = `
             <div class="rounded-3xl border border-red-200 bg-red-50 p-6">
                 <p class="text-red-700 font-semibold">
                     No encontramos ese nombre.
@@ -135,11 +388,10 @@ function mostrarResultado(){
             </div>
         `;
 
-        return;
+            return;
+        }
 
-    }
-
-    resultado.innerHTML = `
+        resultado.innerHTML = `
         <div class="rounded-3xl bg-[#441015] text-white p-8">
 
             <p class="uppercase tracking-[.25em] text-[#C39583] text-xs">
@@ -168,19 +420,13 @@ function mostrarResultado(){
 
         </div>
     `;
-
-}
-
-boton.addEventListener("click", mostrarResultado);
-
-input.addEventListener("keydown",(e)=>{
-
-    if(e.key==="Enter"){
-
-        mostrarResultado();
-
     }
 
-});
+    boton.addEventListener("click", mostrarResultado);
 
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            mostrarResultado();
+        }
+    });
 </script>
