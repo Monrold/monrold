@@ -34,7 +34,7 @@ const whatsappUrl =
 
 // Dominio público del sitio (para la og:image de WhatsApp)
 const SITE = "https://monrold.pages.dev";
-const ogImage = `${SITE}/navidad/og-navidad.jpg`;
+const ogImage = `${SITE}/navidad/og-navidad-familia.jpg`;
 
 // Destellos dorados con posiciones fijas (semilla determinista)
 let s = 23;
@@ -74,16 +74,16 @@ const star = "polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#9d1b24" />
-  <title>Feliz Navidad · Estás invitado</title>
-  <meta name="description" content="Te invitamos a celebrar la Navidad. 25 de diciembre, 7:00 p.m., Calle Vicente Suárez, Ozumbilla." />
-  <meta property="og:title" content="¡Feliz Navidad! Estás invitado" />
+  <title>La familia Montaño Roldán te invita a celebrar la Navidad</title>
+  <meta name="description" content="La familia Montaño Roldán te invita a celebrar la Navidad. 25 de diciembre, 7:00 p.m., Calle Vicente Suárez, Ozumbilla." />
+  <meta property="og:title" content="La familia Montaño Roldán te invita a celebrar la Navidad" />
   <meta property="og:description" content="25 de diciembre · 7:00 p.m. · Calle Vicente Suárez, Ozumbilla" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={`${SITE}/navidad`} />
   <meta property="og:image" content={ogImage} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Invitación de Navidad: 25 de diciembre, 7:00 p.m." />
+  <meta property="og:image:alt" content="La familia Montaño Roldán te invita a celebrar la Navidad" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content={ogImage} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -181,8 +181,9 @@ const star = "polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50
 
         <div class="card-clip">
           <article class="card" aria-label="Invitación">
-            <p class="card-kicker c-line">Te invitamos a celebrar la</p>
-            <h1 class="card-title c-line"><span>Feliz</span><span>Navidad</span></h1>
+            <p class="card-kicker c-line">La familia Montaño Roldán</p>
+            <p class="card-sub c-line">te invita a celebrar la</p>
+            <h1 class="card-title c-line">Navidad</h1>
             <p class="card-stars c-line" aria-hidden="true">✦ &nbsp;✧&nbsp; ✦</p>
             <p class="card-place c-line">Nos vemos en<br />{evento.calle}, {evento.lugar}</p>
             <p class="card-date c-line">25 DICIEMBRE <i>|</i> 7:00 P.M.</p>
@@ -578,10 +579,11 @@ const star = "polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50
       box-shadow: 0 -4px 18px rgba(0,0,0,.18);
       transition: transform 1.2s cubic-bezier(.5, 0, .2, 1) .75s;
     }
-    .card-kicker { font-size: calc(var(--w) * .058); font-weight: 600; letter-spacing: .02em; }
+    .card-kicker { font-size: calc(var(--w) * .047); font-weight: 600; letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; }
+    .card-sub { font-family: "Great Vibes", cursive; font-size: calc(var(--w) * .095); line-height: 1.1; margin-top: calc(var(--w) * .02); color: var(--verde); }
     .card-title {
       font-family: "Cinzel Decorative", serif; font-weight: 700;
-      font-size: calc(var(--w) * .135); line-height: 1.02; margin-top: calc(var(--w) * .03);
+      font-size: calc(var(--w) * .155); line-height: 1.02; margin-top: calc(var(--w) * .005);
       display: flex; flex-direction: column;
     }
     .card-stars { font-size: calc(var(--w) * .045); color: var(--oro); margin: calc(var(--w) * .025) 0; letter-spacing: .3em; }
@@ -627,6 +629,7 @@ const star = "polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50
     .opened .c-line:nth-child(3) { transition-delay: 2.0s; }
     .opened .c-line:nth-child(4) { transition-delay: 2.15s; }
     .opened .c-line:nth-child(5) { transition-delay: 2.3s; }
+    .opened .c-line:nth-child(6) { transition-delay: 2.45s; }
     .opened .santa { animation: santaIn 1s 1.9s cubic-bezier(.3, 1.3, .5, 1) forwards; }
     .opened .cocktail { animation: cocktailIn 1s 2.1s cubic-bezier(.3, 1.3, .5, 1) forwards; }
     .opened .cane { animation: caneIn 1s 2.3s cubic-bezier(.3, 1.3, .5, 1) forwards; }
