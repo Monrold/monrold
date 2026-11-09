@@ -1,0 +1,67 @@
+---
+// Bastón de caramelo, coctel tipo recorte y moño de terciopelo.
+interface Props { kind: "cane" | "cocktail" | "bow" }
+const { kind } = Astro.props;
+---
+{kind === "cane" && (
+  <svg class="cane-art" viewBox="0 0 90 240" aria-hidden="true">
+    <g fill="none" stroke-linecap="round">
+      <path d="M68 230 L68 62 A27 27 0 0 0 14 62 L14 76" stroke="#6e1016" stroke-width="22" />
+      <path d="M68 230 L68 62 A27 27 0 0 0 14 62 L14 76" stroke="#fbf4ea" stroke-width="16" />
+      <path d="M68 230 L68 62 A27 27 0 0 0 14 62 L14 76" stroke="#c8202b" stroke-width="16" stroke-linecap="butt" stroke-dasharray="10 10" />
+      <path d="M63 226 L63 64 A21 21 0 0 0 22 56" stroke="#fff" stroke-width="2.5" opacity=".55" />
+    </g>
+  </svg>
+)}
+{kind === "cocktail" && (
+  <svg class="cocktail-art" viewBox="0 0 160 250" aria-hidden="true">
+    <defs>
+      <pattern id="halftone" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+        <circle cx="2.5" cy="2.5" r="1.3" fill="#111" />
+      </pattern>
+      <linearGradient id="glassG" x1="0" x2="1">
+        <stop offset="0" stop-color="#e9e9e9" /><stop offset=".45" stop-color="#9b9b9b" /><stop offset="1" stop-color="#4a4a4a" />
+      </linearGradient>
+      <linearGradient id="liqG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#d8d8d8" /><stop offset="1" stop-color="#5c5c5c" />
+      </linearGradient>
+    </defs>
+    <!-- contorno blanco tipo sticker -->
+    <g fill="#fff" stroke="#fff" stroke-width="14" stroke-linejoin="round">
+      <path d="M14 28 L146 28 L88 112 Q80 120 72 112 Z" />
+      <path d="M76 112 L84 112 L83 212 L77 212 Z" /><ellipse cx="80" cy="216" rx="40" ry="9" />
+      <path d="M118 6 L74 84" />
+    </g>
+    <path d="M14 28 L146 28 L88 112 Q80 120 72 112 Z" fill="url(#glassG)" opacity=".55" />
+    <path class="liquid" d="M26 40 L134 40 L86 106 Q80 112 74 106 Z" fill="url(#liqG)" />
+    <path d="M26 40 L134 40 L86 106 Q80 112 74 106 Z" fill="url(#halftone)" opacity=".35" />
+    <ellipse cx="80" cy="28" rx="66" ry="7" fill="#f2f2f2" stroke="#3b3b3b" stroke-width="2" />
+    <path d="M76 114 L84 114 L83 212 L77 212 Z" fill="url(#glassG)" stroke="#3b3b3b" stroke-width="1.5" />
+    <ellipse cx="80" cy="216" rx="40" ry="9" fill="url(#glassG)" stroke="#3b3b3b" stroke-width="2" />
+    <path d="M14 28 L146 28 L88 112 Q80 120 72 112 Z" fill="none" stroke="#3b3b3b" stroke-width="2.2" stroke-linejoin="round" />
+    <line x1="118" y1="6" x2="74" y2="84" stroke="#2a2a2a" stroke-width="2.4" />
+    <circle cx="88" cy="60" r="11" fill="#7a7a7a" stroke="#2a2a2a" stroke-width="2" />
+    <circle cx="88" cy="60" r="11" fill="url(#halftone)" opacity=".5" />
+    <circle cx="91" cy="57" r="3.5" fill="#d9d9d9" />
+    <path d="M30 34 L60 92" stroke="#fff" stroke-width="3" opacity=".7" stroke-linecap="round" />
+  </svg>
+)}
+{kind === "bow" && (
+  <svg class="bow-art" viewBox="0 0 200 170" aria-hidden="true">
+    <defs>
+      <linearGradient id="bowG" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#d8434a" /><stop offset=".55" stop-color="#a51e27" /><stop offset="1" stop-color="#6c0f16" />
+      </linearGradient>
+    </defs>
+    <g stroke="#5b0c12" stroke-width="2" stroke-linejoin="round">
+      <path fill="url(#bowG)" d="M94 74 C84 104 70 132 56 160 L74 152 L82 168 C94 136 102 106 104 78 Z" />
+      <path fill="url(#bowG)" d="M106 74 C116 104 130 132 144 160 L126 152 L118 168 C106 136 98 106 96 78 Z" />
+      <path fill="url(#bowG)" d="M100 62 C70 20 18 18 14 52 C10 86 64 92 100 70 Z" />
+      <path fill="url(#bowG)" d="M100 62 C130 20 182 18 186 52 C190 86 136 92 100 70 Z" />
+      <path fill="#6c0f16" stroke="none" opacity=".55" d="M100 64 C80 42 44 38 36 56 C58 50 84 58 100 68 Z" />
+      <path fill="#6c0f16" stroke="none" opacity=".55" d="M100 64 C120 42 156 38 164 56 C142 50 116 58 100 68 Z" />
+      <rect x="86" y="52" width="28" height="28" rx="9" fill="#b9262e" />
+    </g>
+    <path d="M30 40 C40 30 60 30 72 40" fill="none" stroke="#f08a8e" stroke-width="3" opacity=".5" stroke-linecap="round" />
+  </svg>
+)}
