@@ -1,0 +1,51 @@
+---
+// Bola disco original generada con proyección esférica.
+let s = 11;
+const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+const R = 92, cx = 100, cy = 104;
+const rad = (d: number) => (d * Math.PI) / 180;
+const L = [-0.55, -0.6, 0.58];
+const tiles: { d: string; fill: string; flash: boolean; delay: string }[] = [];
+for (let lat = -84; lat < 84; lat += 8.4) {
+  for (let lon = -90; lon < 90; lon += 9) {
+    const pt = (la: number, lo: number) => {
+      const x = cx + R * Math.cos(rad(la)) * Math.sin(rad(lo));
+      const y = cy + R * Math.sin(rad(la));
+      return `${x.toFixed(2)},${y.toFixed(2)}`;
+    };
+    const la = lat + 4.2, lo = lon + 4.5;
+    const n = [Math.cos(rad(la)) * Math.sin(rad(lo)), Math.sin(rad(la)), Math.cos(rad(la)) * Math.cos(rad(lo))];
+    const diff = Math.max(0, n[0] * L[0] + n[1] * L[1] + n[2] * L[2]);
+    const g = Math.min(250, Math.round(40 + diff * 150 + rnd() * 75));
+    const flash = rnd() > 0.88;
+    tiles.push({
+      d: `M${pt(lat, lon)} L${pt(lat, lon + 9)} L${pt(lat + 8.4, lon + 9)} L${pt(lat + 8.4, lon)} Z`,
+      fill: `rgb(${g},${g},${g + 4})`,
+      flash,
+      delay: `${(rnd() * 3).toFixed(2)}s`,
+    });
+  }
+}
+const sparkle = "M0 -14 L3 -3 L14 0 L3 3 L0 14 L-3 3 L-14 0 L-3 -3 Z";
+---
+<svg class="disco-art" viewBox="0 0 200 200" aria-hidden="true">
+  <defs>
+    <radialGradient id="discoShade" cx="35%" cy="32%" r="75%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".25" />
+      <stop offset=".55" stop-color="#000" stop-opacity="0" />
+      <stop offset="1" stop-color="#000" stop-opacity=".55" />
+    </radialGradient>
+    <clipPath id="discoClip"><circle cx={cx} cy={cy} r={R} /></clipPath>
+  </defs>
+  <line x1="100" y1="0" x2="100" y2="14" stroke="#cfcfcf" stroke-width="2" />
+  <circle cx={cx} cy={cy} r={R} fill="#2b2b2e" />
+  <g clip-path="url(#discoClip)" stroke="#2a2a2d" stroke-width=".7">
+    {tiles.map((t) => <path d={t.d} fill={t.fill} class={t.flash ? "tile-flash" : undefined} style={t.flash ? `animation-delay:${t.delay}` : undefined} />)}
+  </g>
+  <circle cx={cx} cy={cy} r={R} fill="url(#discoShade)" />
+  <g fill="#fff">
+    <path class="disco-spark" d={sparkle} transform="translate(64 66)" />
+    <path class="disco-spark s2" d={sparkle} transform="translate(132 132) scale(.7)" />
+    <path class="disco-spark s3" d={sparkle} transform="translate(150 70) scale(.55)" />
+  </g>
+</svg>
