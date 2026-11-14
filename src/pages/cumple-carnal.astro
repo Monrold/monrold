@@ -1,0 +1,520 @@
+---
+/*
+|--------------------------------------------------------------------------
+| Card de cumpleaños - "Feliz cumpleaños, carnal" (tema GSX-R 600, año 2000)
+|--------------------------------------------------------------------------
+| Azul #0b3fa8   Azul osc. #06205a   Blanco #ffffff
+| Asfalto #121419   Rojo #e2231a   Amarillo #ffd400
+|--------------------------------------------------------------------------
+*/
+import "@fontsource/bungee/400.css";
+import "@fontsource/squada-one/400.css";
+import Moto from "../components/cumple-carnal/Moto.astro";
+
+// Dominio público del sitio (para la og:image de WhatsApp)
+const SITE = "https://monrold.pages.dev";
+const ogImage = `${SITE}/cumple-carnal/og-cumple-carnal.jpg`;
+const titulo = "¡Feliz cumpleaños, carnal!";
+
+// Marcas del tacómetro (x1000 rpm)
+const marks = Array.from({ length: 17 }, (_, i) => {
+  const a = ((-225 + (i / 16) * 270) * Math.PI) / 180;
+  return {
+    i,
+    x1: +(60 + Math.cos(a) * 46).toFixed(2), y1: +(60 + Math.sin(a) * 46).toFixed(2),
+    x2: +(60 + Math.cos(a) * (i % 2 ? 41 : 38)).toFixed(2), y2: +(60 + Math.sin(a) * (i % 2 ? 41 : 38)).toFixed(2),
+    tx: +(60 + Math.cos(a) * 30).toFixed(2), ty: +(60 + Math.sin(a) * 30 + 3).toFixed(2),
+  };
+});
+// Zona roja: 14,000 a 16,000 rpm
+const arc = (from: number, to: number, r: number) => {
+  const a1 = ((-225 + (from / 16) * 270) * Math.PI) / 180;
+  const a2 = ((-225 + (to / 16) * 270) * Math.PI) / 180;
+  return `M${60 + Math.cos(a1) * r} ${60 + Math.sin(a1) * r} A${r} ${r} 0 0 1 ${60 + Math.cos(a2) * r} ${60 + Math.sin(a2) * r}`;
+};
+const redZone = arc(14, 16, 44);
+---
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#06205a" />
+  <title>{titulo}</title>
+  <meta name="description" content="Te llegó un regalo. Abre el sobre y arráncale." />
+  <meta property="og:title" content={titulo} />
+  <meta property="og:description" content="Te llegó un regalo 🏍️ Abre el sobre y arráncale." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={`${SITE}/cumple-carnal`} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={titulo} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={ogImage} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preload" as="image" href="/cumple-carnal/kit-de-juntas.jpg" />
+</head>
+
+<body>
+  <main id="app">
+    <!-- ============ HERO / SOBRE ============ -->
+    <section class="hero" id="hero">
+      <div class="speed" aria-hidden="true">
+        {Array.from({ length: 14 }, (_, i) => (
+          <span style={`top:${(i * 7.3 + 3) % 100}%;animation-delay:${-(i * 0.37) % 2}s;width:${30 + ((i * 37) % 50)}%`}></span>
+        ))}
+      </div>
+      <div class="livery" aria-hidden="true"><i></i><i></i><i></i></div>
+
+      <header class="head">
+        <p class="kicker">Para el más rápido de la cuadra</p>
+        <h1 class="title"><span>¡Feliz</span><span>cumpleaños,</span><span class="carnal">carnal!</span></h1>
+      </header>
+
+      <div class="envelope" id="envelope">
+        <svg class="env-back" viewBox="0 0 100 68" preserveAspectRatio="none" aria-hidden="true">
+          <rect width="100" height="68" rx="1.5" fill="#06205a" />
+        </svg>
+        <svg class="env-flap" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 0 L100 0 L52.5 38 Q50 40 47.5 38 Z" fill="#164fc4" />
+          <path d="M8 0 L50 33 L92 0" fill="none" stroke="#fff" stroke-width="2.2" />
+          <path d="M14 0 L50 28.5 L86 0" fill="none" stroke="#e2231a" stroke-width="1" />
+        </svg>
+
+        <div class="card-clip">
+          <div class="card" aria-hidden="true">
+            <p>TU REGALO</p>
+            <span>🎁</span>
+          </div>
+        </div>
+
+        <svg class="env-pocket" viewBox="0 0 100 68" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="pocketG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#1550c9" /><stop offset="1" stop-color="#0b3fa8" />
+            </linearGradient>
+          </defs>
+          <path d="M0 0 L50 37 L100 0 L100 68 L0 68 Z" fill="url(#pocketG)" />
+          <path d="M0 50 L100 30 L100 40 L0 60 Z" fill="#fff" opacity=".95" />
+          <path d="M0 61.5 L100 41.5 L100 43.5 L0 63.5 Z" fill="#e2231a" />
+          <path d="M0 0 L50 37 L100 0" stroke="#2f6bea" stroke-width=".6" fill="none" />
+        </svg>
+        <p class="env-tag" aria-hidden="true">GSX-R 600 · 2000</p>
+
+        <button class="start" id="start" type="button" aria-label="Abrir el sobre">
+          <span class="start-ring" aria-hidden="true"></span>
+          <span class="start-face">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v8M6.3 6.8a8 8 0 1 0 11.4 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" /></svg>
+            <b>START</b>
+          </span>
+        </button>
+      </div>
+
+      <p class="hint">Da click para abrir el sobre<br />y ver tu regalo</p>
+
+      <!-- Regalo revelado -->
+      <figure class="gift" id="gift">
+        <img src="/cumple-carnal/kit-de-juntas.jpg" width="900" height="1046" alt="Tu regalo de cumpleaños: un kit de juntas para la GSX-R 600" />
+        <figcaption>Para que tu nave ya no tire aceite 🛢️</figcaption>
+      </figure>
+
+      <div class="moto-run" aria-hidden="true"><Moto /></div>
+
+      <a class="scroll-hint" href="#ficha" aria-label="Ver más">
+        <span>Desliza</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9 L12 15 L18 9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></svg>
+      </a>
+    </section>
+
+    <!-- ============ FICHA TÉCNICA ============ -->
+    <section class="ficha" id="ficha">
+      <div class="flag" aria-hidden="true"></div>
+      <h2 class="sec-title reveal">Ficha técnica<br /><small>de tu regalo</small></h2>
+      <dl class="specs reveal">
+        <div><dt>Modelo</dt><dd>Kit de juntas</dd></div>
+        <div><dt>Compatible con</dt><dd>GSX-R 600 · 2000</dd></div>
+        <div><dt>Potencia extra</dt><dd>+0 HP</dd></div>
+        <div><dt>Fugas de aceite</dt><dd>0 (ahora sí)</dd></div>
+        <div><dt>Mano de obra</dt><dd>Corre por tu cuenta</dd></div>
+        <div><dt>Garantía</dt><dd>Hasta la próxima rodada</dd></div>
+      </dl>
+      <div class="moto-big reveal-zoom"><Moto /></div>
+      <p class="deseo reveal">Que este año vaya a puro cambio arriba, sin fugas, sin multas y con la rodilla al piso. ¡Salud, carnal!</p>
+      <button class="btn-rev reveal" id="rev" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v8M6.3 6.8a8 8 0 1 0 11.4 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></svg>
+        Acelerar otra vez
+      </button>
+      <p class="firma reveal">Con cariño y aceite 10W-40</p>
+    </section>
+  </main>
+
+  <!-- Tacómetro flotante -->
+  <div class="tach" id="tach" aria-hidden="true">
+    <svg viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="56" fill="#0d0f13" stroke="#c9ced4" stroke-width="3" />
+      <circle cx="60" cy="60" r="52" fill="url(#tachBg)" />
+      <defs>
+        <radialGradient id="tachBg"><stop offset="0" stop-color="#1b2a4d" /><stop offset="1" stop-color="#0a0f1c" /></radialGradient>
+      </defs>
+      <path d={redZone} fill="none" stroke="#e2231a" stroke-width="6" />
+      {marks.map((m) => (
+        <g>
+          <line x1={m.x1} y1={m.y1} x2={m.x2} y2={m.y2} stroke={m.i >= 14 ? "#ff4d42" : "#fff"} stroke-width={m.i % 2 ? 1.2 : 2.2} />
+          {m.i % 2 === 0 && <text x={m.tx} y={m.ty} text-anchor="middle" font-size="8" fill={m.i >= 14 ? "#ff4d42" : "#fff"} font-family="Squada One, sans-serif">{m.i}</text>}
+        </g>
+      ))}
+      <text x="60" y="84" text-anchor="middle" font-size="6.5" fill="#9fb3d9" font-family="Squada One, sans-serif" letter-spacing=".5">x1000 r/min</text>
+      <text x="60" y="98" text-anchor="middle" font-size="11" fill="#ffd400" font-family="Squada One, sans-serif" id="tachNum">0</text>
+      <g id="needle" style="transform-origin:60px 60px;transform:rotate(-225deg)">
+        <path d="M60 57.5 L104 60 L60 62.5 Z" fill="#ff6a1a" />
+      </g>
+      <circle cx="60" cy="60" r="6" fill="#222" stroke="#c9ced4" stroke-width="1.5" />
+      <circle cx="96" cy="26" r="4" fill="#3a0d0b" id="shiftLight" />
+    </svg>
+  </div>
+
+  <audio id="motor" src="/cumple-carnal/gsxr600.mp3" preload="auto"></audio>
+
+  <script>
+    const root = document.documentElement;
+    const hero = document.getElementById("hero")!;
+    const start = document.getElementById("start")!;
+    const envelope = document.getElementById("envelope")!;
+    const tach = document.getElementById("tach")!;
+    const needle = document.getElementById("needle")!;
+    const tachNum = document.getElementById("tachNum")!;
+    const shiftLight = document.getElementById("shiftLight")!;
+    const audio = document.getElementById("motor") as HTMLAudioElement;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    root.classList.add("locked");
+    window.scrollTo(0, 0);
+
+    // Curva de rpm, igual a la del audio sintetizado (segundo, rpm)
+    const K: [number, number][] = [
+      [0, 0], [0.05, 1350], [0.6, 1300], [0.75, 7500], [1.0, 6000], [1.35, 1500], [1.55, 1400], [1.7, 10500],
+      [2.0, 8000], [2.5, 1700], [2.75, 1500], [2.9, 4000], [3.6, 9500], [4.15, 13800], [4.22, 10000], [4.3, 10300],
+      [4.9, 14000], [4.97, 14000], [5.04, 10800], [5.12, 11100], [5.75, 14000], [5.85, 13500], [6.6, 6000],
+      [7.3, 2200], [7.8, 1400], [8.2, 1350], [8.3, 0],
+    ];
+    function rpmAt(t: number) {
+      if (t <= K[0][0]) return 0;
+      for (let i = 1; i < K.length; i++) {
+        if (t <= K[i][0]) {
+          const [t0, r0] = K[i - 1]; const [t1, r1] = K[i];
+          return r0 + ((r1 - r0) * (t - t0)) / (t1 - t0);
+        }
+      }
+      return 0;
+    }
+
+    let shown = 0;
+    let raf = 0;
+    let t0 = 0;
+    function frame() {
+      // Usa el reloj del audio si está sonando; si no, el reloj del navegador
+      const t = !audio.paused && audio.currentTime > 0 ? audio.currentTime : (performance.now() - t0) / 1000;
+      let r = rpmAt(t);
+      if (r > 13700) r -= (Math.sin(t * 2 * Math.PI * 14) > 0 ? 350 : 0); // limitador
+      shown += (r - shown) * 0.35;
+      needle.style.transform = `rotate(${-225 + (shown / 16000) * 270}deg)`;
+      tachNum.textContent = String(Math.round(shown / 100) * 100);
+      const hot = shown > 12500;
+      shiftLight.setAttribute("fill", hot ? "#ff3b2f" : "#3a0d0b");
+      hero.classList.toggle("shake", hot && !reduce);
+      if (t < 8.4) raf = requestAnimationFrame(frame);
+      else { tach.classList.remove("on"); hero.classList.remove("shake"); }
+    }
+    function arrancar() {
+      cancelAnimationFrame(raf);
+      shown = 0;
+      t0 = performance.now();
+      audio.currentTime = 0;
+      audio.volume = 1;
+      audio.play().catch(() => {});
+      tach.classList.add("on");
+      raf = requestAnimationFrame(frame);
+    }
+
+    // Chispas al abrir
+    function burst(x: number, y: number) {
+      const colors = ["#ffd400", "#ffffff", "#2f6bea", "#e2231a"];
+      for (let i = 0; i < 30; i++) {
+        const p = document.createElement("span");
+        p.className = "burst";
+        const a = (i / 30) * Math.PI * 2 + Math.random() * 0.3;
+        const d = 90 + Math.random() * 140;
+        p.style.left = x + "px";
+        p.style.top = y + "px";
+        p.style.setProperty("--dx", Math.cos(a) * d + "px");
+        p.style.setProperty("--dy", Math.sin(a) * d + "px");
+        p.style.background = colors[i % colors.length];
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 1400);
+      }
+    }
+
+    let opened = false;
+    function abrir() {
+      if (opened) return;
+      opened = true;
+      const r = start.getBoundingClientRect();
+      if (!reduce) burst(r.left + r.width / 2, r.top + r.height / 2);
+      if (navigator.vibrate) navigator.vibrate([40, 60, 40, 60, 120]);
+      arrancar();
+      hero.classList.add("opened");
+      setTimeout(() => {
+        const g = document.getElementById("gift")!.getBoundingClientRect();
+        if (!reduce) burst(g.left + g.width / 2, g.top + g.height / 2);
+      }, reduce ? 0 : 2300);
+      setTimeout(() => root.classList.remove("locked"), reduce ? 200 : 3200);
+    }
+    start.addEventListener("click", abrir);
+    envelope.addEventListener("click", abrir);
+    document.getElementById("rev")!.addEventListener("click", arrancar);
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && !audio.paused) audio.pause();
+    });
+
+    // Aparición al hacer scroll
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+        }
+      },
+      { threshold: 0.2 }
+    );
+    document.querySelectorAll(".reveal, .reveal-zoom").forEach((el) => io.observe(el));
+  </script>
+
+  <style is:global>
+    :root {
+      --azul: #0b3fa8;
+      --azul-osc: #06205a;
+      --azul-claro: #2f6bea;
+      --blanco: #ffffff;
+      --asfalto: #121419;
+      --rojo: #e2231a;
+      --amarillo: #ffd400;
+      --w: min(84vw, 380px, 46vh);
+      --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    @supports (height: 1svh) { :root { --w: min(84vw, 380px, 46svh); } }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--asfalto); -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: "Squada One", "Arial Narrow", sans-serif;
+      color: var(--blanco); background: var(--asfalto);
+      overflow-x: hidden; -webkit-tap-highlight-color: transparent;
+    }
+    html.locked, html.locked body { overflow: hidden; height: 100%; }
+    #app { max-width: 520px; margin: 0 auto; position: relative; box-shadow: 0 0 80px rgba(0,0,0,.6); }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      position: relative; height: 100vh; height: 100svh; min-height: 600px; overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 38%, rgba(47,107,234,.45), transparent 65%),
+        linear-gradient(180deg, #0a1430 0%, var(--asfalto) 70%);
+    }
+    .hero::after { content: ""; position: absolute; inset: 0; background: var(--grain); pointer-events: none; z-index: 1; }
+    .speed { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+    .speed span {
+      position: absolute; right: -60%; height: 2px; border-radius: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35));
+      animation: speed 2s linear infinite;
+    }
+    .livery { position: absolute; left: -20%; right: -20%; bottom: 13%; height: 120px; transform: rotate(-10deg); z-index: 0; }
+    .livery i { display: block; height: 34px; background: var(--azul); margin-bottom: 8px; }
+    .livery i:nth-child(2) { background: var(--blanco); height: 22px; }
+    .livery i:nth-child(3) { background: var(--rojo); height: 8px; }
+    .hero.shake { animation: shake .08s linear infinite; }
+
+    .head { position: absolute; top: max(5.5%, env(safe-area-inset-top)); left: 0; right: 0; text-align: center; z-index: 10; transition: opacity .5s, transform .5s; }
+    .kicker { font-size: 17px; letter-spacing: .28em; text-transform: uppercase; color: var(--amarillo); animation: floatIn 1s .1s both; }
+    .title {
+      font-family: "Bungee", sans-serif; font-weight: 400; line-height: .98; margin-top: 8px;
+      display: flex; flex-direction: column; font-size: clamp(32px, 10.5vw, 50px);
+      text-shadow: 0 4px 0 var(--azul-osc), 0 8px 18px rgba(0,0,0,.5);
+    }
+    .title span { animation: slideIn .7s cubic-bezier(.2,.9,.2,1.2) both; }
+    .title span:nth-child(1) { animation-delay: .2s; }
+    .title span:nth-child(2) { animation-delay: .35s; }
+    .title .carnal { color: var(--amarillo); font-size: 1.3em; animation-delay: .5s; -webkit-text-stroke: 1px #000; }
+
+    .hint {
+      position: absolute; bottom: 6%; left: 0; right: 0; text-align: center; z-index: 10;
+      font-size: 21px; letter-spacing: .12em; text-transform: uppercase; line-height: 1.15;
+      color: var(--blanco); text-shadow: 0 2px 8px rgba(0,0,0,.6);
+      animation: floatIn 1s .8s both, pulse 1.8s 1.8s ease-in-out infinite;
+      transition: opacity .5s;
+    }
+
+    /* Sobre */
+    .envelope {
+      position: absolute; left: 50%; top: 52%;
+      width: var(--w); height: calc(var(--w) * .68);
+      transform: translate(-50%, -50%); perspective: 1200px; z-index: 6; cursor: pointer;
+      animation: envIn 1s .3s cubic-bezier(.2, .8, .2, 1) both;
+    }
+    .env-back, .env-pocket, .env-flap { position: absolute; left: 0; width: 100%; display: block; }
+    .env-back { top: 0; height: 100%; z-index: 1; filter: drop-shadow(0 22px 26px rgba(0,0,0,.6)); }
+    .env-pocket { top: 0; height: 100%; z-index: 4; }
+    .env-flap {
+      top: 0; height: 58.8%; z-index: 5; transform-origin: 50% 0;
+      transition: transform .8s cubic-bezier(.6, 0, .3, 1) .15s, z-index 0s linear .55s;
+      filter: drop-shadow(0 4px 4px rgba(0,0,0,.3));
+    }
+    .env-tag {
+      position: absolute; right: 5%; bottom: 5%; z-index: 5; pointer-events: none;
+      font-family: "Bungee", sans-serif; font-size: calc(var(--w) * .045); color: #fff; opacity: .9;
+    }
+    .card-clip { position: absolute; inset: 0; z-index: 3; clip-path: inset(-400% -10% 0 -10%); }
+    .card {
+      position: absolute; left: 7%; top: 5%; width: 86%; height: 88%;
+      background: #fff var(--grain); color: var(--azul); border-radius: 3px;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 6%;
+      box-shadow: 0 -4px 18px rgba(0,0,0,.25);
+      transition: transform .9s cubic-bezier(.5, 0, .2, 1) .7s;
+    }
+    .card p { font-family: "Bungee", sans-serif; font-size: calc(var(--w) * .08); }
+    .card span { font-size: calc(var(--w) * .12); }
+
+    .start {
+      position: absolute; left: 50%; top: 55%; z-index: 7;
+      width: calc(var(--w) * .3); aspect-ratio: 1; transform: translate(-50%, -50%);
+      border: 0; border-radius: 50%; cursor: pointer; padding: 0;
+      background: radial-gradient(circle at 35% 30%, #ff6b5f, var(--rojo) 50%, #8c0f0a);
+      box-shadow: 0 0 0 5px #1b1e24, 0 0 0 8px #c9ced4, 0 10px 18px rgba(0,0,0,.55), inset 0 -6px 10px rgba(0,0,0,.35);
+      color: #fff; animation: sealIn .7s 1s cubic-bezier(.3, 1.6, .5, 1) both;
+      transition: transform .15s;
+    }
+    .start-face { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
+    .start-face svg { width: 38%; }
+    .start-face b { font-family: "Bungee", sans-serif; font-weight: 400; font-size: calc(var(--w) * .045); letter-spacing: .05em; margin-top: 2px; }
+    .start-ring { position: absolute; inset: -16%; border-radius: 50%; border: 3px solid var(--amarillo); opacity: 0; animation: ring 1.6s 1.8s ease-out infinite; }
+
+    /* Regalo */
+    .gift {
+      position: absolute; left: 50%; top: 50%; z-index: 9;
+      width: min(86vw, 420px, 56svh); transform: translate(-50%, -46%) scale(.2) rotate(-14deg);
+      opacity: 0; pointer-events: none; text-align: center;
+    }
+    .gift img {
+      display: block; width: 100%; height: auto; border-radius: 10px;
+      border: 5px solid #fff; box-shadow: 0 0 0 4px var(--azul), 0 24px 50px rgba(0,0,0,.7);
+    }
+    .gift figcaption {
+      display: inline-block; margin-top: 14px; padding: 6px 14px; border-radius: 6px;
+      background: var(--amarillo); color: #111; font-size: 21px; transform: rotate(-2deg);
+      box-shadow: 0 6px 14px rgba(0,0,0,.45);
+    }
+
+    .moto-run { position: absolute; bottom: 1.5%; left: 0; width: 46%; max-width: 230px; z-index: 11; transform: translateX(-120%); pointer-events: none; }
+    .moto svg, .moto { display: block; width: 100%; height: auto; }
+    .moto .wheel { animation: spin .25s linear infinite; }
+
+    .scroll-hint {
+      position: absolute; left: 50%; bottom: 2.5%; z-index: 14; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; text-decoration: none;
+      font-size: 15px; letter-spacing: .3em; text-transform: uppercase; color: #fff;
+      opacity: 0; pointer-events: none; transition: opacity .8s 3.4s;
+    }
+    .scroll-hint svg { width: 26px; animation: bounce 1.6s ease-in-out infinite; }
+
+    /* Estado abierto */
+    .opened .hint, .opened .head { opacity: 0; transform: translateY(-12px); animation: none; }
+    .opened .start-ring { display: none; }
+    .opened .start { transform: translate(-50%, -50%) scale(.9); filter: brightness(1.2); }
+    .opened .env-flap { transform: rotateX(180deg); z-index: 2; }
+    .opened .card { transform: translateY(-75%); }
+    .opened .envelope { animation: envOut 1s 1.8s cubic-bezier(.6, 0, .4, 1) forwards; cursor: default; pointer-events: none; }
+    .opened .gift { animation: giftIn .9s 2.1s cubic-bezier(.3, 1.4, .5, 1) forwards; }
+    .opened .moto-run { animation: run 2.4s 3s cubic-bezier(.4, 0, .6, 1) forwards; }
+    .opened .scroll-hint { opacity: 1; pointer-events: auto; }
+
+    .burst {
+      position: fixed; z-index: 70; width: 9px; height: 9px; margin: -4px 0 0 -4px; pointer-events: none;
+      clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+      animation: burst 1.3s cubic-bezier(.2, .8, .3, 1) forwards;
+    }
+
+    /* Tacómetro */
+    .tach {
+      position: fixed; top: max(12px, env(safe-area-inset-top)); right: 12px; z-index: 80; width: 96px;
+      opacity: 0; transform: scale(.4) translateY(-30px); pointer-events: none;
+      transition: opacity .4s, transform .5s cubic-bezier(.3, 1.5, .5, 1);
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,.6));
+    }
+    .tach.on { opacity: 1; transform: none; }
+    .tach svg { display: block; width: 100%; }
+    @media (min-width: 560px) { .tach { right: calc(50% - 260px + 12px); } }
+
+    /* ---------- FICHA ---------- */
+    .ficha {
+      position: relative; padding: 64px 22px 80px; text-align: center; overflow: hidden;
+      background: linear-gradient(180deg, var(--azul) 0%, var(--azul-osc) 100%);
+    }
+    .ficha::after { content: ""; position: absolute; inset: 0; background: var(--grain); pointer-events: none; }
+    .flag {
+      position: absolute; top: 0; left: 0; right: 0; height: 24px;
+      background: repeating-conic-gradient(#111 0 25%, #fff 0 50%) 0 0 / 24px 24px;
+    }
+    .sec-title { font-family: "Bungee", sans-serif; font-weight: 400; font-size: 32px; line-height: 1.05; margin-top: 10px; }
+    .sec-title small { font-family: "Squada One", sans-serif; font-size: 22px; letter-spacing: .25em; text-transform: uppercase; color: var(--amarillo); }
+    .specs {
+      position: relative; z-index: 1; max-width: 380px; margin: 26px auto 0; text-align: left;
+      background: #fff; color: #111; border-radius: 8px; padding: 8px 18px;
+      box-shadow: 0 16px 34px rgba(0,0,0,.4), inset 0 0 0 3px var(--amarillo);
+    }
+    .specs div { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; align-items: baseline; }
+    .specs div + div { border-top: 1px dashed #c3c9d4; }
+    .specs dt { font-size: 16px; letter-spacing: .12em; text-transform: uppercase; color: var(--azul); }
+    .specs dd { font-size: 21px; text-align: right; }
+    .moto-big { position: relative; z-index: 1; width: 82%; max-width: 340px; margin: 34px auto 0; }
+    .moto-big.in .moto { animation: idle .12s linear infinite; }
+    .deseo { position: relative; z-index: 1; font-size: 24px; line-height: 1.2; max-width: 340px; margin: 20px auto 0; }
+    .btn-rev {
+      position: relative; z-index: 1; margin: 30px auto 0; display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 26px; border: 0; border-radius: 40px; cursor: pointer;
+      font-family: "Bungee", sans-serif; font-size: 17px; color: #fff;
+      background: radial-gradient(circle at 35% 30%, #ff6b5f, var(--rojo) 55%, #8c0f0a);
+      box-shadow: 0 10px 22px rgba(0,0,0,.4), inset 0 0 0 2px rgba(255,255,255,.4);
+      animation: heartbeat 2.4s ease-in-out infinite;
+    }
+    .btn-rev svg { width: 22px; }
+    .btn-rev:active { transform: scale(.95); }
+    .firma { position: relative; z-index: 1; margin-top: 26px; font-size: 18px; letter-spacing: .25em; text-transform: uppercase; color: var(--amarillo); }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .8, .2, 1); }
+    .reveal-zoom { opacity: 0; transform: translateX(-40%); transition: opacity .6s ease, transform 1s cubic-bezier(.3, 1.2, .5, 1); }
+    .reveal.in, .reveal-zoom.in { opacity: 1; transform: none; }
+
+    /* ---------- Animaciones ---------- */
+    @keyframes speed { from { transform: translateX(0); } to { transform: translateX(-260%); } }
+    @keyframes floatIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-60px) skewX(-12deg); } to { opacity: 1; transform: none; } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+    @keyframes envIn { from { opacity: 0; scale: .85; } to { opacity: 1; scale: 1; } }
+    @keyframes envOut { from { opacity: 1; translate: 0 0; } to { opacity: 0; translate: 0 70svh; } }
+    @keyframes sealIn { from { opacity: 0; scale: 2; } to { opacity: 1; scale: 1; } }
+    @keyframes ring { 0% { opacity: .9; transform: scale(.85); } 100% { opacity: 0; transform: scale(1.5); } }
+    @keyframes giftIn { to { opacity: 1; transform: translate(-50%, -47%) scale(1) rotate(-2deg); pointer-events: auto; } }
+    @keyframes run { 0% { transform: translateX(-120%); } 100% { transform: translateX(260%); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes shake { 0% { transform: translate(0, 0); } 25% { transform: translate(1.5px, -1px); } 50% { transform: translate(-1px, 1.5px); } 75% { transform: translate(1px, 1px); } 100% { transform: translate(0, 0); } }
+    @keyframes idle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(1px); } }
+    @keyframes burst { 0% { opacity: 1; transform: translate(0, 0) scale(1.4); } 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.4) rotate(180deg); } }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+    @keyframes heartbeat { 0%, 100% { transform: scale(1); } 8% { transform: scale(1.05); } 16% { transform: scale(1); } 24% { transform: scale(1.04); } 32% { transform: scale(1); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .2s !important; transition-delay: 0s !important; }
+    }
+  </style>
+</body>
+</html>

@@ -1,0 +1,43 @@
+---
+// Silueta estilizada de una deportiva tipo GSX-R 600 (2000), azul y blanco.
+interface Props { class?: string }
+const { class: cls = "" } = Astro.props;
+---
+<svg class={`moto ${cls}`} viewBox="0 0 220 120" aria-hidden="true">
+  <defs>
+    <linearGradient id="motoBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f6bea" /><stop offset=".55" stop-color="#0b3fa8" /><stop offset="1" stop-color="#062466" />
+    </linearGradient>
+  </defs>
+  <!-- llantas -->
+  <g class="wheel" style="transform-origin:48px 90px">
+    <circle cx="48" cy="90" r="25" fill="#111" />
+    <circle cx="48" cy="90" r="17" fill="#2b2f36" />
+    <path d="M48 75v30M33 90h30M37 79l22 22M59 79l-22 22" stroke="#9aa3ad" stroke-width="3" />
+    <circle cx="48" cy="90" r="5" fill="#cfd5db" />
+  </g>
+  <g class="wheel" style="transform-origin:176px 90px">
+    <circle cx="176" cy="90" r="25" fill="#111" />
+    <circle cx="176" cy="90" r="17" fill="#2b2f36" />
+    <path d="M176 75v30M161 90h30M165 79l22 22M187 79l-22 22" stroke="#9aa3ad" stroke-width="3" />
+    <circle cx="176" cy="90" r="5" fill="#cfd5db" />
+  </g>
+  <!-- basculante, horquilla y escape -->
+  <path d="M48 90 L104 78" stroke="#8a9199" stroke-width="7" stroke-linecap="round" />
+  <path d="M176 90 L156 42" stroke="#c9ced4" stroke-width="6" stroke-linecap="round" />
+  <path d="M70 70 Q50 64 26 58 L22 64 Q46 72 70 78 Z" fill="#b8bec6" />
+  <!-- motor -->
+  <path d="M92 58 h40 l6 26 h-44 Z" fill="#30353d" />
+  <!-- cuerpo / carenado -->
+  <path d="M10 44 L38 40 Q62 44 78 42 Q92 26 116 26 Q126 26 132 34 L146 18 Q170 16 182 34 Q190 46 182 56 L160 64 Q150 80 132 82 L98 84 Q88 70 86 60 L60 58 Q36 56 10 50 Z" fill="url(#motoBlue)" />
+  <!-- franjas blancas -->
+  <path d="M100 62 Q120 46 160 44 L178 40 Q182 48 176 54 L160 58 Q130 62 112 74 Z" fill="#fff" />
+  <path d="M12 46 L40 43 Q58 46 74 45 L72 49 Q54 50 40 48 L12 50 Z" fill="#fff" opacity=".9" />
+  <!-- parabrisas y faro -->
+  <path d="M146 18 Q160 6 176 10 L172 22 Q160 18 150 24 Z" fill="#9fc4ff" opacity=".75" />
+  <path d="M178 36 l9 3 -3 6 -8 -2 Z" fill="#fff6c8" />
+  <!-- asiento -->
+  <path d="M56 41 Q70 36 82 40 L80 44 Q68 42 58 45 Z" fill="#111" />
+  <text x="122" y="56" font-family="Bungee, sans-serif" font-size="11" fill="#0b3fa8" transform="rotate(-8 122 56)">GSX-R</text>
+  <text x="153" y="76" font-family="Bungee, sans-serif" font-size="9" fill="#fff" transform="rotate(-22 153 76)">600</text>
+</svg>
