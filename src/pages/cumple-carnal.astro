@@ -1,51 +1,18 @@
 ---
 /*
 |--------------------------------------------------------------------------
-| Card de cumpleaños - "Feliz cumpleaños, carnal" (GSX-R SRAD, blanco y azul)
-|--------------------------------------------------------------------------
-| Azul noche #061638   Azul #0b3fa8   Azul claro #2f6bea
-| Blanco #ffffff       Hielo #eef3fb  Rojo acento #e2231a
+| Card de cumpleaños - "Feliz cumpleaños, carnal"
+| Un solo botón, estilo limpio: blanco, azul y un toque de rojo.
 |--------------------------------------------------------------------------
 */
-import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
-import "@fontsource/poppins/700.css";
-import "@fontsource/poppins/800-italic.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/800.css";
 
 // Dominio público del sitio (para la og:image de WhatsApp)
 const SITE = "https://monrold.pages.dev";
 const ogImage = `${SITE}/cumple-carnal/og-cumple-carnal.jpg`;
 const titulo = "¡Feliz cumpleaños, carnal!";
-const moto = "/cumple-carnal/gsxr-srad.webp";
-
-// Marcas del tacómetro (x1000 rpm)
-const marks = Array.from({ length: 17 }, (_, i) => {
-  const a = ((-225 + (i / 16) * 270) * Math.PI) / 180;
-  return {
-    i,
-    x1: +(60 + Math.cos(a) * 46).toFixed(2), y1: +(60 + Math.sin(a) * 46).toFixed(2),
-    x2: +(60 + Math.cos(a) * (i % 2 ? 42 : 39)).toFixed(2), y2: +(60 + Math.sin(a) * (i % 2 ? 42 : 39)).toFixed(2),
-    tx: +(60 + Math.cos(a) * 31).toFixed(2), ty: +(60 + Math.sin(a) * 31 + 3).toFixed(2),
-  };
-});
-const arc = (from: number, to: number, r: number) => {
-  const a1 = ((-225 + (from / 16) * 270) * Math.PI) / 180;
-  const a2 = ((-225 + (to / 16) * 270) * Math.PI) / 180;
-  return `M${60 + Math.cos(a1) * r} ${60 + Math.sin(a1) * r} A${r} ${r} 0 0 1 ${60 + Math.cos(a2) * r} ${60 + Math.sin(a2) * r}`;
-};
-const redZone = arc(14, 16, 44);
-
-// Humo / nubes detrás de la moto (posiciones fijas)
-const puffs = [
-  { x: -8, y: 30, s: 46 }, { x: 10, y: 16, s: 40 }, { x: 28, y: 26, s: 36 }, { x: 46, y: 12, s: 44 },
-  { x: 64, y: 24, s: 38 }, { x: 80, y: 10, s: 46 }, { x: 96, y: 28, s: 40 }, { x: 2, y: 52, s: 40 },
-  { x: 40, y: 48, s: 34 }, { x: 74, y: 50, s: 42 },
-];
-// Trazos de velocidad diagonales
-const streaks = [
-  { t: 8, l: -20, w: 70, o: 0.18, d: 0 }, { t: 15, l: 30, w: 90, o: 0.1, d: 0.6 }, { t: 24, l: -10, w: 60, o: 0.14, d: 1.2 },
-  { t: 33, l: 40, w: 80, o: 0.08, d: 0.3 }, { t: 41, l: -30, w: 75, o: 0.12, d: 0.9 }, { t: 50, l: 20, w: 95, o: 0.07, d: 1.5 },
-];
 ---
 
 <!doctype html>
@@ -53,11 +20,11 @@ const streaks = [
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#061638" />
+  <meta name="theme-color" content="#ffffff" />
   <title>{titulo}</title>
-  <meta name="description" content="Te llegó un regalo. Abre el sobre y arráncale." />
+  <meta name="description" content="Te llegó un regalo. Pícale al botón." />
   <meta property="og:title" content={titulo} />
-  <meta property="og:description" content="Te llegó un regalo 🏍️ Abre el sobre y arráncale." />
+  <meta property="og:description" content="Te llegó un regalo 🏍️ Pícale al botón." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={`${SITE}/cumple-carnal`} />
   <meta property="og:image" content={ogImage} />
@@ -67,469 +34,97 @@ const streaks = [
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content={ogImage} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="preload" as="image" href={moto} />
   <link rel="preload" as="image" href="/cumple-carnal/kit-de-juntas.jpg" />
 </head>
 
 <body>
-  <main id="app">
-    <!-- ============ HERO ============ -->
-    <section class="hero" id="hero">
-      <div class="streaks" aria-hidden="true">
-        {streaks.map((s) => (
-          <span style={`top:${s.t}%;left:${s.l}%;width:${s.w}%;opacity:${s.o};animation-delay:${s.d}s`}></span>
-        ))}
-      </div>
-      <p class="brand" aria-hidden="true">GSX-R</p>
-
-      <header class="head">
-        <p class="kicker">Para el más rápido de la cuadra</p>
-        <h1 class="title">
-          <span>¡Feliz cumpleaños,</span>
-          <span class="carnal">carnal!</span>
-        </h1>
-      </header>
-
-      <div class="envelope" id="envelope">
-        <svg class="env-back" viewBox="0 0 100 68" preserveAspectRatio="none" aria-hidden="true">
-          <rect width="100" height="68" rx="1.2" fill="#dfe6f3" />
-        </svg>
-        <svg class="env-flap" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0 0 L100 0 L52.5 38 Q50 40 47.5 38 Z" fill="#ffffff" />
-          <path d="M0 0 L52.5 38 Q50 40 47.5 38 L100 0" fill="none" stroke="#c9d3e6" stroke-width=".5" />
-        </svg>
-        <div class="card-clip">
-          <div class="card" aria-hidden="true"><p>Tu regalo</p></div>
-        </div>
-        <svg class="env-pocket" viewBox="0 0 100 68" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0 0 L50 37 L100 0 L100 68 L0 68 Z" fill="#f7f9fd" />
-          <path d="M0 68 L0 52 L100 26 L100 40 L28 68 Z" fill="#0b3fa8" />
-          <path d="M44 68 L100 46 L100 52 L58 68 Z" fill="#0b3fa8" />
-          <path d="M66 68 L100 55 L100 56.4 L69.5 68 Z" fill="#e2231a" />
-          <path d="M0 0 L50 37 L100 0" stroke="#d5ddeb" stroke-width=".5" fill="none" />
-        </svg>
-        <button class="start" id="start" type="button" aria-label="Abrir el sobre">
-          <span class="start-ring" aria-hidden="true"></span>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v7.5M6.6 7a7.6 7.6 0 1 0 10.8 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></svg>
-          <b>START</b>
-        </button>
-      </div>
-
-      <p class="hint">Da click para abrir el sobre<br />y ver tu regalo</p>
-
-      <div class="ride" aria-hidden="true">
-        <div class="smoke">
-          {puffs.map((p, i) => (
-            <span style={`left:${p.x}%;top:${p.y}%;width:${p.s}%;animation-delay:${-(i * 0.7)}s`}></span>
-          ))}
-        </div>
-        <div class="ground"></div>
-        <img class="moto" id="moto" src={moto} width="1100" height="727" alt="" />
-      </div>
-
-      <!-- Regalo revelado -->
-      <figure class="gift" id="gift">
-        <img src="/cumple-carnal/kit-de-juntas.jpg" width="900" height="1046" alt="Tu regalo de cumpleaños: un kit de juntas para la GSX-R 600" />
-        <figcaption>Para que tu nave ya no tire aceite</figcaption>
-      </figure>
-
-      <a class="scroll-hint" href="#ficha" aria-label="Ver más">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9 L12 15 L18 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
-      </a>
-    </section>
-
-    <!-- ============ FICHA TÉCNICA ============ -->
-    <section class="ficha" id="ficha">
-      <p class="sec-kicker reveal">Ficha técnica</p>
-      <h2 class="sec-title reveal">Tu regalo</h2>
-      <dl class="specs reveal">
-        <div><dt>Modelo</dt><dd>Kit de juntas</dd></div>
-        <div><dt>Compatible con</dt><dd>GSX-R 600 · 2000</dd></div>
-        <div><dt>Potencia extra</dt><dd>+0 HP</dd></div>
-        <div><dt>Fugas de aceite</dt><dd>0, ahora sí</dd></div>
-        <div><dt>Mano de obra</dt><dd>Corre por tu cuenta</dd></div>
-        <div><dt>Garantía</dt><dd>Hasta la próxima rodada</dd></div>
-      </dl>
-    </section>
-
-    <section class="cierre">
-      <img class="cierre-moto reveal" src={moto} width="1100" height="727" alt="" loading="lazy" />
-      <p class="deseo reveal">Que este año vaya a puro cambio arriba, sin fugas, sin multas y con la rodilla al piso.</p>
-      <p class="salud reveal">¡Salud, carnal!</p>
-      <button class="btn-rev reveal" id="rev" type="button">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v7.5M6.6 7a7.6 7.6 0 1 0 10.8 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" /></svg>
-        Acelerar otra vez
+  <main class="stage" id="stage">
+    <section class="intro">
+      <p class="kicker">GSX-R 600 · Modelo 2000</p>
+      <h1 class="title">¡Feliz cumpleaños,<br />carnal!</h1>
+      <span class="rule" aria-hidden="true"></span>
+      <button class="btn" id="btn" type="button">
+        <span>Abrir mi regalo</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" /></svg>
       </button>
-      <p class="firma reveal">Con cariño y aceite 10W-40</p>
+      <p class="note">Sube el volumen</p>
+    </section>
+
+    <section class="gift" id="gift" aria-live="polite">
+      <img src="/cumple-carnal/kit-de-juntas.jpg" width="900" height="1079" alt="Tu regalo de cumpleaños: un kit de juntas para la GSX-R 600" />
+      <button class="again" id="again" type="button">Acelerar otra vez</button>
     </section>
   </main>
-
-  <!-- Tacómetro flotante -->
-  <div class="tach" id="tach" aria-hidden="true">
-    <svg viewBox="0 0 120 120">
-      <defs>
-        <radialGradient id="tachBg"><stop offset="0" stop-color="#ffffff" /><stop offset="1" stop-color="#e6ebf4" /></radialGradient>
-      </defs>
-      <circle cx="60" cy="60" r="57" fill="#061638" />
-      <circle cx="60" cy="60" r="53" fill="url(#tachBg)" />
-      <path d={redZone} fill="none" stroke="#e2231a" stroke-width="5" />
-      {marks.map((m) => (
-        <g>
-          <line x1={m.x1} y1={m.y1} x2={m.x2} y2={m.y2} stroke={m.i >= 14 ? "#e2231a" : "#061638"} stroke-width={m.i % 2 ? 1 : 2} />
-          {m.i % 2 === 0 && <text x={m.tx} y={m.ty} text-anchor="middle" font-size="8.5" font-weight="700" fill={m.i >= 14 ? "#e2231a" : "#061638"} font-family="Poppins, sans-serif">{m.i}</text>}
-        </g>
-      ))}
-      <text x="60" y="84" text-anchor="middle" font-size="5.5" fill="#6a7590" font-family="Poppins, sans-serif" letter-spacing=".4">x1000 r/min</text>
-      <text x="60" y="97" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0b3fa8" font-family="Poppins, sans-serif" id="tachNum">0</text>
-      <g id="needle" style="transform-origin:60px 60px;transform:rotate(-225deg)">
-        <path d="M60 58 L105 60 L60 62 Z" fill="#e2231a" />
-      </g>
-      <circle cx="60" cy="60" r="5.5" fill="#061638" />
-      <circle cx="94" cy="28" r="3.6" fill="#f3c9c6" id="shiftLight" />
-    </svg>
-  </div>
 
   <audio id="motor" src="/cumple-carnal/gsxr600.mp3" preload="auto"></audio>
 
   <script>
-    const root = document.documentElement;
-    const hero = document.getElementById("hero")!;
-    const start = document.getElementById("start")!;
-    const envelope = document.getElementById("envelope")!;
-    const tach = document.getElementById("tach")!;
-    const needle = document.getElementById("needle")!;
-    const tachNum = document.getElementById("tachNum")!;
-    const shiftLight = document.getElementById("shiftLight")!;
+    const stage = document.getElementById("stage")!;
     const audio = document.getElementById("motor") as HTMLAudioElement;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    root.classList.add("locked");
-    window.scrollTo(0, 0);
-
-    // Curva de rpm, igual a la del audio sintetizado (segundo, rpm)
-    const K: [number, number][] = [
-      [0, 0], [0.05, 1350], [0.6, 1300], [0.75, 7500], [1.0, 6000], [1.35, 1500], [1.55, 1400], [1.7, 10500],
-      [2.0, 8000], [2.5, 1700], [2.75, 1500], [2.9, 4000], [3.6, 9500], [4.15, 13800], [4.22, 10000], [4.3, 10300],
-      [4.9, 14000], [4.97, 14000], [5.04, 10800], [5.12, 11100], [5.75, 14000], [5.85, 13500], [6.6, 6000],
-      [7.3, 2200], [7.8, 1400], [8.2, 1350], [8.3, 0],
-    ];
-    function rpmAt(t: number) {
-      if (t <= K[0][0]) return 0;
-      for (let i = 1; i < K.length; i++) {
-        if (t <= K[i][0]) {
-          const [t0, r0] = K[i - 1]; const [t1, r1] = K[i];
-          return r0 + ((r1 - r0) * (t - t0)) / (t1 - t0);
-        }
-      }
-      return 0;
-    }
-
-    let shown = 0;
-    let raf = 0;
-    let t0 = 0;
-    function frame() {
-      // Usa el reloj del audio si está sonando; si no, el del navegador
-      const t = !audio.paused && audio.currentTime > 0 ? audio.currentTime : (performance.now() - t0) / 1000;
-      let r = rpmAt(t);
-      if (r > 13700) r -= Math.sin(t * 2 * Math.PI * 14) > 0 ? 350 : 0; // limitador
-      shown += (r - shown) * 0.35;
-      needle.style.transform = `rotate(${-225 + (shown / 16000) * 270}deg)`;
-      tachNum.textContent = String(Math.round(shown / 100) * 100);
-      shiftLight.setAttribute("fill", shown > 12500 ? "#e2231a" : "#f3c9c6");
-      // La moto vibra y el humo crece con las revoluciones
-      hero.style.setProperty("--rev", (shown / 14000).toFixed(3));
-      hero.classList.toggle("shake", shown > 12500 && !reduce);
-      if (t < 8.4) raf = requestAnimationFrame(frame);
-      else { tach.classList.remove("on"); hero.classList.remove("shake"); hero.style.setProperty("--rev", "0"); }
-    }
-    function arrancar() {
-      cancelAnimationFrame(raf);
-      shown = 0;
-      t0 = performance.now();
+    function acelerar() {
       audio.currentTime = 0;
       audio.volume = 1;
       audio.play().catch(() => {});
-      tach.classList.add("on");
-      raf = requestAnimationFrame(frame);
-    }
-
-    function burst(x: number, y: number) {
-      const colors = ["#ffffff", "#2f6bea", "#0b3fa8", "#e2231a"];
-      for (let i = 0; i < 28; i++) {
-        const p = document.createElement("span");
-        p.className = "burst";
-        const a = (i / 28) * Math.PI * 2 + Math.random() * 0.3;
-        const d = 90 + Math.random() * 140;
-        p.style.left = x + "px";
-        p.style.top = y + "px";
-        p.style.setProperty("--dx", Math.cos(a) * d + "px");
-        p.style.setProperty("--dy", Math.sin(a) * d + "px");
-        p.style.background = colors[i % colors.length];
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 1400);
-      }
-    }
-
-    let opened = false;
-    function abrir() {
-      if (opened) return;
-      opened = true;
-      const r = start.getBoundingClientRect();
-      if (!reduce) burst(r.left + r.width / 2, r.top + r.height / 2);
       if (navigator.vibrate) navigator.vibrate([40, 60, 40, 60, 120]);
-      arrancar();
-      hero.classList.add("opened");
-      setTimeout(() => {
-        const g = document.getElementById("gift")!.getBoundingClientRect();
-        if (!reduce) burst(g.left + g.width / 2, g.top + g.height / 2);
-      }, reduce ? 0 : 2300);
-      setTimeout(() => root.classList.remove("locked"), reduce ? 200 : 3200);
     }
-    start.addEventListener("click", abrir);
-    envelope.addEventListener("click", abrir);
-    document.getElementById("rev")!.addEventListener("click", arrancar);
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden && !audio.paused) audio.pause();
+    document.getElementById("btn")!.addEventListener("click", () => {
+      acelerar();
+      stage.classList.add("opened");
     });
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-        }
-      },
-      { threshold: 0.2 }
-    );
-    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    document.getElementById("again")!.addEventListener("click", acelerar);
+    document.addEventListener("visibilitychange", () => { if (document.hidden) audio.pause(); });
   </script>
 
   <style is:global>
-    :root {
-      --noche: #061638;
-      --azul: #0b3fa8;
-      --azul-claro: #2f6bea;
-      --blanco: #ffffff;
-      --hielo: #eef3fb;
-      --rojo: #e2231a;
-      --tinta: #0d1b3d;
-      --gris: #6a7590;
-      --w: min(62vw, 270px, 30vh);
-      --moto: min(112vw, 580px, 58vh);
-    }
-    @supports (height: 1svh) { :root { --w: min(62vw, 270px, 30svh); --moto: min(112vw, 580px, 58svh); } }
+    :root { --azul: #0b3fa8; --azul-osc: #082f7e; --rojo: #e2231a; --tinta: #111; --gris: #6e7582; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { background: var(--noche); -webkit-text-size-adjust: 100%; }
-    body {
-      font-family: "Poppins", system-ui, sans-serif; color: var(--blanco); background: var(--noche);
-      overflow-x: hidden; -webkit-tap-highlight-color: transparent;
-    }
-    html.locked, html.locked body { overflow: hidden; height: 100%; }
-    #app { max-width: 520px; margin: 0 auto; position: relative; overflow: hidden; box-shadow: 0 0 80px rgba(0,0,0,.5); }
+    html, body { height: 100%; background: #fff; -webkit-text-size-adjust: 100%; }
+    body { font-family: "Poppins", system-ui, sans-serif; color: var(--tinta); -webkit-tap-highlight-color: transparent; }
 
-    /* ---------- HERO ---------- */
-    .hero {
-      --rev: 0;
-      position: relative; height: 100vh; height: 100svh; min-height: 600px; overflow: hidden;
-      background:
-        radial-gradient(ellipse 90% 50% at 70% 18%, rgba(47,107,234,.55), transparent 70%),
-        linear-gradient(172deg, #050f2a 0%, #0a2563 45%, #1645b5 100%);
-    }
-    .streaks { position: absolute; inset: 0; transform: rotate(-16deg) scale(1.3); }
-    .streaks span {
-      position: absolute; height: 3px; border-radius: 3px;
-      background: linear-gradient(90deg, transparent, #fff 40%, transparent);
-      animation: streak 3.2s ease-in-out infinite;
-    }
-    .brand {
-      position: absolute; left: -4%; top: 38%; z-index: 0; white-space: nowrap; pointer-events: none;
-      font-weight: 800; font-style: italic; font-size: min(46vw, 230px); line-height: 1; letter-spacing: -.02em;
-      color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.22);
-      transform: rotate(-14deg); animation: brandIn 1.4s .2s cubic-bezier(.2,.8,.2,1) both;
-    }
+    .stage { position: relative; min-height: 100vh; min-height: 100svh; display: grid; place-items: center; padding: 32px 24px; overflow: hidden; }
+    .intro, .gift { grid-area: 1 / 1; width: 100%; max-width: 420px; }
 
-    .head { position: absolute; top: max(6%, env(safe-area-inset-top)); left: 24px; right: 24px; z-index: 10; transition: opacity .5s, transform .5s; }
-    .kicker {
-      font-size: 12px; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: rgba(255,255,255,.7);
-      animation: floatIn .9s .1s both;
-    }
-    .title { font-weight: 800; font-style: italic; line-height: 1; margin-top: 12px; display: flex; flex-direction: column; letter-spacing: -.01em; }
-    .title span { font-size: clamp(28px, 8.6vw, 42px); animation: slideIn .8s .25s cubic-bezier(.2,.9,.2,1) both; }
-    .title .carnal {
-      font-size: clamp(54px, 17vw, 84px); animation-delay: .4s; position: relative; width: fit-content;
-    }
-    .title .carnal::after {
-      content: ""; position: absolute; left: 4px; right: 10%; bottom: 2px; height: 5px; background: var(--rojo);
-      transform: skewX(-20deg); transform-origin: left; animation: line .6s .9s cubic-bezier(.6,0,.2,1) both;
-    }
+    .intro { text-align: center; transition: opacity .5s, transform .6s cubic-bezier(.6, 0, .3, 1); }
+    .kicker { font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--azul); animation: up .7s .1s both; }
+    .title { font-size: clamp(32px, 9.5vw, 44px); font-weight: 800; line-height: 1.08; letter-spacing: -.02em; margin-top: 12px; animation: up .7s .2s both; }
+    .rule { display: block; width: 56px; height: 4px; background: var(--rojo); margin: 22px auto 36px; animation: grow .6s .5s cubic-bezier(.6, 0, .2, 1) both; }
 
-    .hint {
-      position: absolute; left: 0; right: 0; top: calc(39% + var(--w) * .34 + 22px); text-align: center; z-index: 10;
-      font-size: 12.5px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; line-height: 1.6;
-      color: rgba(255,255,255,.85);
-      animation: floatIn 1s .9s both, pulse 2s 2s ease-in-out infinite; transition: opacity .5s;
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+      width: 100%; max-width: 320px; padding: 20px 28px; border: 0; border-radius: 2px; cursor: pointer;
+      font-family: inherit; font-size: 15px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      color: #fff; background: var(--azul);
+      box-shadow: 0 12px 26px rgba(11, 63, 168, .28);
+      transition: background .2s, transform .15s, box-shadow .2s;
+      animation: up .7s .45s both;
+      position: relative; overflow: hidden;
     }
+    .btn::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.28) 50%, transparent 70%); transform: translateX(-100%); animation: shine 2.8s 1.4s ease-in-out infinite; }
+    .btn svg { width: 20px; height: 20px; transition: transform .2s; }
+    .btn:hover { background: var(--azul-osc); }
+    .btn:hover svg { transform: translateX(4px); }
+    .btn:active { transform: scale(.97); box-shadow: 0 6px 14px rgba(11, 63, 168, .25); }
+    .note { margin-top: 16px; font-size: 12px; font-weight: 500; letter-spacing: .08em; color: var(--gris); animation: up .7s .6s both; }
 
-    /* Sobre */
-    .envelope {
-      position: absolute; left: 50%; top: 39%;
-      width: var(--w); height: calc(var(--w) * .68);
-      transform: translate(-50%, -50%); perspective: 1200px; z-index: 6; cursor: pointer;
-      animation: envIn 1s .5s cubic-bezier(.2, .8, .2, 1) both;
+    .gift { text-align: center; opacity: 0; transform: translateY(40px) scale(.96); pointer-events: none; transition: opacity .7s .35s, transform .9s .35s cubic-bezier(.2, .8, .2, 1); }
+    .gift img { display: block; width: 100%; height: auto; max-height: 76svh; object-fit: contain; box-shadow: 0 24px 50px rgba(17, 24, 39, .18); }
+    .again {
+      margin-top: 22px; padding: 12px 22px; border: 1.5px solid var(--azul); border-radius: 2px; background: #fff; cursor: pointer;
+      font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--azul);
     }
-    .env-back, .env-pocket, .env-flap { position: absolute; left: 0; width: 100%; display: block; }
-    .env-back { top: 0; height: 100%; z-index: 1; filter: drop-shadow(0 22px 28px rgba(2,8,30,.55)); }
-    .env-pocket { top: 0; height: 100%; z-index: 4; }
-    .env-flap {
-      top: 0; height: 58.8%; z-index: 5; transform-origin: 50% 0;
-      transition: transform .8s cubic-bezier(.6, 0, .3, 1) .15s, z-index 0s linear .55s;
-      filter: drop-shadow(0 3px 3px rgba(0,0,0,.12));
-    }
-    .card-clip { position: absolute; inset: 0; z-index: 3; clip-path: inset(-400% -10% 0 -10%); }
-    .card {
-      position: absolute; left: 7%; top: 6%; width: 86%; height: 88%;
-      background: var(--azul); border-radius: 2px; display: flex; justify-content: center; padding-top: 9%;
-      transition: transform .9s cubic-bezier(.5, 0, .2, 1) .7s;
-    }
-    .card p { font-weight: 800; font-style: italic; font-size: calc(var(--w) * .08); color: #fff; }
+    .again:active { transform: scale(.97); }
 
-    .start {
-      position: absolute; left: 50%; top: 56%; z-index: 7;
-      width: calc(var(--w) * .3); aspect-ratio: 1; transform: translate(-50%, -50%);
-      border: 0; border-radius: 50%; cursor: pointer; padding: 0;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
-      background: var(--noche); color: #fff;
-      box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--rojo), 0 10px 20px rgba(2,8,30,.45);
-      animation: sealIn .7s 1.1s cubic-bezier(.3, 1.6, .5, 1) both; transition: transform .15s, background .3s;
-    }
-    .start svg { width: 36%; }
-    .start b { font-size: calc(var(--w) * .036); font-weight: 700; letter-spacing: .14em; }
-    .start-ring { position: absolute; inset: -18%; border-radius: 50%; border: 1.5px solid #fff; opacity: 0; animation: ring 1.8s 2s ease-out infinite; }
+    .opened .intro { opacity: 0; transform: translateY(-30px); pointer-events: none; }
+    .opened .gift { opacity: 1; transform: none; pointer-events: auto; }
+    .opened .gift img { animation: rev .07s linear 8 1.2s, rev .07s linear 20 3.7s; }
 
-    /* Moto */
-    .ride {
-      position: absolute; left: 50%; bottom: 1.5%; z-index: 8; width: var(--moto); aspect-ratio: 1100 / 727;
-      transform: translateX(-46%); pointer-events: none;
-      animation: rideIn 1.3s .3s cubic-bezier(.2, .8, .2, 1) both;
-    }
-    .moto {
-      position: absolute; inset: 0; width: 100%; height: auto; z-index: 2;
-      filter: drop-shadow(0 14px 16px rgba(2,8,30,.45));
-    }
-    .shake .moto { animation: shake .07s linear infinite; }
-    .ground {
-      position: absolute; left: 6%; right: 4%; bottom: 1%; height: 9%; z-index: 1;
-      background: radial-gradient(ellipse at center, rgba(2,8,30,.65), transparent 70%);
-    }
-    .smoke { position: absolute; left: -30%; width: 60%; bottom: 4%; height: 55%; z-index: 0; }
-    .smoke span {
-      position: absolute; aspect-ratio: 1; border-radius: 50%;
-      background: radial-gradient(circle at 40% 35%, #ffffff 0%, #e8eef9 45%, rgba(190,206,236,.0) 70%);
-      opacity: calc(.15 + var(--rev) * .75);
-      transform: scale(calc(.6 + var(--rev) * .7)) translateX(calc(var(--rev) * -30%));
-      transition: opacity .25s, transform .4s;
-      animation: puff 4s ease-in-out infinite;
-    }
-
-    /* Regalo */
-    .gift {
-      position: absolute; left: 50%; top: calc(3% + 70px); z-index: 9;
-      width: min(74vw, 350px, 44svh); transform: translate(-50%, 20%) scale(.25) rotate(-10deg);
-      opacity: 0; pointer-events: none; text-align: center;
-    }
-    .gift img { display: block; width: 100%; height: auto; border-radius: 4px; box-shadow: 0 0 0 6px #fff, 0 30px 60px rgba(2,8,30,.6); }
-    .gift figcaption {
-      display: inline-block; margin-top: 18px; padding: 8px 16px; border-radius: 40px;
-      background: #fff; color: var(--azul); font-size: 13px; font-weight: 700; letter-spacing: .04em;
-      box-shadow: 0 8px 18px rgba(2,8,30,.35);
-    }
-
-    .scroll-hint {
-      position: absolute; left: 50%; bottom: 1%; z-index: 14; transform: translateX(-50%);
-      width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%;
-      background: rgba(255,255,255,.15); color: #fff; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-      opacity: 0; pointer-events: none; transition: opacity .8s 3.4s;
-    }
-    .scroll-hint svg { width: 22px; animation: bounce 1.6s ease-in-out infinite; }
-
-    /* Estado abierto */
-    .opened .hint, .opened .head { opacity: 0; transform: translateY(-12px); animation: none; }
-    .opened .start-ring { display: none; }
-    .opened .start { transform: translate(-50%, -50%) scale(.9); background: var(--rojo); }
-    .opened .env-flap { transform: rotateX(180deg); z-index: 2; }
-    .opened .card { transform: translateY(-70%); }
-    .opened .envelope { animation: envOut .9s 1.8s cubic-bezier(.6, 0, .4, 1) forwards; cursor: default; pointer-events: none; }
-    .opened .gift { animation: giftIn .9s 2.1s cubic-bezier(.3, 1.3, .5, 1) forwards; }
-    .opened .brand { opacity: .5; transition: opacity 1s; }
-    .opened .scroll-hint { opacity: 1; pointer-events: auto; }
-
-    .burst {
-      position: fixed; z-index: 70; width: 7px; height: 7px; margin: -3px 0 0 -3px; pointer-events: none; border-radius: 1px;
-      animation: burst 1.3s cubic-bezier(.2, .8, .3, 1) forwards;
-    }
-
-    /* Tacómetro */
-    .tach {
-      position: fixed; top: max(12px, env(safe-area-inset-top)); right: 12px; z-index: 80; width: 92px;
-      opacity: 0; transform: scale(.5) translateY(-30px); pointer-events: none;
-      transition: opacity .4s, transform .5s cubic-bezier(.3, 1.5, .5, 1);
-      filter: drop-shadow(0 8px 16px rgba(2,8,30,.5));
-    }
-    .tach.on { opacity: 1; transform: none; }
-    .tach svg { display: block; width: 100%; }
-    @media (min-width: 560px) { .tach { right: calc(50% - 260px + 12px); } }
-
-    /* ---------- FICHA ---------- */
-    .ficha { background: var(--hielo); color: var(--tinta); padding: 72px 28px 56px; }
-    .sec-kicker { font-size: 12px; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: var(--azul); }
-    .sec-title { font-weight: 800; font-style: italic; font-size: 44px; line-height: 1.05; margin-top: 6px; }
-    .sec-title::after { content: ""; display: block; width: 56px; height: 4px; margin-top: 12px; background: var(--rojo); transform: skewX(-20deg); }
-    .specs { margin-top: 28px; }
-    .specs div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0; border-bottom: 1px solid #d3dbea; }
-    .specs dt { font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--gris); }
-    .specs dd { font-size: 16px; font-weight: 700; text-align: right; }
-
-    .cierre {
-      position: relative; text-align: center; padding: 40px 24px 80px; overflow: hidden;
-      background: linear-gradient(180deg, var(--hielo) 0%, var(--hielo) 22%, var(--noche) 22%, #0a2563 100%);
-    }
-    .cierre-moto { width: 108%; max-width: 520px; margin: 0 -4%; height: auto; filter: drop-shadow(0 16px 20px rgba(2,8,30,.4)); }
-    .deseo { font-size: 18px; line-height: 1.45; max-width: 320px; margin: 18px auto 0; color: rgba(255,255,255,.88); }
-    .salud { font-weight: 800; font-style: italic; font-size: 34px; margin-top: 10px; }
-    .btn-rev {
-      margin: 26px auto 0; display: inline-flex; align-items: center; gap: 10px;
-      padding: 15px 28px; border: 0; border-radius: 40px; cursor: pointer;
-      font-family: inherit; font-size: 15px; font-weight: 700; letter-spacing: .06em; color: var(--azul);
-      background: #fff; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--rojo), 0 12px 24px rgba(0,0,0,.35);
-      transition: transform .15s;
-    }
-    .btn-rev svg { width: 20px; }
-    .btn-rev:active { transform: scale(.95); }
-    .firma { margin-top: 28px; font-size: 11px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.6); }
-
-    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .8, .2, 1); }
-    .reveal.in { opacity: 1; transform: none; }
-
-    /* ---------- Animaciones ---------- */
-    @keyframes streak { 0%, 100% { transform: translateX(-8%); } 50% { transform: translateX(8%); } }
-    @keyframes brandIn { from { opacity: 0; transform: rotate(-14deg) translateX(-30%); } to { opacity: 1; transform: rotate(-14deg); } }
-    @keyframes floatIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-    @keyframes slideIn { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: none; } }
-    @keyframes line { from { transform: skewX(-20deg) scaleX(0); } to { transform: skewX(-20deg) scaleX(1); } }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
-    @keyframes envIn { from { opacity: 0; scale: .85; } to { opacity: 1; scale: 1; } }
-    @keyframes envOut { from { opacity: 1; translate: 0 0; } to { opacity: 0; translate: 0 -40svh; scale: .6; } }
-    @keyframes sealIn { from { opacity: 0; scale: 2; } to { opacity: 1; scale: 1; } }
-    @keyframes ring { 0% { opacity: .8; transform: scale(.85); } 100% { opacity: 0; transform: scale(1.5); } }
-    @keyframes rideIn { from { opacity: 0; transform: translateX(-120%); } to { opacity: 1; transform: translateX(-46%); } }
-    @keyframes giftIn { to { opacity: 1; transform: translate(-50%, 0) scale(1) rotate(-2deg); pointer-events: auto; } }
-    @keyframes shake { 0% { transform: translate(0, 0); } 25% { transform: translate(1px, -1px); } 50% { transform: translate(-1px, 1px); } 75% { transform: translate(1px, 1px); } 100% { transform: translate(0, 0); } }
-    @keyframes puff { 0%, 100% { translate: 0 0; } 50% { translate: -6% -8%; } }
-    @keyframes burst { 0% { opacity: 1; transform: translate(0, 0) scale(1.4); } 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.4) rotate(180deg); } }
-    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+    @keyframes up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes shine { 0% { transform: translateX(-100%); } 40%, 100% { transform: translateX(100%); } }
+    @keyframes rev { 0%, 100% { translate: 0 0; } 50% { translate: 1px -1px; } }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .2s !important; transition-delay: 0s !important; }
+      *, *::before, *::after { animation: none !important; transition-duration: .2s !important; transition-delay: 0s !important; }
     }
   </style>
 </body>
