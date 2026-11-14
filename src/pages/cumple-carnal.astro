@@ -56,6 +56,7 @@ const titulo = "¡Feliz cumpleaños, carnal!";
     </section>
   </main>
 
+  <canvas id="confeti" aria-hidden="true"></canvas>
   <audio id="motor" src="/cumple-carnal/gsxr600.mp3" preload="auto"></audio>
 
   <script>
@@ -67,11 +68,62 @@ const titulo = "¡Feliz cumpleaños, carnal!";
       audio.play().catch(() => {});
       if (navigator.vibrate) navigator.vibrate([40, 60, 40, 60, 120]);
     }
+    // Confeti (canvas, sin dependencias)
+    const cv = document.getElementById("confeti") as HTMLCanvasElement;
+    const ctx = cv.getContext("2d")!;
+    const colores = ["#0b3fa8", "#2f6bea", "#e2231a", "#ffffff", "#0b3fa8", "#c9d6f2"];
+    type P = { x: number; y: number; vx: number; vy: number; r: number; w: number; h: number; c: string; s: number; t: number };
+    let parts: P[] = [];
+    let anim = 0;
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = innerWidth * dpr; cv.height = innerHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function lanzar(x: number, y: number, n: number, ang: number, spread: number, fuerza: number) {
+      for (let i = 0; i < n; i++) {
+        const a = ang + (Math.random() - 0.5) * spread;
+        const v = fuerza * (0.55 + Math.random() * 0.6);
+        parts.push({
+          x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: Math.random() * Math.PI,
+          w: 6 + Math.random() * 6, h: 3 + Math.random() * 5, c: colores[i % colores.length],
+          s: (Math.random() - 0.5) * 0.3, t: 0,
+        });
+      }
+      if (!anim) anim = requestAnimationFrame(paso);
+    }
+    function paso() {
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      parts = parts.filter((p) => p.y < innerHeight + 30 && p.t < 420);
+      for (const p of parts) {
+        p.t++; p.vy += 0.22; p.vx *= 0.985; p.vy *= 0.985;
+        p.x += p.vx + Math.sin(p.t / 9) * 0.6; p.y += p.vy; p.r += p.s;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+        ctx.scale(1, Math.cos(p.t / 6));
+        ctx.fillStyle = p.c; ctx.strokeStyle = "rgba(11,63,168,.25)"; ctx.lineWidth = 0.6;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        if (p.c === "#ffffff") ctx.strokeRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      }
+      anim = parts.length ? requestAnimationFrame(paso) : 0;
+      if (!anim) ctx.clearRect(0, 0, innerWidth, innerHeight);
+    }
+    function confeti(n = 1) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      resize();
+      const W = innerWidth, H = innerHeight;
+      lanzar(0, H * 0.7, 90 * n, -Math.PI / 3, 0.9, 19);
+      lanzar(W, H * 0.7, 90 * n, (-2 * Math.PI) / 3, 0.9, 19);
+      setTimeout(() => lanzar(W / 2, H * 0.35, 70 * n, -Math.PI / 2, Math.PI * 1.6, 11), 250);
+    }
+    addEventListener("resize", () => { if (anim) resize(); });
+
     document.getElementById("btn")!.addEventListener("click", () => {
       acelerar();
       stage.classList.add("opened");
+      setTimeout(() => confeti(), 450);
     });
-    document.getElementById("again")!.addEventListener("click", acelerar);
+    document.getElementById("again")!.addEventListener("click", () => { acelerar(); confeti(0.6); });
     document.addEventListener("visibilitychange", () => { if (document.hidden) audio.pause(); });
   </script>
 
@@ -113,6 +165,8 @@ const titulo = "¡Feliz cumpleaños, carnal!";
       font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--azul);
     }
     .again:active { transform: scale(.97); }
+
+    #confeti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
 
     .opened .intro { opacity: 0; transform: translateY(-30px); pointer-events: none; }
     .opened .gift { opacity: 1; transform: none; pointer-events: auto; }
