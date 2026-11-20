@@ -1,0 +1,668 @@
+---
+/*
+|--------------------------------------------------------------------------
+| Invitación Digital - Boda Susana & Luis (solo móvil)
+|--------------------------------------------------------------------------
+| Estilo pop moderno + elegante: negro con grano, crema, azul cielo de las
+| fotos y figuras saturadas (cobalto, rosa, verde, naranja, amarillo).
+|--------------------------------------------------------------------------
+*/
+import "@fontsource-variable/bricolage-grotesque";
+import "@fontsource/instrument-serif/400.css";
+import "@fontsource/instrument-serif/400-italic.css";
+
+// ===== Datos del evento (editar aquí) =====
+const evento = {
+  diaSemana: "Sábado",
+  fecha: "6 de marzo de 2027",
+  fechaCorta: "06 · 03 · 27",
+  hora: "5:00 PM", // POR CONFIRMAR
+  // 6 mar 2027, 5:00 p.m. hora del centro de México (UTC-6)
+  iso: "2027-03-06T17:00:00-06:00",
+  lugar: "Nombre del lugar", // POR CONFIRMAR
+  direccion: "Dirección por confirmar", // POR CONFIRMAR
+};
+const mapsUrl = ""; // POR CONFIRMAR: link de Google Maps del lugar
+
+const calUrl =
+  "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+  "&text=" + encodeURIComponent("Boda de Susana & Luis 💍") +
+  "&dates=20270306T230000Z/20270307T050000Z" +
+  "&details=" + encodeURIComponent("¡Nos casamos! Gracias por acompañarnos.") +
+  "&location=" + encodeURIComponent(`${evento.lugar}, ${evento.direccion}`);
+
+const SITE = "https://monrold.pages.dev";
+const ogImage = `${SITE}/susanayluis/og-susanayluis.jpg`;
+const titulo = "Susana & Luis · ¡Nos casamos!";
+
+// ===== Figuras pop =====
+function starburst(points: number, inner: number) {
+  const pts: string[] = [];
+  for (let i = 0; i < points * 2; i++) {
+    const r = i % 2 === 0 ? 50 : inner;
+    const a = (i / (points * 2)) * Math.PI * 2 - Math.PI / 2;
+    pts.push(`${(50 + Math.cos(a) * r).toFixed(2)},${(50 + Math.sin(a) * r).toFixed(2)}`);
+  }
+  return pts.join(" ");
+}
+const burst12 = starburst(12, 38);
+const burst8 = starburst(8, 26);
+const burst16 = starburst(16, 42);
+const sparkle = "M50 0 C54 34 66 46 100 50 C66 54 54 66 50 100 C46 66 34 54 0 50 C34 46 46 34 50 0Z";
+const rays = Array.from({ length: 12 }, (_, i) => {
+  const a = (i / 12) * Math.PI * 2;
+  return {
+    x1: (50 + Math.cos(a) * 14).toFixed(2), y1: (50 + Math.sin(a) * 14).toFixed(2),
+    x2: (50 + Math.cos(a) * 48).toFixed(2), y2: (50 + Math.sin(a) * 48).toFixed(2),
+  };
+});
+const marquee = Array.from({ length: 4 }, () => "SUSANA & LUIS ✦ 06.03.27 ✦ NOS CASAMOS ✦ ");
+---
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0d0d0f" />
+  <title>{titulo}</title>
+  <meta name="description" content={`${evento.diaSemana} ${evento.fecha} · ${evento.hora}. Una boda pequeña con las personas que más queremos.`} />
+  <meta property="og:title" content={titulo} />
+  <meta property="og:description" content={`${evento.diaSemana} ${evento.fecha} · Abre tu invitación 💌`} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={`${SITE}/susanayluis`} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={titulo} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={ogImage} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preload" as="image" href="/susanayluis/propuesta.jpg" />
+</head>
+
+<body>
+  <!-- Sprites -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="b12" viewBox="0 0 100 100"><polygon points={burst12} /></symbol>
+      <symbol id="b8" viewBox="0 0 100 100"><polygon points={burst8} /></symbol>
+      <symbol id="b16" viewBox="0 0 100 100"><polygon points={burst16} /></symbol>
+      <symbol id="spk" viewBox="0 0 100 100"><path d={sparkle} /></symbol>
+      <symbol id="squig" viewBox="0 0 120 30"><path d="M3 15 Q18 0 33 15 T63 15 T93 15 T123 15" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" /></symbol>
+      <symbol id="rays" viewBox="0 0 100 100"><g stroke="currentColor" stroke-width="3" stroke-linecap="round">{rays.map((r) => <line x1={r.x1} y1={r.y1} x2={r.x2} y2={r.y2} />)}</g></symbol>
+    </defs>
+  </svg>
+
+  <!-- ============ Aviso de escritorio ============ -->
+  <div id="solo-movil" role="alert">
+    <svg class="shape" style="--c:var(--cobalt);width:220px;left:6%;top:10%;--r:-12deg"><use href="#b12" /></svg>
+    <svg class="shape" style="--c:var(--pink);width:160px;right:8%;top:14%"><use href="#spk" /></svg>
+    <svg class="shape" style="--c:var(--orange);width:190px;right:12%;bottom:8%"><use href="#b8" /></svg>
+    <svg class="shape" style="--c:var(--lime);width:120px;left:14%;bottom:12%"><use href="#spk" /></svg>
+    <div class="sm-card">
+      <p class="kicker">Susana & Luis</p>
+      <h1>Esta invitación es <em>solo</em> para celulares</h1>
+      <p>Ábrela desde tu teléfono para vivirla completa ✦</p>
+    </div>
+  </div>
+
+  <!-- ============ Sobre (pantalla de entrada) ============ -->
+  <div id="sobre" class="sobre">
+    <svg class="shape float" style="--c:var(--cobalt);width:46vw;left:-12vw;top:6vh;--r:-8deg"><use href="#b12" /></svg>
+    <svg class="shape float" style="--c:var(--pink);width:22vw;right:8vw;top:9vh;--d:-2s"><use href="#spk" /></svg>
+    <svg class="shape float" style="--c:var(--orange);width:38vw;right:-10vw;bottom:10vh;--d:-4s"><use href="#b8" /></svg>
+    <svg class="shape float" style="--c:var(--lime);width:16vw;left:10vw;bottom:16vh;--d:-1s"><use href="#spk" /></svg>
+    <svg class="shape spin" style="--c:var(--cream);width:14vw;left:62vw;top:24vh"><use href="#rays" /></svg>
+    <span class="dot" style="--c:var(--sun);width:12vw;left:6vw;top:34vh"></span>
+    <span class="dot" style="--c:var(--sky);width:18vw;right:4vw;bottom:30vh"></span>
+
+    <p class="sobre-kicker">Tienes una invitación</p>
+
+    <button class="envelope" id="envelope" type="button" aria-label="Abrir la invitación">
+      <span class="env-back"></span>
+      <span class="env-letter">
+        <span class="l-names">Susana <em>&</em> Luis</span>
+        <span class="l-sub">¡Nos casamos!</span>
+      </span>
+      <span class="env-front"></span>
+      <span class="env-flap"></span>
+      <span class="env-seal">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#b16" /></svg>
+        <span>S<em>&</em>L</span>
+      </span>
+    </button>
+
+    <p class="sobre-hint">Toca el sobre para abrir <span>✦</span></p>
+    <p class="sobre-sound">🔊 Sube el volumen</p>
+  </div>
+
+  <!-- ============ Invitación ============ -->
+  <main id="app">
+    <!-- Marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">{marquee.map((t) => <span>{t}</span>)}{marquee.map((t) => <span>{t}</span>)}</div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <svg class="shape spin-slow" style="--c:var(--pink);width:30vw;right:-6vw;top:2vh"><use href="#b12" /></svg>
+      <svg class="shape" style="--c:var(--cobalt);width:13vw;left:5vw;top:5vh;--r:12deg"><use href="#spk" /></svg>
+
+      <p class="hero-kicker reveal">Con muchísimo amor</p>
+      <h1 class="hero-title reveal">
+        <span class="t1">Susana</span>
+        <span class="amp">&</span>
+        <span class="t2">Luis</span>
+      </h1>
+
+      <div class="hero-photo reveal-zoom">
+        <img src="/susanayluis/propuesta.jpg" alt="Luis pidiéndole matrimonio a Susana frente al agua" width="1000" height="1149" />
+        <div class="sticker sticker-burst">
+          <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#b12" /></svg>
+          <span>¡Nos<br />casamos!</span>
+        </div>
+        <svg class="shape" style="--c:var(--lime);width:16vw;left:-5vw;bottom:9%"><use href="#spk" /></svg>
+        <svg class="shape" style="--c:var(--sun);width:9vw;left:6vw;bottom:2%"><use href="#spk" /></svg>
+      </div>
+
+      <p class="hero-date reveal">
+        <span>{evento.diaSemana}</span>
+        <strong>{evento.fechaCorta}</strong>
+      </p>
+      <div class="scroll-cue" aria-hidden="true">desliza<span></span></div>
+    </section>
+
+    <!-- BODA PEQUEÑA -->
+    <section class="intima">
+      <svg class="shape float" style="--c:var(--orange);width:36vw;left:-14vw;top:4vh"><use href="#b8" /></svg>
+      <svg class="shape float" style="--c:var(--cobalt);width:24vw;right:-6vw;bottom:6vh;--d:-3s"><use href="#b12" /></svg>
+      <svg class="squig" style="color:var(--pink)"><use href="#squig" /></svg>
+
+      <p class="label reveal">Una boda chiquita</p>
+      <p class="intima-big reveal">
+        Decidimos celebrar <em>en pequeño</em>, solo con las personas que más queremos.
+      </p>
+      <p class="intima-bold reveal">
+        Por eso, que estés ahí <span class="hl">significa muchísimo</span> para nosotros.
+      </p>
+      <p class="intima-small reveal">Tú eres parte de nuestra historia ✦</p>
+    </section>
+
+    <!-- FOTOS -->
+    <section class="fotos">
+      <p class="label dark reveal">Spoiler</p>
+      <h2 class="fotos-title reveal">Él preguntó.<br /><em>Ella dijo que sí.</em></h2>
+
+      <div class="polas">
+        <figure class="pola p1 reveal">
+          <img src="/susanayluis/manos-arriba.jpg" alt="Susana y Luis juntando sus manos frente al agua" loading="lazy" width="900" height="900" />
+          <figcaption style="--c:var(--pink)">tú y yo</figcaption>
+        </figure>
+        <figure class="pola p2 reveal">
+          <img src="/susanayluis/anillo-cerca.jpg" alt="Las manos de Susana y Luis, se ve el anillo de compromiso" loading="lazy" width="900" height="900" />
+          <figcaption style="--c:var(--lime)">el anillo 💍</figcaption>
+        </figure>
+        <figure class="pola p3 reveal">
+          <img src="/susanayluis/abrazo.jpg" alt="Susana abrazando a Luis frente al agua" loading="lazy" width="900" height="900" />
+          <figcaption style="--c:var(--sun)">para siempre</figcaption>
+        </figure>
+        <svg class="shape" style="--c:var(--cobalt);width:20vw;right:2vw;top:30%"><use href="#spk" /></svg>
+        <svg class="shape" style="--c:var(--orange);width:12vw;left:4vw;top:62%"><use href="#spk" /></svg>
+      </div>
+    </section>
+
+    <!-- CUENTA REGRESIVA -->
+    <section class="cuenta">
+      <svg class="shape spin-slow" style="--c:var(--pink);width:28vw;left:-8vw;top:-4vh"><use href="#b16" /></svg>
+      <svg class="shape" style="--c:var(--sun);width:12vw;right:7vw;top:5vh"><use href="#spk" /></svg>
+
+      <p class="label reveal">Guarda la fecha</p>
+      <div class="fecha reveal">
+        <span class="f-dia">{evento.diaSemana}</span>
+        <span class="f-num">6</span>
+        <span class="f-mes">de marzo <em>2027</em></span>
+        <span class="f-hora"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>{evento.hora}</span>
+      </div>
+
+      <p class="faltan reveal">Faltan</p>
+      <div id="cuenta" data-target={evento.iso}>
+        <div class="tiles reveal" id="tiles">
+          <div class="tile" style="--c:var(--pink)"><b data-u="d">--</b><span>días</span></div>
+          <div class="tile" style="--c:var(--lime)"><b data-u="h">--</b><span>horas</span></div>
+          <div class="tile" style="--c:var(--sun)"><b data-u="m">--</b><span>min</span></div>
+          <div class="tile" style="--c:var(--orange)"><b data-u="s">--</b><span>seg</span></div>
+        </div>
+        <p class="hoy" id="hoy" hidden>¡Hoy es el gran día! 🎉</p>
+      </div>
+
+      <a class="btn btn-light reveal" href={calUrl} target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>
+        Agregar a mi calendario
+      </a>
+    </section>
+
+    <!-- UBICACIÓN -->
+    <section class="ubicacion">
+      <p class="label dark reveal">¿Dónde?</p>
+      <div class="lugar-card reveal-zoom">
+        <img src="/susanayluis/lugar.jpg" alt="Alberca turquesa entre cabañas y jardines" loading="lazy" width="1100" height="1100" />
+        <div class="sticker sticker-pill">aquí es la fiesta ✦</div>
+        <div class="lugar-info">
+          <h2>{evento.lugar}</h2>
+          <p>{evento.direccion}</p>
+        </div>
+      </div>
+      {mapsUrl ? (
+        <a class="btn btn-dark reveal" href={mapsUrl} target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" /></svg>
+          Cómo llegar
+        </a>
+      ) : (
+        <span class="btn btn-dark is-soon reveal">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" /></svg>
+          Ubicación muy pronto
+        </span>
+      )}
+    </section>
+
+    <!-- CIERRE -->
+    <section class="cierre">
+      <svg class="shape float" style="--c:var(--cobalt);width:40vw;left:-12vw;bottom:-4vh"><use href="#b12" /></svg>
+      <svg class="shape float" style="--c:var(--pink);width:20vw;right:6vw;top:6vh;--d:-2s"><use href="#spk" /></svg>
+      <svg class="shape" style="--c:var(--lime);width:26vw;right:-6vw;bottom:8vh"><use href="#b8" /></svg>
+      <svg class="shape spin" style="--c:var(--cream);width:14vw;left:10vw;top:8vh"><use href="#rays" /></svg>
+
+      <h2 class="cierre-big reveal">Nos vemos<br /><em>ahí</em></h2>
+      <p class="cierre-text reveal">Ven listo para celebrar, bailar y brindar con nosotros.</p>
+      <p class="firma reveal">Con amor,<br /><span>Susana <em>&</em> Luis</span></p>
+    </section>
+  </main>
+
+  <audio id="musica" src="/susanayluis/cancion-boda.mp3" loop preload="auto"></audio>
+  <button class="music-btn" id="musicBtn" type="button" aria-label="Pausar música" aria-pressed="true">
+    <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+    <svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="17" cy="16" r="3" /><path d="M3 3l18 18" /></svg>
+  </button>
+
+  <script>
+    const root = document.documentElement;
+    const sobre = document.getElementById("sobre")!;
+    const envelope = document.getElementById("envelope")!;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    root.classList.add("locked");
+    window.scrollTo(0, 0);
+
+    // Confeti pop al abrir
+    const colors = ["#2b4cff", "#ff7ad9", "#3fe08a", "#ff5b24", "#ffd43b", "#f3ede1"];
+    function confetti() {
+      const r = envelope.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      for (let i = 0; i < 42; i++) {
+        const p = document.createElement("span");
+        p.className = "confetti" + (i % 3 === 0 ? " round" : "");
+        const a = Math.random() * Math.PI * 2;
+        const d = 120 + Math.random() * 200;
+        p.style.left = cx + "px";
+        p.style.top = cy + "px";
+        p.style.background = colors[i % colors.length];
+        p.style.setProperty("--dx", Math.cos(a) * d + "px");
+        p.style.setProperty("--dy", Math.sin(a) * d - 60 + "px");
+        p.style.setProperty("--rot", Math.random() * 720 - 360 + "deg");
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 1700);
+      }
+    }
+
+    // Música: arranca con el toque que abre el sobre (permitido en iOS/Android)
+    const audio = document.getElementById("musica") as HTMLAudioElement;
+    const musicBtn = document.getElementById("musicBtn")!;
+    function setMusicUI(on: boolean) {
+      musicBtn.classList.toggle("off", !on);
+      musicBtn.setAttribute("aria-pressed", String(on));
+      musicBtn.setAttribute("aria-label", on ? "Pausar música" : "Reproducir música");
+    }
+    function playMusic() {
+      audio.volume = 0;
+      audio.play().then(() => {
+        setMusicUI(true);
+        let v = 0;
+        const fade = setInterval(() => { v = Math.min(0.85, v + 0.05); audio.volume = v; if (v >= 0.85) clearInterval(fade); }, 120);
+      }).catch(() => setMusicUI(false));
+      setTimeout(() => musicBtn.classList.add("show"), 1800);
+    }
+    musicBtn.addEventListener("click", () => {
+      if (audio.paused) { audio.volume = 0.85; audio.play().then(() => setMusicUI(true)).catch(() => {}); }
+      else { audio.pause(); setMusicUI(false); }
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && !audio.paused) { audio.pause(); musicBtn.dataset.resume = "1"; }
+      else if (!document.hidden && musicBtn.dataset.resume) { delete musicBtn.dataset.resume; audio.play().catch(() => {}); }
+    });
+
+    let opened = false;
+    function openInvite() {
+      if (opened) return;
+      opened = true;
+      if (navigator.vibrate) navigator.vibrate(30);
+      playMusic();
+      sobre.classList.add("opening");
+      if (!reduce) setTimeout(confetti, 450);
+      setTimeout(() => {
+        sobre.classList.add("gone");
+        root.classList.remove("locked");
+        startReveal();
+      }, reduce ? 300 : 1900);
+      setTimeout(() => sobre.remove(), reduce ? 900 : 2800);
+    }
+    envelope.addEventListener("click", openInvite);
+
+    // Aparición al hacer scroll
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+        }
+      },
+      { threshold: 0.15 }
+    );
+    function startReveal() {
+      document.querySelectorAll(".reveal, .reveal-zoom").forEach((el) => io.observe(el));
+    }
+
+    // Cuenta regresiva
+    const cuenta = document.getElementById("cuenta")!;
+    const target = new Date(cuenta.dataset.target!).getTime();
+    const units = {
+      d: cuenta.querySelector<HTMLElement>('[data-u="d"]')!,
+      h: cuenta.querySelector<HTMLElement>('[data-u="h"]')!,
+      m: cuenta.querySelector<HTMLElement>('[data-u="m"]')!,
+      s: cuenta.querySelector<HTMLElement>('[data-u="s"]')!,
+    };
+    const pad = (n: number) => String(n).padStart(2, "0");
+    function tick() {
+      let diff = Math.max(0, target - Date.now());
+      if (diff === 0) {
+        document.getElementById("tiles")!.hidden = true;
+        document.getElementById("hoy")!.hidden = false;
+        return false;
+      }
+      const d = Math.floor(diff / 864e5); diff -= d * 864e5;
+      const h = Math.floor(diff / 36e5); diff -= h * 36e5;
+      const m = Math.floor(diff / 6e4); diff -= m * 6e4;
+      const sec = Math.floor(diff / 1e3);
+      units.d.textContent = String(d);
+      units.h.textContent = pad(h);
+      units.m.textContent = pad(m);
+      units.s.textContent = pad(sec);
+      return true;
+    }
+    if (tick()) {
+      const id = setInterval(() => { if (!tick()) clearInterval(id); }, 1000);
+    }
+  </script>
+
+  <style is:global>
+    :root {
+      --ink: #0d0d0f;
+      --ink-2: #17171b;
+      --cream: #f3ede1;
+      --paper: #fbf7ef;
+      --sky: #cfe4ec;
+      --cobalt: #2b4cff;
+      --pink: #ff7ad9;
+      --lime: #3fe08a;
+      --orange: #ff5b24;
+      --sun: #ffd43b;
+      --display: "Bricolage Grotesque Variable", "Arial Black", system-ui, sans-serif;
+      --serif: "Instrument Serif", Georgia, serif;
+      --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--ink); -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--display);
+      color: var(--ink);
+      background: var(--cream);
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Grano de película sobre todo */
+    body::after {
+      content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none;
+      background: var(--grain); mix-blend-mode: multiply; opacity: .5;
+    }
+    html.locked, html.locked body { overflow: hidden; height: 100%; }
+    em { font-family: var(--serif); font-style: italic; font-weight: 400; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ---------- Figuras ---------- */
+    .shape { position: absolute; fill: var(--c); color: var(--c); transform: rotate(var(--r, 0deg)); pointer-events: none; z-index: 0; aspect-ratio: 1; height: auto; }
+    .dot { position: absolute; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fff8 0, transparent 45%), var(--c); pointer-events: none; }
+    .float { animation: float 7s ease-in-out infinite; animation-delay: var(--d, 0s); }
+    .spin { animation: spin 14s linear infinite; }
+    .spin-slow { animation: spin 40s linear infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); } 50% { transform: translateY(-14px) rotate(calc(var(--r, 0deg) + 8deg)); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .label {
+      display: inline-block; position: relative; z-index: 1;
+      font-family: var(--display); font-weight: 700; font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+      padding: 7px 14px; border: 1.5px solid currentColor; border-radius: 99px; color: var(--cream);
+    }
+    .label.dark { color: var(--ink); }
+
+    /* ---------- Escritorio ---------- */
+    #solo-movil { display: none; }
+    @media (min-width: 1024px), (min-width: 768px) and (hover: hover) and (pointer: fine) {
+      #app, #sobre, .music-btn { display: none !important; }
+      html.locked, html.locked body { overflow: auto; height: auto; }
+      #solo-movil { position: fixed; inset: 0; display: grid; place-items: center; padding: 32px; background: var(--ink); overflow: hidden; }
+    }
+    .sm-card { position: relative; z-index: 1; max-width: 520px; text-align: center; background: var(--cream); padding: 56px 48px; border-radius: 28px; box-shadow: 10px 10px 0 var(--cobalt); }
+    .sm-card .kicker { font-weight: 700; letter-spacing: .2em; text-transform: uppercase; font-size: 13px; }
+    .sm-card h1 { font-size: 40px; line-height: 1.05; margin: 16px 0; letter-spacing: -.02em; }
+    .sm-card h1 em { color: var(--orange); }
+    .sm-card p:last-child { font-size: 18px; opacity: .75; }
+
+    /* ---------- Sobre ---------- */
+    .sobre {
+      position: fixed; inset: 0; z-index: 50; background: var(--ink); color: var(--cream);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 34px;
+      overflow: hidden; transition: opacity .8s ease, transform .8s ease;
+    }
+    .sobre.gone { opacity: 0; transform: scale(1.06); pointer-events: none; }
+    .sobre .shape, .sobre .dot { opacity: .95; }
+    .sobre-kicker { position: relative; z-index: 2; font-family: var(--serif); font-style: italic; font-size: 30px; }
+    .sobre-hint { position: relative; z-index: 2; font-weight: 700; font-size: 14px; letter-spacing: .2em; text-transform: uppercase; animation: pulse 1.6s ease-in-out infinite; }
+    .sobre-hint span { color: var(--pink); }
+    .sobre-sound { position: absolute; bottom: max(24px, env(safe-area-inset-bottom)); z-index: 2; font-size: 13px; opacity: .6; }
+    .sobre.opening .sobre-hint, .sobre.opening .sobre-kicker, .sobre.opening .sobre-sound { opacity: 0; transition: opacity .4s; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+
+    .envelope {
+      --ew: min(80vw, 340px);
+      position: relative; z-index: 2; width: var(--ew); aspect-ratio: 1.45; border: 0; background: none; cursor: pointer;
+      perspective: 900px; animation: bob 3s ease-in-out infinite; font: inherit; color: inherit;
+    }
+    @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-8px) rotate(1deg); } }
+    .sobre.opening .envelope { animation: none; transform: translateY(12vh); transition: transform 1s cubic-bezier(.5, 0, .2, 1) .35s; }
+    .env-back, .env-front, .env-flap, .env-letter { position: absolute; display: block; }
+    .env-back { inset: 0; background: #d9cfbe; border-radius: 10px; }
+    .env-front {
+      inset: 0; border-radius: 10px; z-index: 3;
+      background: var(--cream) var(--grain);
+      clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%);
+      box-shadow: 0 30px 50px #0008;
+    }
+    .env-flap {
+      left: 0; right: 0; top: 0; height: 60%; z-index: 4;
+      background: #e9e0cf var(--grain);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top center; transition: transform .6s cubic-bezier(.5, 0, .3, 1), z-index 0s .3s;
+      border-radius: 10px 10px 0 0;
+    }
+    .sobre.opening .env-flap { transform: rotateX(180deg); z-index: 1; }
+    .env-letter {
+      left: 6%; right: 6%; top: 8%; bottom: 6%; z-index: 2;
+      background: var(--paper); border-radius: 6px; padding: 14px 10px;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 4px;
+      color: var(--ink); transition: transform .9s cubic-bezier(.3, 1.3, .4, 1) .45s;
+      border-top: 8px solid var(--cobalt);
+    }
+    .sobre.opening .env-letter { transform: translateY(-62%); }
+    .l-names { font-weight: 800; font-size: clamp(24px, 7.5vw, 32px); letter-spacing: -.03em; }
+    .l-names em { color: var(--orange); }
+    .l-sub { font-family: var(--serif); font-style: italic; font-size: 20px; }
+    .env-seal {
+      position: absolute; left: 50%; top: 54%; z-index: 5; width: 96px; aspect-ratio: 1;
+      transform: translate(-50%, -50%) rotate(-8deg); display: grid; place-items: center;
+      transition: transform .4s ease, opacity .3s ease;
+    }
+    .env-seal svg { position: absolute; inset: 0; fill: var(--pink); animation: spin 18s linear infinite; filter: drop-shadow(3px 3px 0 var(--ink)); }
+    .env-seal span { position: relative; font-weight: 800; font-size: 26px; color: var(--ink); letter-spacing: -.04em; }
+    .env-seal em { font-size: 28px; color: var(--cobalt); margin: 0 1px; }
+    .sobre.opening .env-seal { transform: translate(-50%, -50%) scale(0) rotate(90deg); opacity: 0; }
+
+    .confetti { position: fixed; z-index: 60; width: 10px; height: 16px; border-radius: 2px; pointer-events: none; animation: conf 1.6s cubic-bezier(.15, .7, .3, 1) forwards; }
+    .confetti.round { border-radius: 50%; width: 11px; height: 11px; }
+    @keyframes conf {
+      0% { transform: translate(-50%, -50%) rotate(0); opacity: 1; }
+      100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy) + 180px)) rotate(var(--rot)); opacity: 0; }
+    }
+
+    /* ---------- Marquee ---------- */
+    .marquee { background: var(--ink); color: var(--cream); overflow: hidden; white-space: nowrap; padding: 10px 0; padding-top: max(10px, env(safe-area-inset-top)); }
+    .marquee-track { display: inline-flex; animation: marquee 22s linear infinite; }
+    .marquee span { font-weight: 800; font-size: 14px; letter-spacing: .14em; padding-right: 4px; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 42px 22px 64px; text-align: center; overflow: hidden; background: var(--cream); }
+    .hero-kicker { position: relative; z-index: 1; font-family: var(--serif); font-style: italic; font-size: 22px; }
+    .hero-title { position: relative; z-index: 1; margin: 6px 0 26px; line-height: .82; letter-spacing: -.055em; font-weight: 800; font-variation-settings: "wdth" 85; }
+    .hero-title .t1, .hero-title .t2 { display: block; font-size: clamp(72px, 23.5vw, 116px); }
+    .hero-title .amp { display: block; font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--orange); font-size: clamp(64px, 20vw, 100px); line-height: .7; margin: 4px 0 2px; letter-spacing: 0; }
+    .hero-photo { position: relative; width: min(84vw, 380px); margin: 0 auto; }
+    .hero-photo img {
+      position: relative; z-index: 1; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 40% 30%;
+      border-radius: 999px 999px 24px 24px; border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--cobalt);
+    }
+    .hero-photo .shape { z-index: 2; }
+    .sticker { position: absolute; z-index: 3; }
+    .sticker-burst { width: 118px; aspect-ratio: 1; right: -16px; top: 30px; display: grid; place-items: center; transform: rotate(12deg); }
+    .sticker-burst svg { position: absolute; inset: 0; fill: var(--sun); filter: drop-shadow(3px 3px 0 var(--ink)); animation: spin 30s linear infinite; }
+    .sticker-burst span { position: relative; font-weight: 800; font-size: 17px; line-height: 1; letter-spacing: -.02em; }
+    .hero-date { position: relative; z-index: 1; margin-top: 36px; display: flex; flex-direction: column; gap: 2px; }
+    .hero-date span { font-family: var(--serif); font-style: italic; font-size: 26px; }
+    .hero-date strong { font-size: 44px; font-weight: 800; letter-spacing: -.02em; }
+    .scroll-cue { margin-top: 26px; font-size: 11px; letter-spacing: .3em; text-transform: uppercase; opacity: .55; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .scroll-cue span { width: 1.5px; height: 34px; background: currentColor; animation: cue 1.8s ease-in-out infinite; transform-origin: top; }
+    @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+
+    /* ---------- Boda pequeña ---------- */
+    .intima { position: relative; overflow: hidden; background: var(--ink); color: var(--cream); padding: 90px 26px 100px; text-align: center; }
+    .intima .squig { position: relative; z-index: 1; width: 110px; height: 28px; display: block; margin: 0 auto 26px; }
+    .intima-big { position: relative; z-index: 1; margin: 26px auto 0; max-width: 440px; font-family: var(--serif); font-size: clamp(34px, 9.6vw, 46px); line-height: 1.08; }
+    .intima-big em { color: var(--pink); }
+    .intima-bold { position: relative; z-index: 1; margin: 30px auto 0; max-width: 420px; font-weight: 700; font-size: 21px; line-height: 1.35; letter-spacing: -.01em; }
+    .hl { background: var(--lime); color: var(--ink); padding: 0 6px; border-radius: 6px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+    .intima-small { position: relative; z-index: 1; margin-top: 26px; font-family: var(--serif); font-style: italic; font-size: 20px; opacity: .8; }
+
+    /* ---------- Fotos ---------- */
+    .fotos { position: relative; overflow: hidden; background: var(--sky); padding: 80px 18px 90px; text-align: center; }
+    .fotos-title { margin-top: 20px; font-weight: 800; font-size: clamp(40px, 12vw, 56px); line-height: .95; letter-spacing: -.045em; }
+    .fotos-title em { display: inline-block; margin-top: 4px; color: var(--cobalt); font-size: 1.08em; letter-spacing: -.01em; }
+    .polas { position: relative; margin-top: 46px; display: flex; flex-direction: column; align-items: center; }
+    .pola { position: relative; z-index: 1; width: min(72vw, 320px); background: var(--paper); padding: 10px 10px 0; border-radius: 6px; box-shadow: 0 18px 30px #0d0d0f30; }
+    .pola img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 3px; }
+    .pola figcaption { padding: 12px 0 14px; font-family: var(--serif); font-style: italic; font-size: 24px; }
+    .pola figcaption::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--c); margin-right: 8px; vertical-align: middle; border: 1.5px solid var(--ink); }
+    .p1 { --rot: -5deg; align-self: flex-start; margin-left: 2vw; }
+    .p2 { --rot: 4deg; align-self: flex-end; margin-right: 1vw; margin-top: 6px; z-index: 2; }
+    .p3 { --rot: -3deg; margin-top: 6px; z-index: 3; }
+    .pola { transform: rotate(var(--rot)); }
+    .pola.reveal { transform: translateY(40px) rotate(var(--rot)); }
+    .pola.reveal.in { transform: rotate(var(--rot)); }
+
+    /* ---------- Cuenta regresiva ---------- */
+    .cuenta { position: relative; overflow: hidden; background: var(--cobalt); color: var(--cream); padding: 86px 22px 92px; text-align: center; }
+    .fecha { position: relative; z-index: 1; margin-top: 26px; display: flex; flex-direction: column; align-items: center; }
+    .f-dia { font-family: var(--serif); font-style: italic; font-size: 32px; }
+    .f-num { font-weight: 800; font-size: 190px; line-height: .8; letter-spacing: -.06em; color: var(--sun); text-shadow: 6px 6px 0 var(--ink); margin: 8px 0 4px; }
+    .f-mes { font-weight: 800; font-size: 34px; letter-spacing: -.03em; }
+    .f-mes em { color: var(--pink); font-size: 1.1em; }
+    .f-hora { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: var(--cream); font-weight: 700; font-size: 20px; padding: 10px 20px; border-radius: 99px; }
+    .f-hora svg { width: 20px; height: 20px; fill: none; stroke: var(--lime); stroke-width: 2.2; stroke-linecap: round; }
+    .faltan { position: relative; z-index: 1; margin-top: 46px; font-family: var(--serif); font-style: italic; font-size: 26px; }
+    #cuenta { position: relative; z-index: 1; }
+    .tiles { margin: 14px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; max-width: 400px; }
+    .tile { background: var(--c); color: var(--ink); border: 2.5px solid var(--ink); border-radius: 18px; padding: 14px 2px 10px; box-shadow: 4px 4px 0 var(--ink); display: flex; flex-direction: column; align-items: center; }
+    .tile b { font-size: clamp(26px, 8vw, 36px); font-weight: 800; letter-spacing: -.03em; font-variant-numeric: tabular-nums; line-height: 1; }
+    .tile span { margin-top: 6px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .tile:nth-child(odd) { transform: rotate(-2deg); }
+    .tile:nth-child(even) { transform: rotate(2deg); }
+    .hoy { font-weight: 800; font-size: 30px; margin-top: 10px; }
+
+    .btn { position: relative; z-index: 1; margin-top: 40px; display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; padding: 15px 24px; border-radius: 99px; border: 2.5px solid var(--ink); transition: transform .15s; }
+    .btn:active { transform: translate(3px, 3px); box-shadow: none !important; }
+    .btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .btn-light { background: var(--cream); color: var(--ink); box-shadow: 4px 4px 0 var(--ink); }
+    .btn-dark { background: var(--ink); color: var(--cream); box-shadow: 4px 4px 0 var(--orange); }
+    .btn.is-soon { opacity: .9; }
+
+    /* ---------- Ubicación ---------- */
+    .ubicacion { position: relative; overflow: hidden; background: var(--cream); padding: 80px 18px 96px; text-align: center; }
+    .lugar-card { position: relative; margin: 26px auto 0; max-width: 440px; border-radius: 28px; overflow: hidden; border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--pink); }
+    .lugar-card img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 60%; }
+    .lugar-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, #0d0d0fd9 100%); }
+    .sticker-pill { top: 16px; left: 16px; background: var(--sun); border: 2px solid var(--ink); border-radius: 99px; padding: 8px 14px; font-weight: 800; font-size: 13px; transform: rotate(-4deg); box-shadow: 3px 3px 0 var(--ink); }
+    .lugar-info { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 22px; color: var(--cream); text-align: left; }
+    .lugar-info h2 { font-weight: 800; font-size: 32px; line-height: 1; letter-spacing: -.03em; }
+    .lugar-info p { margin-top: 8px; font-family: var(--serif); font-style: italic; font-size: 20px; opacity: .9; }
+
+    /* ---------- Cierre ---------- */
+    .cierre { position: relative; overflow: hidden; background: var(--ink); color: var(--cream); padding: 110px 24px calc(120px + env(safe-area-inset-bottom)); text-align: center; }
+    .cierre-big { position: relative; z-index: 1; font-weight: 800; font-size: clamp(64px, 19vw, 96px); line-height: .85; letter-spacing: -.055em; }
+    .cierre-big em { color: var(--pink); font-size: 1.15em; letter-spacing: 0; }
+    .cierre-text { position: relative; z-index: 1; margin: 28px auto 0; max-width: 330px; font-size: 18px; line-height: 1.4; opacity: .85; }
+    .firma { position: relative; z-index: 1; margin-top: 44px; font-family: var(--serif); font-style: italic; font-size: 22px; }
+    .firma span { display: inline-block; margin-top: 6px; font-family: var(--display); font-style: normal; font-weight: 800; font-size: 30px; letter-spacing: -.03em; }
+    .firma span em { color: var(--orange); }
+
+    /* ---------- Botón de música ---------- */
+    .music-btn {
+      position: fixed; z-index: 80; right: 16px; bottom: max(16px, env(safe-area-inset-bottom));
+      width: 52px; height: 52px; border-radius: 50%; border: 2.5px solid var(--ink); background: var(--pink); color: var(--ink);
+      display: grid; place-items: center; box-shadow: 3px 3px 0 var(--ink); cursor: pointer;
+      opacity: 0; transform: scale(.6); pointer-events: none; transition: opacity .4s, transform .4s;
+    }
+    .music-btn.show { opacity: 1; transform: none; pointer-events: auto; }
+    .eq { display: flex; align-items: flex-end; gap: 3px; height: 18px; }
+    .eq i { width: 4px; background: var(--ink); border-radius: 2px; animation: eq 1s ease-in-out infinite; }
+    .eq i:nth-child(2) { animation-delay: -.3s; }
+    .eq i:nth-child(3) { animation-delay: -.6s; }
+    @keyframes eq { 0%, 100% { height: 5px; } 50% { height: 18px; } }
+    .ic-off { display: none; width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+    .music-btn.off .eq { display: none; }
+    .music-btn.off .ic-off { display: block; }
+    .music-btn.off { background: var(--cream); }
+
+    /* ---------- Apariciones ---------- */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .8, .2, 1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal-zoom { opacity: 0; transform: scale(.92) rotate(-2deg); transition: opacity .9s ease, transform 1s cubic-bezier(.2, .9, .2, 1.1); }
+    .reveal-zoom.in { opacity: 1; transform: none; }
+    .hero .reveal:nth-of-type(2) { transition-delay: .12s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+      .reveal, .reveal-zoom { opacity: 1; transform: none; }
+    }
+  </style>
+</body>
+</html>
