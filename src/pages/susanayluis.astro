@@ -27,7 +27,13 @@ const evento = {
   lugar: "Nombre del lugar", // POR CONFIRMAR
   direccion: "Dirección por confirmar", // POR CONFIRMAR
 };
-const mapsUrl = ""; // POR CONFIRMAR: link de Google Maps del lugar
+const mapsUrl = "https://maps.app.goo.gl/RonWPU9yKgqJHKod7";
+
+// Hospedaje recomendado
+const hotel = {
+  zona: "Huasca de Ocampo, Hidalgo",
+  url: "https://share.google/pOX0r80uI81gK0J6Q",
+};
 
 // Itinerario (horas POR CONFIRMAR)
 const itinerario = [
@@ -307,11 +313,13 @@ const linea3 = letras("Invitado", 0.9);
       <p class="caps sm reveal">Nuestra historia</p>
       <h2 class="serif-title reveal">Él preguntó…</h2>
       <p class="script-line reveal">y ella dijo que sí</p>
-      <div class="polas">
-        <figure class="pola p1 reveal"><img src="/susanayluis/propuesta.jpg" alt="Luis pidiéndole matrimonio a Susana" loading="lazy" width="1000" height="1149" /></figure>
-        <figure class="pola p2 reveal"><img src="/susanayluis/anillo-cerca.jpg" alt="Sus manos, se ve el anillo" loading="lazy" width="900" height="900" /></figure>
-        <figure class="pola p3 reveal"><img src="/susanayluis/abrazo.jpg" alt="Susana abrazando a Luis" loading="lazy" width="900" height="900" /></figure>
+      <div class="polas" id="polas" tabindex="0" aria-label="Fotos, desliza para ver más">
+        <figure class="pola" style="--r:-3deg"><img src="/susanayluis/propuesta.jpg" alt="Luis pidiéndole matrimonio a Susana" loading="lazy" width="1000" height="1149" style="object-position:30% 55%" /></figure>
+        <figure class="pola" style="--r:2.5deg"><img src="/susanayluis/anillo-cerca.jpg" alt="Sus manos, se ve el anillo" loading="lazy" width="900" height="900" /></figure>
+        <figure class="pola" style="--r:-2deg"><img src="/susanayluis/abrazo.jpg" alt="Susana abrazando a Luis" loading="lazy" width="900" height="900" /></figure>
       </div>
+      <div class="pola-dots" id="polaDots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+      <p class="pola-hint" aria-hidden="true">Desliza <span>→</span></p>
     </section>
 
     <!-- FRASE -->
@@ -343,14 +351,25 @@ const linea3 = letras("Invitado", 0.9);
     <section class="ubicacion">
       <p class="caps sm reveal">Dónde</p>
       <h2 class="serif-title reveal">La celebración</h2>
-      <figure class="lugar reveal"><img src="/susanayluis/lugar.jpg" alt="Alberca entre cabañas y jardines" loading="lazy" width="1100" height="1100" /></figure>
+      <figure class="lugar reveal"><img src="/susanayluis/lugar-jardin.jpg" alt="Jardín y casa del lugar de la boda" loading="lazy" width="900" height="900" /></figure>
       <p class="lugar-name reveal">{evento.lugar}</p>
       <p class="body reveal">{evento.direccion}</p>
       {mapsUrl ? (
-        <a class="btn reveal" href={mapsUrl} target="_blank" rel="noopener">Cómo llegar</a>
+        <a class="btn reveal" href={mapsUrl} target="_blank" rel="noopener">Ver ubicación</a>
       ) : (
         <span class="btn ghost reveal">Ubicación muy pronto</span>
       )}
+    </section>
+
+    <!-- HOSPEDAJE -->
+    <section class="hospedaje">
+      <p class="caps sm reveal">Hospedaje</p>
+      <h2 class="serif-title reveal">Dónde quedarse</h2>
+      <p class="body reveal">Si vienes de fuera, te recomendamos este hotel en {hotel.zona}.</p>
+      <figure class="hotel reveal"><img src="/susanayluis/hotel-huasca.jpg" alt="Fachada del hotel recomendado en Huasca de Ocampo" loading="lazy" width="900" height="1128" /></figure>
+      <p class="lugar-name reveal">Hotel recomendado</p>
+      <p class="body reveal">{hotel.zona}</p>
+      <a class="btn reveal" href={hotel.url} target="_blank" rel="noopener">Ver hotel</a>
     </section>
 
     <!-- CIERRE -->
@@ -483,6 +502,17 @@ const linea3 = letras("Invitado", 0.9);
     function startReveal() {
       document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
     }
+
+    // Carrusel de fotos: puntitos
+    const polas = document.getElementById("polas")!;
+    const dots = [...document.querySelectorAll("#polaDots i")];
+    polas.addEventListener("scroll", () => {
+      const items = [...polas.children] as HTMLElement[];
+      const mid = polas.scrollLeft + polas.clientWidth / 2;
+      let best = 0, bd = Infinity;
+      items.forEach((el, i) => { const d = Math.abs(el.offsetLeft + el.offsetWidth / 2 - mid); if (d < bd) { bd = d; best = i; } });
+      dots.forEach((d, i) => d.classList.toggle("on", i === best));
+    }, { passive: true });
 
     // Cuenta regresiva
     const cuenta = document.getElementById("cuenta")!;
@@ -647,14 +677,16 @@ const linea3 = letras("Invitado", 0.9);
     .historia { padding: 40px 22px 70px; }
     .historia .serif-title { margin-top: 8px; }
     .script-line { font-family: var(--script); font-size: 40px; color: var(--green); margin-top: -2px; }
-    .polas { position: relative; height: 430px; max-width: 360px; margin: 26px auto 0; }
-    .pola { position: absolute; background: #fff; padding: 9px 9px 30px; box-shadow: 0 12px 24px -10px #2f3a2555; }
-    .pola img { width: 100%; aspect-ratio: 1; object-fit: cover; filter: saturate(.85) sepia(.08); }
-    .p1 { width: 64%; left: 4%; top: 0; transform: rotate(-4deg); }
-    .p1 img { object-position: 30% 55%; }
-    .p2 { width: 46%; right: 0; top: 120px; transform: rotate(5deg); }
-    .p3 { width: 48%; left: 16%; top: 245px; transform: rotate(-2deg); }
-    .pola.reveal.in { transition-delay: .1s; }
+    .polas { display: flex; gap: 18px; margin: 26px -22px 0; padding: 18px calc(50vw - 36vw) 30px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; outline: none; }
+    .polas::-webkit-scrollbar { display: none; }
+    .pola { flex: 0 0 72vw; max-width: 300px; scroll-snap-align: center; background: #fff; padding: 10px 10px 34px; box-shadow: 0 12px 24px -10px #2f3a2555; transform: rotate(var(--r)); }
+    .pola img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: saturate(.85) sepia(.08); }
+    .pola-dots { display: flex; justify-content: center; gap: 8px; }
+    .pola-dots i { width: 6px; height: 6px; border-radius: 50%; background: #3a483040; transition: background .3s, transform .3s; }
+    .pola-dots i.on { background: var(--green); transform: scale(1.25); }
+    .pola-hint { margin-top: 10px; font-family: var(--sans); font-weight: 600; font-size: 10.5px; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); }
+    .pola-hint span { display: inline-block; animation: nudge 1.6s ease-in-out infinite; }
+    @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
 
     /* ---------- Frase ---------- */
     .frase { background: var(--green); padding: 46px 26px; }
@@ -681,6 +713,13 @@ const linea3 = letras("Invitado", 0.9);
     .lugar-name { margin-top: 28px; font-family: var(--cinzel); font-size: 20px; letter-spacing: .12em; text-transform: uppercase; }
     .lugar-name + .body { margin-top: 4px; font-style: italic; color: var(--muted); }
 
+    /* ---------- Hospedaje ---------- */
+    .hospedaje { padding: 64px 22px 72px; }
+    .hospedaje .serif-title { margin-top: 8px; }
+    .hotel { margin: 28px auto 0; max-width: 330px; background: #fff; padding: 10px; box-shadow: 0 12px 24px -12px #2f3a2555; transform: rotate(1.5deg); }
+    .hotel img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+    .hotel.reveal.in { transform: rotate(1.5deg); }
+
     /* ---------- Cierre ---------- */
     .cierre { background: var(--green); color: var(--cream); padding: 70px 22px calc(90px + env(safe-area-inset-bottom)); overflow: hidden; }
     .ramita { position: absolute; width: 40px; aspect-ratio: 60 / 100; height: auto; color: #cdd3b8; opacity: .5; }
@@ -703,10 +742,6 @@ const linea3 = letras("Invitado", 0.9);
     /* ---------- Apariciones ---------- */
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity 1s ease, transform 1s cubic-bezier(.2, .8, .2, 1); }
     .reveal.in { opacity: 1; transform: none; }
-    .pola.reveal { transform: translateY(18px) rotate(var(--r, 0deg)); }
-    .p1.reveal.in { transform: rotate(-4deg); }
-    .p2.reveal.in { transform: rotate(5deg); }
-    .p3.reveal.in { transform: rotate(-2deg); }
     .lugar.reveal.in { transform: rotate(-1.5deg); }
 
     @media (prefers-reduced-motion: reduce) {
