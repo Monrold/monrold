@@ -80,6 +80,7 @@ const linea3 = letras("Invitado", 0.9);
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content={ogImage} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preload" as="image" href="/susanayluis/sello-sl.webp" />
   <link rel="preload" as="image" href="/susanayluis/ilustracion-pareja.webp" />
 </head>
 
@@ -222,20 +223,7 @@ const linea3 = letras("Invitado", 0.9);
     <svg class="tex env-tex" aria-hidden="true"><rect width="100%" height="100%" filter="url(#paperTex)" /></svg>
 
     <div class="seal" id="seal">
-      <svg class="seal-wax" viewBox="0 0 200 200" aria-hidden="true">
-        <g filter="url(#wax)">
-          <circle cx="100" cy="100" r="88" fill="url(#gold)" />
-        </g>
-        <circle cx="100" cy="100" r="68" fill="url(#goldInner)" />
-        <circle cx="100" cy="100" r="68" fill="none" stroke="#6e5220" stroke-opacity=".55" stroke-width="3" />
-        <circle cx="100" cy="102" r="68" fill="none" stroke="#fff1c2" stroke-opacity=".35" stroke-width="1.5" />
-        <circle cx="100" cy="100" r="60" fill="none" stroke="#7a5b22" stroke-opacity=".4" stroke-width="1" stroke-dasharray="1.5 3" />
-        <g class="seal-sl" filter="url(#emboss)" fill="#86662a">
-          <text x="70" y="124" text-anchor="middle">S</text>
-          <text x="128" y="132" text-anchor="middle">L</text>
-        </g>
-        <ellipse cx="70" cy="56" rx="22" ry="8" fill="#fff" opacity=".2" transform="rotate(-32 70 56)" />
-      </svg>
+      <img class="seal-img" src="/susanayluis/sello-sl.webp" alt="" width="600" height="623" />
     </div>
 
     <p class="sobre-hint">Toca para abrir</p>
@@ -594,16 +582,15 @@ const linea3 = letras("Invitado", 0.9);
     .sobre.opening .env-tex { opacity: 0; }
 
     .seal {
-      position: absolute; z-index: 4; left: 50%; top: 50%; width: min(40vw, 170px); aspect-ratio: 1;
+      position: absolute; z-index: 4; left: 50%; top: 50%; width: min(44vw, 185px); aspect-ratio: 600 / 623;
       transform: translate(-50%, -50%) rotate(-6deg); filter: drop-shadow(0 7px 7px #0b0f0799);
       transition: transform .5s cubic-bezier(.5, 0, .3, 1), opacity .4s ease;
     }
-    .seal-wax { display: block; width: 100%; height: 100%; overflow: visible; }
-    .seal-sl { font-family: var(--script); font-size: 86px; }
+    .seal-img { display: block; width: 100%; height: 100%; }
     .sobre:not(.opening) .seal { animation: sealIdle 3s ease-in-out infinite; }
     @keyframes sealIdle { 0%, 100% { transform: translate(-50%, -50%) rotate(-6deg) scale(1); } 50% { transform: translate(-50%, -50%) rotate(-6deg) scale(1.04); } }
     .sobre.opening .seal { transform: translate(-50%, -50%) rotate(4deg) scale(1.12); opacity: 0; }
-    .sobre-hint { position: absolute; z-index: 4; left: 0; right: 0; top: calc(50% + min(20vw, 85px) + 30px); font-family: var(--serif); font-style: italic; font-size: 22px; text-align: center; color: #efe6cc; letter-spacing: .02em; text-shadow: 0 1px 6px #10160c; animation: pulse 2.2s ease-in-out infinite; }
+    .sobre-hint { position: absolute; z-index: 4; left: 0; right: 0; top: calc(50% + min(23vw, 96px) + 26px); font-family: var(--serif); font-style: italic; font-size: 22px; text-align: center; color: #efe6cc; letter-spacing: .02em; text-shadow: 0 1px 6px #10160c; animation: pulse 2.2s ease-in-out infinite; }
     .sobre.opening .sobre-hint { opacity: 0; transition: opacity .3s; animation: none; }
     @keyframes pulse { 0%, 100% { opacity: .95; } 50% { opacity: .45; } }
 
