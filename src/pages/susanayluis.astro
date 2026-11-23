@@ -30,9 +30,44 @@ const evento = {
 const mapsUrl = "https://maps.app.goo.gl/RonWPU9yKgqJHKod7";
 
 // Confirmación de asistencia por WhatsApp
+const whatsapp = "527713011118";
 const rsvpUrl =
-  "https://wa.me/527713011118?text=" +
-  encodeURIComponent("¡Hola! Confirmo mi asistencia a la boda de Susana y Luis el 6 de marzo 💍");
+  `https://wa.me/${whatsapp}?text=` +
+  encodeURIComponent("¡Hola! Quiero confirmar mi asistencia a la boda de Susana y Luis 💍");
+
+// Lista de invitados y boletos (los que solo tienen nombre se buscan solo por nombre)
+const invitados = [
+  { nombre: "Irma Sánchez", boletos: 3 },
+  { nombre: "María de la Luz Sánchez", boletos: 3 },
+  { nombre: "Martha Sánchez", boletos: 4 },
+  { nombre: "Iris Morales", boletos: 2 },
+  { nombre: "Gaby", boletos: 2 },
+  { nombre: "Lucero Sánchez", boletos: 3 },
+  { nombre: "David Sánchez", boletos: 3 },
+  { nombre: "Humberto Sánchez", boletos: 2 },
+  { nombre: "Maricela Sánchez", boletos: 2 },
+  { nombre: "Sarahí Sánchez", boletos: 3 },
+  { nombre: "Juan Sánchez", boletos: 2 },
+  { nombre: "Carlos Sánchez", boletos: 2 },
+  { nombre: "Teresa Sánchez", boletos: 1 },
+  { nombre: "Mario Montaño", boletos: 6 },
+  { nombre: "Carlos Montaño", boletos: 2 },
+  { nombre: "Lidia Roldán", boletos: 1 },
+  { nombre: "Erick Cedillo", boletos: 3 },
+  { nombre: "Carlos Fernández", boletos: 2 },
+  { nombre: "Rodrigo Contreras", boletos: 1 },
+  { nombre: "Haziel Pérez", boletos: 1 },
+  { nombre: "Oscar", boletos: 4 },
+  { nombre: "Eduardo Roldán", boletos: 2 },
+  { nombre: "Aylin Mendoza", boletos: 2 },
+  { nombre: "Julieta Roldán", boletos: 1 },
+  { nombre: "Danao Martínez", boletos: 2 },
+  { nombre: "Hiram Martínez", boletos: 2 },
+  { nombre: "Jeanine Chino", boletos: 2 },
+  { nombre: "Alan Sánchez", boletos: 4 },
+  { nombre: "Juana", boletos: 4 },
+  { nombre: "Nelda", boletos: 2 },
+];
 
 // Hospedaje recomendado
 const hotel = {
@@ -367,14 +402,38 @@ const linea3 = letras("Invitado", 0.9);
     </section>
 
     <!-- CONFIRMAR ASISTENCIA -->
-    <section class="rsvp">
+    <section class="rsvp" id="rsvp" data-invitados={JSON.stringify(invitados)} data-wa={whatsapp}>
       <p class="caps sm reveal">Confirma tu asistencia</p>
       <h2 class="serif-title reveal">¿Nos acompañas?</h2>
-      <p class="body reveal">Por ser una boda pequeña, nos ayuda mucho saber si vienes. Confírmanos por WhatsApp, por favor.</p>
-      <a class="btn btn-wa reveal" href={rsvpUrl} target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3z" /></svg>
-        Confirmar asistencia
-      </a>
+      <p class="body reveal">Por ser una boda pequeña, nos ayuda mucho saber si vienes. Escribe tu nombre para ver tus boletos y confirmar.</p>
+
+      <form class="rsvp-form reveal" id="rsvpForm" novalidate>
+        <label class="field">
+          <span>Nombre</span>
+          <input id="rsvpNombre" name="nombre" type="text" autocomplete="given-name" autocapitalize="words" placeholder="Tu primer nombre" required />
+        </label>
+        <label class="field">
+          <span>Apellido</span>
+          <input id="rsvpApellido" name="apellido" type="text" autocomplete="family-name" autocapitalize="words" placeholder="Tu apellido" />
+        </label>
+        <button class="btn" type="submit">Buscar mi invitación</button>
+      </form>
+
+      <div class="rsvp-result" id="rsvpResult" aria-live="polite" hidden>
+        <p class="rr-hola" id="rrHola"></p>
+        <p class="rr-label">Tu invitación es para</p>
+        <p class="rr-num"><b id="rrNum">0</b> <span id="rrUnit">boletos</span></p>
+        <a class="btn btn-wa" id="rrWa" href={rsvpUrl} target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3z" /></svg>
+          <span id="rrWaTxt">Confirmar asistencia</span>
+        </a>
+        <button class="rr-otro" type="button" id="rrOtro">No soy yo</button>
+      </div>
+
+      <div class="rsvp-miss" id="rsvpMiss" aria-live="polite" hidden>
+        <p class="body" id="rmTxt"></p>
+        <a class="btn btn-wa ghost" href={rsvpUrl} target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3z" /></svg> Escríbenos por WhatsApp</a>
+      </div>
     </section>
 
     <!-- HOSPEDAJE -->
@@ -530,6 +589,64 @@ const linea3 = letras("Invitado", 0.9);
       dots.forEach((d, i) => d.classList.toggle("on", i === best));
     }, { passive: true });
 
+    // Confirmación: busca al invitado en la lista
+    type Invitado = { nombre: string; boletos: number };
+    const rsvp = document.getElementById("rsvp")!;
+    const lista: Invitado[] = JSON.parse(rsvp.dataset.invitados || "[]");
+    const waNum = rsvp.dataset.wa!;
+    const norm = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-zñ ]/g, " ").trim().split(/\s+/).filter(Boolean);
+    const rForm = document.getElementById("rsvpForm") as HTMLFormElement;
+    const rNombre = document.getElementById("rsvpNombre") as HTMLInputElement;
+    const rApellido = document.getElementById("rsvpApellido") as HTMLInputElement;
+    const rResult = document.getElementById("rsvpResult")!;
+    const rMiss = document.getElementById("rsvpMiss")!;
+    function buscar(nombre: string, apellido: string): Invitado | "apellido" | null {
+      const n = norm(nombre), a = norm(apellido);
+      if (!n.length) return null;
+      const porNombre = lista.filter((i) => norm(i.nombre)[0] === n[0]);
+      // Invitados registrados solo con su nombre (Oscar, Juana, Nelda, Gaby)
+      const solo = porNombre.find((i) => norm(i.nombre).length === 1);
+      if (solo) return solo;
+      if (!a.length) return porNombre.length ? "apellido" : null;
+      return porNombre.find((i) => { const t = norm(i.nombre); return a.some((x) => t.slice(1).includes(x)); }) || null;
+    }
+    rForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      rMiss.hidden = true;
+      const r = buscar(rNombre.value, rApellido.value);
+      const msg = document.getElementById("rmTxt")!;
+      if (!r || r === "apellido") {
+        msg.textContent = !norm(rNombre.value).length
+          ? "Escribe tu nombre, por favor."
+          : r === "apellido"
+            ? "Escribe también tu apellido, por favor."
+            : "No encontramos tu nombre en la lista. Revisa cómo lo escribiste o escríbenos por WhatsApp.";
+        rMiss.hidden = false;
+        (r === "apellido" ? rApellido : rNombre).focus();
+        return;
+      }
+      const varios = r.boletos > 1;
+      const ap = rApellido.value.trim().replace(/\s+/g, " ");
+      const quien = norm(r.nombre).length === 1 && ap ? `${r.nombre} ${ap}` : r.nombre;
+      const primer = r.nombre.split(" ")[0];
+      document.getElementById("rrHola")!.textContent = `¡Hola, ${primer}!`;
+      document.getElementById("rrNum")!.textContent = String(r.boletos);
+      document.getElementById("rrUnit")!.textContent = varios ? "boletos" : "boleto";
+      document.getElementById("rrWaTxt")!.textContent = varios ? "Confirmar nuestra asistencia" : "Confirmar mi asistencia";
+      const texto = varios
+        ? `¡Hola! Queremos confirmar nuestra asistencia a la boda de Susana y Luis 💍\nSoy: ${quien} (${r.boletos} boletos)`
+        : `¡Hola! Quiero confirmar mi asistencia a la boda de Susana y Luis 💍\nSoy: ${quien} (1 boleto)`;
+      (document.getElementById("rrWa") as HTMLAnchorElement).href = `https://wa.me/${waNum}?text=${encodeURIComponent(texto)}`;
+      rForm.hidden = true;
+      rResult.hidden = false;
+    });
+    document.getElementById("rrOtro")!.addEventListener("click", () => {
+      rResult.hidden = true;
+      rForm.hidden = false;
+      rNombre.value = ""; rApellido.value = "";
+      rNombre.focus();
+    });
+
     // Cuenta regresiva
     const cuenta = document.getElementById("cuenta")!;
     const target = new Date(cuenta.dataset.target!).getTime();
@@ -584,6 +701,7 @@ const linea3 = letras("Invitado", 0.9);
     body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; background: var(--grain); mix-blend-mode: multiply; opacity: .55; }
     html.locked, html.locked body { overflow: hidden; height: 100%; }
     img { display: block; max-width: 100%; height: auto; }
+    [hidden] { display: none !important; }
     a { color: inherit; text-decoration: none; }
     section { position: relative; text-align: center; }
 
@@ -733,7 +851,23 @@ const linea3 = letras("Invitado", 0.9);
     .rsvp { background: var(--cream-2); padding: 64px 22px 70px; }
     .rsvp .serif-title { margin-top: 8px; }
     .btn-wa { display: inline-flex; align-items: center; gap: 10px; }
-    .btn-wa svg { width: 18px; height: 18px; fill: currentColor; }
+    .btn-wa svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
+    .rsvp-form { max-width: 320px; margin: 30px auto 0; display: flex; flex-direction: column; gap: 14px; text-align: left; }
+    .field span { display: block; margin-bottom: 6px; font-family: var(--sans); font-weight: 600; font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+    .field input { width: 100%; padding: 13px 14px; border: 1px solid #3a483055; border-radius: 0; background: #faf8f2; font-family: var(--serif); font-size: 19px; color: var(--green-ink); outline: none; -webkit-appearance: none; }
+    .field input:focus { border-color: var(--green); box-shadow: 0 0 0 3px #3a48301a; }
+    .rsvp-form .btn { margin-top: 8px; width: 100%; border: 0; cursor: pointer; }
+    .rsvp-result { max-width: 320px; margin: 30px auto 0; padding: 30px 22px 24px; background: var(--cream); outline: 1px solid #3a483033; outline-offset: -8px; animation: rise .6s ease; }
+    .rr-hola { font-family: var(--script); font-size: 38px; color: var(--green); line-height: 1.1; }
+    .rr-label { margin-top: 10px; font-family: var(--sans); font-weight: 600; font-size: 10.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
+    .rr-num { margin-top: 4px; font-family: var(--cinzel); font-size: 20px; letter-spacing: .12em; text-transform: uppercase; }
+    .rr-num b { font-weight: 400; font-size: 52px; letter-spacing: 0; vertical-align: -6px; margin-right: 4px; }
+    .rsvp-result .btn { margin-top: 20px; }
+    .rr-otro { display: block; margin: 16px auto 0; background: none; border: 0; font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--muted); text-decoration: underline; cursor: pointer; }
+    .rsvp-miss { max-width: 320px; margin: 26px auto 0; animation: rise .6s ease; }
+    .rsvp-miss .btn { margin-top: 16px; }
+    .btn-wa.ghost { background: transparent; color: var(--green); border: 1px solid var(--green); }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
     /* ---------- Hospedaje ---------- */
     .hospedaje { padding: 64px 22px 72px; }
